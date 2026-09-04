@@ -176,20 +176,19 @@ img{max-width:100%;height:auto;display:block}
 .pipe .st i{font-family:var(--mono);font-size:11px;color:var(--gel);font-weight:600}
 .pipe .st.on{border-color:var(--gel);background:color-mix(in srgb,var(--gel) 8%,var(--stage2))}
 .pipe .st small{display:block;color:var(--ink3);font-size:11.5px}
-.post{background:var(--stage2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.post .ph{height:120px;background:linear-gradient(135deg,#2A2D3D,#151722);position:relative}
-.post .ph::after{content:"사진 한 장";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink3)}
+.post{display:block;text-decoration:none;color:inherit;background:var(--stage2);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.post:hover{border-color:var(--line2);transform:translateY(-2px)}
+.post .ph{position:relative;aspect-ratio:16/9;background:#151722;overflow:hidden}
+.post .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.real{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#fff;background:rgba(0,0,0,.6);padding:3px 8px;border-radius:4px;pointer-events:none}
 .post .tx{padding:12px 14px;font-size:13px;line-height:1.5}
 .post .tx b{display:block;font-size:14px;margin-bottom:4px}
 .post .sh{display:flex;gap:6px;padding:0 14px 12px;flex-wrap:wrap}
 .post .sh span{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--ink2)}
-.a4{background:#F7F5EE;color:#161616;border-radius:8px;padding:16px;aspect-ratio:1/1.3;max-width:280px;margin-left:auto;display:flex;flex-direction:column;gap:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
-.a4 .nm{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.02em}
-.a4 .rl{font-size:12px;color:#555}
-.a4 .ph{flex:1;background:linear-gradient(160deg,#D9D5C8,#B9B4A4);border-radius:6px;min-height:80px}
-.a4 .li{font-size:11px;line-height:1.55;color:#333}
-.a4 .qr{width:44px;height:44px;background:repeating-conic-gradient(#111 0 25%,#F7F5EE 0 50%) 0 0/8px 8px;align-self:flex-end}
-@media(max-width:900px){.cue{grid-template-columns:64px 1fr}.cue .vis{grid-column:2}.phone,.a4{margin-left:0}}
+.sheet{position:relative;display:block;max-width:320px;margin-left:auto;border-radius:8px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 60px -30px rgba(0,0,0,.9);transition:.2s}
+.sheet:hover{transform:translateY(-3px);border-color:var(--amber)}
+.sheet img{display:block;width:100%;height:auto}
+@media(max-width:900px){.cue{grid-template-columns:64px 1fr}.cue .vis{grid-column:2}.phone,.sheet{margin-left:0}}
 @media(max-width:520px){.cue{grid-template-columns:1fr}.cue .vis{grid-column:1}.cue-no{font-size:26px}.cue-no small{display:inline;margin-left:8px}}
 
 /* ── 실시간 판 ── */
@@ -450,7 +449,7 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
         <a class="cta" href="https://www.ai-make.co.kr/gallery/" target="_blank" rel="noopener">홍보글 예시 보기 <span class="ar">→</span></a>
       </div>
       <div class="vis">
-        <div class="post"><div class="ph"></div><div class="tx"><b>녹동바다불꽃축제 무대 · 음향 진행</b>3일 밤, 관객 1만 명 앞에 라인어레이 25K가 섰습니다…</div><div class="sh"><span>네이버 블로그</span><span>밴드</span><span>인스타 문구</span><span>검색 등록 ✓</span></div></div>
+        <a class="post" href="https://xn--wk0bn7yi8h24iszc.com/#portfolio" target="_blank" rel="noopener" title="큰길이벤트기획 행사 실적 보기"><div class="ph"><img src="img/nokdong.jpg" alt="녹동바다불꽃축제 야간 무대 — 트러스 조명과 LED 앞의 관객" loading="lazy" width="1200" height="676"><span class="real">실제 행사 사진 · 큰길이벤트기획</span></div><div class="tx"><b>녹동바다불꽃축제 — 무대 · 음향 · LED 진행</b>행사 끝나고 이 사진 한 장을 올리면 이런 글이 됩니다. 검색에 걸리고, 블로그와 밴드로 나갑니다.</div><div class="sh"><span>네이버 블로그</span><span>밴드</span><span>인스타 문구</span><span>검색 등록 ✓</span></div></a>
       </div>
     </article>
 
@@ -459,12 +458,12 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
       <div class="cue-body">
         <div class="k">가수 · MC · 공연팀 프로필 페이지</div>
         <h3>섭외 담당자는<br>영상 30초로 결정합니다.</h3>
-        <p>무대를 아직 못 본 담당자가 링크 하나로 섭외를 결정하게 만듭니다. <b>대표 영상 + 이력 + 섭외 폼</b>이 한 페이지에, 기획사에 바로 보낼 <b>A4 프로필 한 장</b>은 덤입니다.</p>
+        <p>무대를 아직 못 본 담당자가 링크 하나로 섭외를 결정하게 만듭니다. <b>대표 영상 + 이력 + 섭외 폼</b>이 한 페이지에, 기획사에 바로 보낼 <b>A4 프로필 한 장</b>은 덤입니다. 오른쪽은 <b>가수 마리</b>의 실제 프로필입니다 — 사진을 누르면 페이지가 열립니다.</p>
         <ul class="facts"><li>원페이지 + <b>A4 한 장</b></li><li>섭외 폼 · 문자로 받기</li><li>QR</li></ul>
-        <a class="cta" href="https://www.ai-make.co.kr/gallery/posts/2026-08-singer-mc-homepage.html" target="_blank" rel="noopener">가수 · MC 홈페이지 이야기 <span class="ar">→</span></a>
+        <a class="cta" href="https://xn--wk0bn7yi8h24iszc.com/mari/" target="_blank" rel="noopener">가수 마리 프로필 페이지 <span class="ar">→</span></a>
       </div>
       <div class="vis">
-        <div class="a4"><div class="nm">박준화</div><div class="rl">트로트 가수 · 행사 · 축제 · 방송</div><div class="ph"></div><div class="li">대표곡 「…」 · 2025 ○○가요제 대상 · 전국 축제 무대 120회</div><div class="qr"></div></div>
+        <a class="sheet" href="https://xn--wk0bn7yi8h24iszc.com/mari/" target="_blank" rel="noopener" title="가수 마리 프로필 페이지 열기"><img src="img/mari-sheet.jpg" alt="가수 마리 A4 프로필 — 무대를 흔드는 라켄롤 보컬, 음반 · 대표곡 · 설 수 있는 무대 · 섭외 연락처" loading="lazy" width="900" height="1273"><span class="real">실제 A4 프로필 · 가수 마리</span></a>
       </div>
     </article>
   </div>
