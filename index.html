@@ -270,6 +270,34 @@ img{max-width:100%;height:auto;display:block}
 .close-box .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .big-tel{font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,52px);letter-spacing:-.01em;margin-top:22px}
 .big-tel a{text-decoration:none}
+/* ═══ 만든 것들 — 살아 있는 사이트 다섯 곳 ═══ */
+.works{padding:clamp(56px,9vh,110px) 0 0}
+.wgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.work{--gel:var(--amber);grid-column:span 2;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0F1017;transition:transform .25s,border-color .25s}
+.work:hover{transform:translateY(-4px);border-color:var(--gel)}
+.work:nth-child(4){grid-column:2/4}.work:nth-child(5){grid-column:4/6}
+.work .shot{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#14151d}
+.work .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s}
+.work:hover .shot img{transform:scale(1.03)}
+.work .shot::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gel);box-shadow:0 0 14px var(--gel)}
+.work .wb{padding:16px 18px 18px;display:grid;gap:6px;align-content:start;flex:1}
+.work .wk{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gel)}
+.work b{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.01em;line-height:1.25;text-wrap:balance}
+.work p{margin:0;color:var(--ink2);font-size:14px;line-height:1.55}
+.work .wu{margin-top:auto;padding-top:8px;font-family:var(--mono);font-size:12px;color:var(--ink3);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.work .wu i{font-style:normal;color:var(--ink2);overflow-wrap:anywhere}
+.work .wu span{color:var(--gel);white-space:nowrap}
+.maker{margin-top:clamp(28px,5vh,48px);display:grid;grid-template-columns:1fr auto;gap:18px 28px;align-items:center;padding:clamp(22px,4vw,36px) clamp(22px,4vw,40px);border:1px solid var(--line2);border-radius:22px;background:radial-gradient(70% 120% at 0% 50%,rgba(255,176,32,.14),transparent 60%),#0F1017;text-decoration:none;color:var(--ink);transition:border-color .25s,transform .25s}
+.maker:hover{border-color:var(--amber);transform:translateY(-2px)}
+.maker .mk{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ink3)}
+.maker h3{margin:6px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(22px,3.4vw,36px);letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
+.maker p{margin:8px 0 0;color:var(--ink2);max-width:36em}
+.maker .go{justify-self:end;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--amber);color:#111;font-weight:800;white-space:nowrap}
+.maker .go small{font-family:var(--mono);font-weight:600;font-size:12px;opacity:.7}
+@media(max-width:900px){.wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.work,.work:nth-child(4),.work:nth-child(5){grid-column:auto}.work:nth-child(5){grid-column:1/-1}.work:nth-child(5) .shot{aspect-ratio:16/7}}
+@media(max-width:720px){.maker{grid-template-columns:1fr}.maker .go{justify-self:start;white-space:normal;flex-wrap:wrap}}
+@media(max-width:520px){.wgrid{grid-template-columns:1fr}.work:nth-child(5){grid-column:auto}.work:nth-child(5) .shot{aspect-ratio:16/10}}
+@media(prefers-reduced-motion:reduce){.work,.work .shot img,.maker{transition:none}}
 footer{border-top:1px solid var(--line);padding:32px 0 calc(40px + env(safe-area-inset-bottom));color:var(--ink3);font-size:13px}
 footer .f{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
 footer .f b{color:var(--ink2);font-weight:500}
@@ -547,6 +575,46 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
   </div>
 </section>
 
+<!-- ═══ 만든 것들 · 큰길브리지로 ═══ -->
+<section class="works" id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="n">ENCORE · WORKS</span>
+      <h2>말로만 하지 않습니다.<br>이벤트인의 홈페이지, 이미 다섯 곳.</h2>
+      <p>전부 지금 살아 있는 사이트입니다. 폰으로 열어서 검색이 되는지, 전화가 눌러지는지, 대표님 회사 것과 비교해 보세요.</p>
+    </div>
+    <div class="wgrid">
+      <a class="work" href="https://brizymedia.github.io/goodfriend-event/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
+        <div class="shot"><img src="img/works/goodfriend.webp" alt="굿프랜드유아체육연구소 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">유아체육 · 이벤트</span><b>굿프랜드유아체육연구소 &amp; 이벤트</b><p>여수·순천·광양 유치원으로 찾아가는 물놀이·에어바운스·운동회. 원장님이 폰으로 바로 문의하는 원페이지.</p><span class="wu"><i>brizymedia.github.io/goodfriend-event</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/" target="_blank" rel="noopener" style="--gel:var(--amber)">
+        <div class="shot"><img src="img/works/keungil.webp" alt="큰길이벤트기획 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">행사기획 · 장비</span><b>큰길이벤트기획</b><p>광양·순천 본사, 광주·전남·경남 당일 세팅. 자동 견적·전자계약·사진 갤러리까지 한 사이트에서.</p><span class="wu"><i>큰길이벤트.com</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://www.xn--el3bx2ohi64bba144lgmbdzd.com/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
+        <div class="shot"><img src="img/works/ym.webp" alt="YM토탈이벤트 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">토탈 행사대행</span><b>YM토탈이벤트</b><p>음향·조명·LED전광판·특수효과·무대를 한 번에. 축제·기념식·체육대회·법회까지 책임지는 토탈 행사대행.</p><span class="wu"><i>와이엠토탈이벤트.com</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://brizymedia.github.io/immagic/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
+        <div class="shot"><img src="img/works/immagic.webp" alt="아이엠매직 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">공연팀</span><b>아이엠매직 I.M.MAGIC</b><p>2005년부터 4,000회 넘는 무대. 마술·버블·벌룬·샌드아트·레이저쇼, 춘천에서 전국으로 찾아가는 공연팀.</p><span class="wu"><i>brizymedia.github.io/immagic</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/jisuyang/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
+        <div class="shot"><img src="img/works/jisuyang.webp" alt="가수 지수양 홍보 페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">가수 프로필</span><b>트로트 가수 지수양</b><p>무대 영상·활동 경력·정규 1집을 한 장에. 기획사에 보낼 A4 프로필과 섭외 신청 폼까지 붙은 홍보 페이지.</p><span class="wu"><i>큰길이벤트.com/jisuyang</i><span>열어보기 ↗</span></span></div>
+      </a>
+    </div>
+    <a class="maker" href="https://www.ai-make.co.kr/" target="_blank" rel="noopener">
+      <div>
+        <span class="mk">MADE BY</span>
+        <h3>이 다섯 곳을 만든 곳, 큰길브리지.</h3>
+        <p>이벤트 코리아의 홈페이지·전자명함·알림 앱·기획서와 견적 도구도 전부 큰길브리지가 만들었습니다. 다음 차례는 대표님 회사입니다.</p>
+      </div>
+      <span class="go">큰길브리지 홈페이지로 <small>www.ai-make.co.kr</small> →</span>
+    </a>
+  </div>
+</section>
 <footer>
   <div class="wrap">
     <div class="f"><b>이벤트 코리아</b><span>주식회사 브리지미디어</span><span>대표 김효민</span><span class="mono">1533-7295</span><span>www.event-korea.co.kr</span></div>
