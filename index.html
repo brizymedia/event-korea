@@ -225,6 +225,43 @@ img{max-width:100%;height:auto;display:block}
 .ckres b{font-family:var(--display);font-weight:900;font-size:clamp(30px,4vw,44px);color:var(--cyan);line-height:1}
 .ckres .of{font-family:var(--mono);color:var(--ink3);margin-right:10px}
 .ckres.bad b{color:var(--magenta)}.ckres.mid b{color:var(--amber)}
+
+/* ── 큐 06 실제 예시 창 ── */
+.pipe .st[role=button]{cursor:pointer;grid-template-columns:28px 1fr auto;transition:.2s}
+.pipe .st[role=button]:hover,.pipe .st[role=button]:focus-visible{border-color:var(--gel);background:color-mix(in srgb,var(--gel) 8%,var(--stage2));outline:none}
+.pipe .st em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--gel);opacity:.8;white-space:nowrap}
+.pipe-hint{font-size:10.5px;letter-spacing:.12em;color:var(--ink3);text-align:center;padding-top:6px}
+.ex{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:14px}
+.ex-back{position:absolute;inset:0;background:rgba(5,6,10,.8);backdrop-filter:blur(4px)}
+.ex-card{position:relative;width:min(960px,100%);max-height:94vh;display:flex;flex-direction:column;background:var(--stage2);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+.ex-head{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.ex-no{font-size:22px;font-weight:600;color:var(--amber);text-shadow:0 0 14px rgba(255,176,32,.4)}
+.ex-tt{flex:1;min-width:0}
+.ex-k{font-size:12px;letter-spacing:.06em;color:var(--amber);font-weight:700}
+.ex-head h4{margin:2px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(16px,2.4vw,21px);line-height:1.3;letter-spacing:-.01em}
+.ex-x{width:38px;height:38px;border-radius:10px;border:1px solid var(--line2);background:transparent;color:var(--ink2);font-size:22px;line-height:1;cursor:pointer}
+.ex-x:hover{color:var(--ink);border-color:var(--ink2)}
+.ex-body{flex:1;overflow:auto;padding:18px}
+.ex-body .cap{margin:0 0 12px;color:var(--ink2);font-size:14.5px}
+.ex-body .cap b{color:var(--ink)}
+.ex-body .warn{margin:12px 0 0;padding:10px 14px;border-left:3px solid var(--magenta);background:rgba(255,61,138,.08);color:var(--ink2);font-size:13.5px;border-radius:0 8px 8px 0}
+.ex-frame{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff;height:min(62vh,720px)}
+.ex-frame iframe{width:100%;height:100%;border:0;display:block}
+.ex-foot{display:flex;gap:10px;align-items:center;padding:12px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+.ex-foot .btn{padding:10px 16px;font-size:14px}
+.mail{background:#FBFBF8;color:#161616;border-radius:12px;overflow:hidden;border:1px solid #E4E2D9}
+.mail-h{padding:12px 16px;border-bottom:1px solid #E4E2D9;display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.mail-h b{font-size:14.5px}.mail-h small{font-family:var(--mono);font-size:11px;color:#8E8E88}
+.mail pre{margin:0;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#333;white-space:pre-wrap;word-break:keep-all}
+.mail .mail-btn{display:inline-block;margin:0 16px 16px;padding:10px 16px;border-radius:8px;background:var(--amber);color:#111;font-weight:700;font-size:14px}
+.mail .att{margin:0 16px 16px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #E4E2D9;border-radius:8px;font-size:13px;color:#333;background:#fff}
+.ledger{margin-top:14px;overflow-x:auto;border:1px solid var(--line2);border-radius:12px}
+.ledger table{border-collapse:collapse;min-width:720px;width:100%;font-size:12.5px}
+.ledger th,.ledger td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.ledger th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink3);font-weight:600;background:var(--stage)}
+.ledger td{color:var(--ink2)}.ledger td b{color:var(--ink);font-weight:500}
+.ledger .tag{font-family:var(--mono);font-size:11px;color:var(--cyan)}
+@media(max-width:720px){.ex{padding:0}.ex-card{max-height:100vh;height:100vh;border-radius:0}.ex-frame{height:56vh}.ex-foot .sp{flex-basis:100%}}
 /* ── 마감 ── */
 .close-sec{padding:clamp(64px,10vh,120px) 0 clamp(40px,6vh,64px)}
 .close-box{position:relative;overflow:hidden;border:1px solid var(--line2);border-radius:24px;padding:clamp(28px,5vw,64px);background:radial-gradient(80% 100% at 20% 0%,rgba(255,176,32,.12),transparent 60%),radial-gradient(60% 80% at 90% 100%,rgba(47,212,255,.10),transparent 60%),var(--stage2)}
@@ -391,12 +428,13 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
         <a class="cta" href="plan.html?admin=1" target="_blank" rel="noopener">행사 기획서 만들기 <span class="ar">→</span></a>
       </div>
       <div class="vis">
-        <div class="pipe">
-          <div class="st"><i>01</i><span>손님 문의 <small>홈페이지 폼 → 메일</small></span></div>
-          <div class="st"><i>02</i><span>행사 기획서 <small>행사 유형 · 규모만 넣으면</small></span></div>
-          <div class="st on"><i>03</i><span>견적서 링크 <small>버튼 하나</small></span></div>
-          <div class="st"><i>04</i><span>계약서 · 서명 <small>손님 폰에서</small></span></div>
-          <div class="st"><i>05</i><span>PDF 양쪽 메일 <small>계약 대장 기록</small></span></div>
+        <div class="pipe" id="pipe">
+          <div class="st" role="button" tabindex="0" data-ex="0"><i>01</i><span>손님 문의 <small>홈페이지 폼 → 메일</small></span><em>예시 ›</em></div>
+          <div class="st" role="button" tabindex="0" data-ex="1"><i>02</i><span>행사 기획서 <small>행사 유형 · 규모만 넣으면</small></span><em>예시 ›</em></div>
+          <div class="st" role="button" tabindex="0" data-ex="2"><i>03</i><span>견적서 링크 <small>버튼 하나</small></span><em>예시 ›</em></div>
+          <div class="st" role="button" tabindex="0" data-ex="3"><i>04</i><span>계약서 · 서명 <small>손님 폰에서</small></span><em>예시 ›</em></div>
+          <div class="st" role="button" tabindex="0" data-ex="4"><i>05</i><span>PDF 양쪽 메일 <small>계약 대장 기록</small></span><em>예시 ›</em></div>
+          <div class="pipe-hint mono">▲ 단계를 누르면 실제 예시가 열립니다</div>
         </div>
       </div>
     </article>
@@ -502,6 +540,26 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
   </div>
 </footer>
 
+
+<!-- ═══ 실제 예시 창 (큐 06) ═══ -->
+<div class="ex" id="ex" hidden>
+  <div class="ex-back" data-close></div>
+  <div class="ex-card" role="dialog" aria-modal="true" aria-labelledby="ex-title">
+    <div class="ex-head">
+      <span class="ex-no mono" id="ex-no">01</span>
+      <div class="ex-tt"><div class="ex-k" id="ex-k"></div><h4 id="ex-title"></h4></div>
+      <button class="ex-x" type="button" data-close aria-label="닫기">×</button>
+    </div>
+    <div class="ex-body" id="ex-body"></div>
+    <div class="ex-foot">
+      <a class="btn" id="ex-open" href="#" target="_blank" rel="noopener">실제로 열어보기 ↗</a>
+      <span class="sp"></span>
+      <button class="btn" type="button" id="ex-prev">‹ 이전</button>
+      <button class="btn fill" type="button" id="ex-next">다음 단계 ›</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   /* ── 상단 바 ── */
@@ -588,6 +646,53 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
     .then(function(j){ done=true; render(j.items||[], j.generated_at||''); })
     .catch(function(){ if(!done) fallback(); });
   setTimeout(function(){ if(!done && document.querySelector('#bidList .skel')) fallback(); }, 6000);
+
+  /* ── 큐 06 실제 예시 창 ── */
+  var PLAN_EX="plan.html#p=eyJ0eXBlIjoiZmVzdGl2YWwiLCJ0aXRsZSI6IuqwgOydhCDrs4TruZsg66y47ZmU7LaV7KCcICjsmIjsi5wpIiwiZGF0ZSI6IjIwMjYtMTAtMTciLCJ0aW1lIjoiMTU6MDAiLCJwbGFjZSI6IuuzhOu5m-q1sOuvvOq0keyepSIsImlvIjoib3V0IiwicGVvcGxlIjoiODAwIiwib3JnIjoi67OE67mb6rWwIOusuO2ZlOq0gOq0keqzvCIsIm5hbWUiOiLquYDri7Tri7kiLCJ0ZWwiOiIxNTMzLTcyOTUiLCJlbWFpbCI6IiIsImdvYWxzIjpbIuyngOyXrSDtmZTtlakiXSwibmVlZHMiOm51bGwsImJ1ZGdldCI6IjEwXzMwIiwibm90ZSI6Iuq1sOyImOuLmCDssLjshJ0g7ZmV7KCVIMK3IOyasOyynCDsi5wg67OE67mb7LK07Jyh6rSA7Jy866GcIOydtOuPmSJ9", QUOTE_EX="https://xn--wk0bn7yi8h24iszc.com/quote.html#q=eyJpIjpbIuuzhOu5m-q1sCDrrLjtmZTqtIDqtJHqs7wiLCLquYDri7Tri7kiLCIxNTMzLTcyOTUiLCIiLCLqsIDsnYQg67OE67mbIOusuO2ZlOy2leygnCAo7JiI7IucKSIsIjIwMjYtMTAtMTciLCLrs4TruZvqtbDrr7zqtJHsnqUiLCI4MDDrqoUiLCLtlonsgqwg6riw7ZqN7IScIOq4sOykgDogaHR0cHM6Ly93d3cuZXZlbnQta29yZWEuY29tL3BsYW4uaHRtbCNwPWV5SjBlWEJsSWpvaVptVnpkR2wyWVd3aUxDSjBhWFJzWlNJNkl1cXdnT3lkaENEcnM0VHJ1WnNnNjZ5NDdabVU3TGFWN0tDY0lDanNtSWpzaTV3cElpd2laR0YwWlNJNklqSXdNall0TVRBdE1UY2lMQ0owYVcxbElqb2lNVFU2TURBaUxDSndiR0ZqWlNJNkl1dXpoT3U1bS1xMXNPdXZ2T3Ewa2V5ZXBTSXNJbWx2SWpvaWIzVjBJaXdpY0dWdmNHeGxJam9pT0RBd0lpd2liM0puSWpvaTY3T0U2N21iNnJXd0lPdXN1TzJabE9xMGdPcTBrZXF6dkNJc0ltNWhiV1VpT2lMcXVZRHJpN1RyaTdraUxDSjBaV3dpT2lJeE5UTXpMVGN5T1RVaUxDSmxiV0ZwYkNJNklpSXNJbWR2WVd4eklqcGJJdXluZ095WHJTRHRtWlR0bGFraVhTd2libVZsWkhNaU9tNTFiR3dzSW1KMVpHZGxkQ0k2SWpFd1h6TXdJaXdpYm05MFpTSTZJdXExc095SW1PdUxtQ0Rzc0xqc2hKMGc3Wm1WN0tDVklNSzNJT3lhc095eW5DRHNpNXdnNjdPRTY3bWI3TEswN0p5aDZyU0E3Snk4NjZHY0lPeWR0T3VQbVNKOSJdLCJyIjpbWyJkNyIsMSwxLDI1MDAwMDBdLFsiZDIiLDEyLDEsNjAwMDBdLFsiYTMiLDEsMSwyMjAwMDAwXSxbImE0Iiw2LDEsNTAwMDBdLFsiYTUiLDEsMSwzMDAwMDBdLFsiYjEiLDEsMSw1MDAwMDBdLFsiYjIiLDgsMSwxMjAwMDBdLFsiYjQiLDEsMSw4MDAwMDBdLFsiYzIiLDEsMSwyODAwMDAwXSxbImM3IiwxLDEsOTAwMDAwXSxbImM2IiwxLDEsMzUwMDAwXSxbImYxIiwxLDEsNzAwMDAwXSxbImYyIiwxLDEsMzAwMDAwMF0sWyJkMyIsMTMsMSw2MDAwMF0sWyJkMTEiLDIsMSwyNTAwMDBdLFsiZDkiLDgwMCwxLDE1MDBdLFsiZDQiLDEsMSw2MDAwMDBdLFsiZDUiLDgsMSw2MDAwMF0sWyJlMiIsMSwxLDgwMDAwMF0sWyJlMSIsMSwxLDI1MDAwMF0sWyJnMSIsMSwxLDYwMDAwMF0sWyJmNSIsNiwxLDE1MDAwMF0sWyJnMiIsMSwxLDcwMDAwMF1dfQ", CONTRACT_EX="https://xn--wk0bn7yi8h24iszc.com/contract.html?preview=1#c=eyJ2IjoxLCJubyI6IktHLTIwMjYwOTA0LUpTViIsImRhdGUiOiIyMDI2LTA5LTA0IiwiY2wiOnsib3JnIjoi67OE67mb6rWwIOusuO2ZlOq0gOq0keqzvCIsIm5hbWUiOiLquYDri7Tri7kiLCJ0ZWwiOiIxNTMzLTcyOTUiLCJlbWFpbCI6IiIsImFkZHIiOiIifSwiZXYiOnsidGl0bGUiOiLqsIDsnYQg67OE67mbIOusuO2ZlOy2leygnCAo7JiI7IucKSIsImRhdGUiOiIyMDI2LTEwLTE3IiwicGxhY2UiOiLrs4TruZvqtbDrr7zqtJHsnqUiLCJwZW9wbGUiOiI4MDDrqoUiLCJzY29wZSI6Iu2WieyCrCDquLDtmo3shJwg6riw7KSAOiBodHRwczovL3d3dy5ldmVudC1rb3JlYS5jb20vcGxhbi5odG1sI3A9ZXlKMGVYQmxJam9pWm1WemRHbDJZV3dpTENKMGFYUnNaU0k2SXVxd2dPeWRoQ0RyczRUcnVac2c2Nnk0N1ptVTdMYVY3S0NjSUNqc21JanNpNXdwSWl3aVpHRjBaU0k2SWpJd01qWXRNVEF0TVRjaUxDSjBhVzFsSWpvaU1UVTZNREFpTENKd2JHRmpaU0k2SXV1emhPdTVtLXExc091dnZPcTBrZXllcFNJc0ltbHZJam9pYjNWMElpd2ljR1Z2Y0d4bElqb2lPREF3SWl3aWIzSm5Jam9pNjdPRTY3bWI2cld3SU91c3VPMlpsT3EwZ09xMGtlcXp2Q0lzSW01aGJXVWlPaUxxdVlEcmk3VHJpN2tpTENKMFpXd2lPaUl4TlRNekxUY3lPVFVpTENKbGJXRnBiQ0k2SWlJc0ltZHZZV3h6SWpwYkl1eW5nT3lYclNEdG1aVHRsYWtpWFN3aWJtVmxaSE1pT201MWJHd3NJbUoxWkdkbGRDSTZJakV3WHpNd0lpd2libTkwWlNJNkl1cTFzT3lJbU91TG1DRHNzTGpzaEowZzdabVY3S0NWSU1LM0lPeWFzT3l5bkNEc2k1d2c2N09FNjdtYjdMSzA3SnloNnJTQTdKeTg2NkdjSU95ZHRPdVBtU0o5In0sIml0ZW1zIjpbeyJuYW1lIjoi7KGw66a97IudIOustOuMgCAzMO2PiSIsInNwZWMiOiLrhpLsnbQgNjB-MTIwY20iLCJxdHkiOjEsInVuaXQiOiLsi50iLCJkYXlzIjoxLCJwcmljZSI6MjUwMDAwMH0seyJuYW1lIjoi67Cx65Oc66GtIO2KuOufrOyKpCIsInNwZWMiOiLtmITsiJjrp4kg6rGw7LmY7JqpIiwicXR5IjoxMiwidW5pdCI6Im0iLCJkYXlzIjoxLCJwcmljZSI6NjAwMDB9LHsibmFtZSI6IuydjO2WpSAo64yA7ZiVKSIsInNwZWMiOiJGQlQg65287J247Ja066CI7J20IMK3IDUwMOuqhSDsnbTsg4EiLCJxdHkiOjEsInVuaXQiOiLsi50iLCJkYXlzIjoxLCJwcmljZSI6MjIwMDAwMH0seyJuYW1lIjoi66y07ISgIOuniOydtO2BrCDstpTqsIAiLCJzcGVjIjoi7ZW465OcIC8g7ZWAIOuniOydtO2BrCIsInF0eSI6NiwidW5pdCI6IuqwnCIsImRheXMiOjEsInByaWNlIjo1MDAwMH0seyJuYW1lIjoi7J247J207Ja0IOuqqOuLiO2EsCIsInNwZWMiOiLrsLTrk5wgwrcg6rCA7IiYIOudvOydtOu4jOyaqSIsInF0eSI6MSwidW5pdCI6IuyLnSIsImRheXMiOjEsInByaWNlIjozMDAwMDB9LHsibmFtZSI6Iuq4sOuzuCDsobDrqoUiLCJzcGVjIjoi7YyM65287J207Yq4IOyEuO2KuCDCtyDsi6TrgrTsmbgiLCJxdHkiOjEsInVuaXQiOiLsi50iLCJkYXlzIjoxLCJwcmljZSI6NTAwMDAwfSx7Im5hbWUiOiLrrLTruZnrnbzsnbTtirgiLCJzcGVjIjoi67mUIC8g7JuM7IucIiwicXR5Ijo4LCJ1bml0Ijoi64yAIiwiZGF5cyI6MSwicHJpY2UiOjEyMDAwMH0seyJuYW1lIjoi7KGw66qFIO2KuOufrOyKpCDsi5zqs7UiLCJzcGVjIjoi6rWs7KGw66y8IOyEpOy5mCDCtyDssqDsiJgg7Y-s7ZWoIiwicXR5IjoxLCJ1bml0Ijoi7IudIiwiZGF5cyI6MSwicHJpY2UiOjgwMDAwMH0seyJuYW1lIjoiTEVEIOyghOq0ke2MkCAzMDDsnbjsuZgiLCJzcGVjIjoi7Iuk64K07Jm4IOqyuOyaqSIsInF0eSI6MSwidW5pdCI6IuyLnSIsImRheXMiOjEsInByaWNlIjoyODAwMDAwfSx7Im5hbWUiOiLroIjsnbTtl4gg6rWs7KGw66y8Iiwic3BlYyI6IkxFRCDqsbDsuZjsmqkg7Iuc7Iqk7YWcIOu5hOqzhCDCtyDshKTsuZggwrcg7LKg7IiYIiwicXR5IjoxLCJ1bml0Ijoi7IudIiwiZGF5cyI6MSwicHJpY2UiOjkwMDAwMH0seyJuYW1lIjoi7JiB7IOBIOyYpO2NvOugiOydtO2EsCIsInNwZWMiOiLsi53siJwg7JiB7IOBIMK3IOyekOuniSDsmrTsmqkiLCJxdHkiOjEsInVuaXQiOiLrqoUiLCJkYXlzIjoxLCJwcmljZSI6MzUwMDAwfSx7Im5hbWUiOiJNQyDCtyDsgqztmozsnpAiLCJzcGVjIjoi7KCE66y4IOynhO2WieyekCIsInF0eSI6MSwidW5pdCI6IuuqhSIsImRheXMiOjEsInByaWNlIjo3MDAwMDB9LHsibmFtZSI6IuqwgOyImCDshK3smbgiLCJzcGVjIjoi7ZaJ7IKsIOyEseqyqeyXkCDrp57ripQg65287J247JeFIiwicXR5IjoxLCJ1bml0Ijoi7YyAIiwiZGF5cyI6MSwicHJpY2UiOjMwMDAwMDB9LHsibmFtZSI6IuyekOuwlOudvCDthZDtirggM23DlzNtIiwic3BlYyI6IuybkO2EsOy5mCDCtyDshKTsuZggwrcg7LKg7IiYIiwicXR5IjoxMywidW5pdCI6IuuPmSIsImRheXMiOjEsInByaWNlIjo2MDAwMH0seyJuYW1lIjoi66q96rOo7YWQ7Yq4Iiwic3BlYyI6IuybkO2EsOy5mCDrjIDtmJUg7YWQ7Yq4IiwicXR5IjoyLCJ1bml0Ijoi64-ZIiwiZGF5cyI6MSwicHJpY2UiOjI1MDAwMH0seyJuYW1lIjoi7J2Y7J6QIiwic3BlYyI6Iu2WieyCrOyaqSDtjJTqsbjsnbQg7J2Y7J6QIiwicXR5Ijo4MDAsInVuaXQiOiLqsJwiLCJkYXlzIjoxLCJwcmljZSI6MTUwMH0seyJuYW1lIjoi7Y-s7Yag7KG0IOygnOyekSIsInNwZWMiOiLqtazsobDrrLwgKyDstpzroKXrrLwiLCJxdHkiOjEsInVuaXQiOiLsi50iLCJkYXlzIjoxLCJwcmljZSI6NjAwMDAwfSx7Im5hbWUiOiLtmITsiJjrp4kgwrcg67Cw64SIIiwic3BlYyI6IuyLpOyCrCDstpzroKUiLCJxdHkiOjgsInVuaXQiOiLsnqUiLCJkYXlzIjoxLCJwcmljZSI6NjAwMDB9LHsibmFtZSI6IuustOuMgCDrtojqvYMiLCJzcGVjIjoi7Iqk7YyM7YG065-sIMK3IOyLpOuCtOyZuCIsInF0eSI6MSwidW5pdCI6IuyLnSIsImRheXMiOjEsInByaWNlIjo4MDAwMDB9LHsibmFtZSI6IuyKpOuqqOq3uCDCtyDtl6TsnbTsoIAiLCJzcGVjIjoi66y064yAIOyXsOy2nOyaqSIsInF0eSI6MSwidW5pdCI6IuyLnSIsImRheXMiOjEsInByaWNlIjoyNTAwMDB9LHsibmFtZSI6IuuwnOyghOywqCIsInNwZWMiOiLsoITsm5Ag66-47ZmV67O0IO2YhOyepSIsInF0eSI6MSwidW5pdCI6IuuMgCIsImRheXMiOjEsInByaWNlIjo2MDAwMDB9LHsibmFtZSI6Iu2WieyCrCDsiqTtg60iLCJzcGVjIjoi7ZiE7J6lIOynhO2WiSDsnbjroKUiLCJxdHkiOjYsInVuaXQiOiLrqoUiLCJkYXlzIjoxLCJwcmljZSI6MTUwMDAwfSx7Im5hbWUiOiLsmrTrsJggwrcg7ISk7LmYIOyduOqxtOu5hCIsInNwZWMiOiLsg4HtlZjssKggwrcg7ISk7LmYIMK3IOyyoOyImCIsInF0eSI6MSwidW5pdCI6IuyLnSIsImRheXMiOjEsInByaWNlIjo3MDAwMDB9XSwibSI6eyJkaXNjIjowfX0";
+  var EX=[
+    {no:'01',k:'손님 문의',t:'홈페이지 문의 폼이 그대로 메일이 됩니다',open:'https://xn--wk0bn7yi8h24iszc.com/#contact',
+     body:'<p class="cap">손님이 홈페이지 문의 폼을 보내면 <b>이런 메일이 옵니다.</b> 맨 아래 단추를 누르면 3번 견적서가 내용이 채워진 채로 열립니다. 문자로 받아 적을 일이 없습니다.</p>'+
+      '<div class="mail"><div class="mail-h"><b>[큰길이벤트기획 문의] 별빛군 문화관광과 · 가을 별빛 문화축제</b><small>받은편지함 · 방금</small></div>'+
+      '<pre>단체 · 회사명 : 별빛군 문화관광과\n담당자       : 김담당\n연락처       : 1533-7295\n행사명       : 가을 별빛 문화축제 (예시)\n행사일       : 2026-10-17\n행사장소     : 별빛군민광장\n예상인원     : 800명\n\n문의 내용 :\n무대 · 음향 · LED 포함해서 견적 부탁드립니다. 군수님 참석 예정이고 우천 시 체육관으로 옮깁니다.</pre>'+
+      '<span class="mail-btn">📄 이 문의로 견적서 작성</span></div>'},
+    {no:'02',k:'행사 기획서',t:'행사 유형 · 규모만 넣으면 기획서 아홉 장이 나옵니다',open:PLAN_EX,frame:PLAN_EX,
+     body:'<p class="cap">예시: <b>가을 별빛 문화축제 · 800명 · 실외.</b> 개요 → 방향 → 큐시트 초안 → 무대 · 장비 → 인력 → 예산 → 일정 → 안전 → 준비물. 담당자에겐 이 링크를 그대로 보냅니다.</p>'},
+    {no:'03',k:'견적서 링크',t:'기획서의 장비 목록이 견적서로 넘어갑니다',open:QUOTE_EX,frame:QUOTE_EX,
+     body:'<p class="cap">손님이 보는 화면입니다. <b>품목 23개 · 합계 22,840,000원</b> (예시 단가). 수량 · 단가는 우리가 관리자 화면에서 고치고, 손님은 링크로 확인만 합니다.</p>'},
+    {no:'04',k:'계약서 · 서명',t:'손님이 폰에서 읽고 손가락으로 서명합니다',open:CONTRACT_EX,frame:CONTRACT_EX,
+     body:'<p class="cap">견적서의 「이 견적으로 계약서 작성」 한 번이면 <b>행사 대행 계약서</b>가 됩니다. 맨 아래 「내용 확인 후 서명하기」를 누르면 서명판이 열립니다.</p><p class="warn">예시 계약서라 서명은 저장되지 않습니다. 실제 계약서에서는 서명 즉시 5번이 자동으로 일어납니다.</p>'},
+    {no:'05',k:'PDF 양쪽 메일 · 대장',t:'서명하는 순간 PDF가 양쪽 메일로 가고, 대장에 한 줄 남습니다',open:null,
+     body:'<p class="cap">서명이 끝나면 서버가 <b>PDF를 만들어 손님과 우리에게 동시에</b> 보내고, 구글 시트 계약 대장에 한 줄을 씁니다. 사람 손이 안 갑니다. <span style="color:var(--ink3)">(아래는 실제 메일 · 대장과 같은 형식의 예시)</span></p>'+
+      '<div class="mail"><div class="mail-h"><b>[큰길이벤트기획] 행사 대행 계약 체결 — 가을 별빛 문화축제 (예시)</b><small>김담당 · 큰길이벤트기획 · 방금</small></div>'+
+      '<pre>계약번호 : KG-20261004-7A2\n계약자   : 별빛군 문화관광과 (김담당)\n행사     : 가을 별빛 문화축제 (예시) · 2026-10-17 · 별빛군민광장\n계약금액 : 22,840,000원 (부가세 별도)\n서명시각 : 2026-10-04 14:32 (KST)\n문서확인 : 3f9c1e7a2b…\n\n계약서 PDF : https://drive.google.com/…/KG-20261004-7A2.pdf\n\n첨부된 PDF 를 보관해 주세요.\n이 메일은 큰길이벤트기획 전자계약 시스템이 자동으로 보낸 것입니다.</pre>'+
+      '<span class="att">📎 계약서_KG-20261004-7A2.pdf · 214 KB</span></div>'+
+      '<div class="ledger"><table><thead><tr><th>기록시각</th><th>계약번호</th><th>상태</th><th>행사</th><th>상호</th><th>담당자</th><th>계약금액</th><th>서명시각</th><th>PDF</th></tr></thead>'+
+      '<tbody><tr><td>2026-10-04 14:32</td><td class="tag">KG-20261004-7A2</td><td><b>서명완료</b></td><td>가을 별빛 문화축제 (예시)</td><td>별빛군 문화관광과</td><td>김담당</td><td><b>22,840,000</b></td><td>2026-10-04 14:32</td><td class="tag">drive.google.com/…</td></tr></tbody></table></div>'}
+  ];
+  var exEl=document.getElementById('ex'), exBody=document.getElementById('ex-body'), exOpen=document.getElementById('ex-open'), exCur=-1;
+  function exShow(i){
+    i=Math.max(0,Math.min(EX.length-1,i)); exCur=i; var e=EX[i];
+    document.getElementById('ex-no').textContent=e.no; document.getElementById('ex-k').textContent=e.k; document.getElementById('ex-title').textContent=e.t;
+    var h=e.body||'';
+    if(e.frame) h+='<div class="ex-frame"><iframe title="'+e.k+' 예시" loading="lazy"></iframe></div>';
+    exBody.innerHTML=h; exBody.scrollTop=0;
+    var f=exBody.querySelector('iframe'); if(f) f.src=e.frame;
+    if(e.open){ exOpen.href=e.open; exOpen.style.display=''; } else { exOpen.style.display='none'; }
+    document.getElementById('ex-prev').disabled=i===0;
+    document.getElementById('ex-next').textContent=i===EX.length-1?'닫기':'다음 단계 ›';
+    document.querySelectorAll('#pipe .st').forEach(function(st,j){ st.classList.toggle('on', j===i); });
+    exEl.hidden=false; document.body.style.overflow='hidden';
+  }
+  function exClose(){ exEl.hidden=true; document.body.style.overflow=''; exBody.innerHTML=''; document.querySelectorAll('#pipe .st').forEach(function(st){ st.classList.remove('on'); }); }
+  document.querySelectorAll('#pipe .st[data-ex]').forEach(function(st){
+    st.addEventListener('click',function(){ exShow(+st.getAttribute('data-ex')); });
+    st.addEventListener('keydown',function(ev){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); exShow(+st.getAttribute('data-ex')); } });
+  });
+  exEl.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',exClose); });
+  document.getElementById('ex-prev').addEventListener('click',function(){ exShow(exCur-1); });
+  document.getElementById('ex-next').addEventListener('click',function(){ if(exCur>=EX.length-1) exClose(); else exShow(exCur+1); });
+  document.addEventListener('keydown',function(ev){ if(exEl.hidden) return; if(ev.key==='Escape') exClose(); else if(ev.key==='ArrowRight') exShow(exCur+1); else if(ev.key==='ArrowLeft') exShow(exCur-1); });
+  window.__ex={show:exShow,close:exClose,EX:EX};
   /* ── 검색 체크 ── */
   var cks=[].slice.call(document.querySelectorAll("#cklist input")), ckn=document.getElementById("ckn"), ckmsg=document.getElementById("ckmsg"), ckres=document.getElementById("ckres");
   function ck(){ var n=cks.filter(function(c){return c.checked;}).length; ckn.textContent=n;
