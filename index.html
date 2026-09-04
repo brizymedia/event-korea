@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>이벤트 코리아 | 이벤트인을 위한 포털 — 행사 일감 알림 · 축제 입찰 정보 · 이벤트 회사 홈페이지</title>
+<meta name="description" content="오직, 이벤트의 · 이벤트에 의한 · 이벤트인을 위한 홈페이지. 이벤트 회사 홈페이지 제작, 카톡 일감 알림, 전자명함·콜백문자, 전국 축제·입찰·행사 정보를 한 곳에. 1533-7295">
+<link rel="canonical" href="https://www.event-korea.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="이벤트 코리아">
+<meta property="og:title" content="이벤트 코리아 — 오직, 이벤트의 · 이벤트에 의한 · 이벤트인을 위한">
+<meta property="og:description" content="홈페이지 제작 · 일감 알림톡 · 전자명함 콜백문자 · 전국 축제·입찰·행사 정보. 이벤트인이 매일 쓰는 도구를 한 곳에. 1533-7295">
+<meta property="og:url" content="https://www.event-korea.com/">
+<meta property="og:image" content="https://www.event-korea.com/og.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0B10">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"이벤트 코리아","alternateName":"Event Korea","url":"https://www.event-korea.com/","telephone":"+82-1533-7295","parentOrganization":{"@type":"Organization","name":"주식회사 브리지미디어"},"sameAs":["https://www.ai-make.co.kr/","https://xn--wk0bn7yi8h24iszc.com/"]}
+</script>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   이벤트 코리아 — 무대 위 젤 조명 세 색.
+   앰버(만드는 것) · 마젠타(일감·연락) · 시안(정보).
+   히어로의 빔이 그 색이고, 각 서비스 줄의 번호가 그 색이다.
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --stage:#0A0B10; --stage2:#111319; --haze:#181A24; --line:#262937; --line2:#33364A;
+  --ink:#F3F2EC; --ink2:#A9AAB6; --ink3:#6E7080;
+  --amber:#FFB020; --magenta:#FF3D8A; --cyan:#2FD4FF;
+  --display:"Gothic A1","Noto Sans KR","Malgun Gothic",sans-serif;
+  --sans:"IBM Plex Sans KR","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --w:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--stage);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.mono{font-family:var(--mono)}
+::selection{background:var(--amber);color:#111}
+
+/* ── 상단 ── */
+.top{position:fixed;top:0;left:0;right:0;z-index:40;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.top.on{background:rgba(10,11,16,.82);backdrop-filter:blur(10px);border-color:var(--line)}
+.top-in{display:flex;align-items:center;gap:18px;padding:14px 0}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.mark .dots{display:flex;gap:4px}
+.mark .dots i{width:8px;height:8px;border-radius:50%;display:block}
+.mark .dots i:nth-child(1){background:var(--amber)}.mark .dots i:nth-child(2){background:var(--magenta)}.mark .dots i:nth-child(3){background:var(--cyan)}
+.mark b{font-family:var(--display);font-weight:900;letter-spacing:.14em;font-size:15px}
+.top nav{margin-left:auto;display:flex;gap:22px;font-size:14px;color:var(--ink2)}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+.tel-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--ink);color:#111;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.tel-btn .mono{font-weight:600;letter-spacing:.02em}
+@media(max-width:820px){.top nav{display:none}}
+
+/* ── 히어로 ── */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate;padding-top:80px}
+.hero .wrap{position:relative;z-index:3}
+.beam{position:absolute;z-index:1;top:-18%;width:60vmax;height:150vmax;pointer-events:none;mix-blend-mode:screen;opacity:.85;
+      background:conic-gradient(from 0deg at 50% 0%,transparent 0deg,transparent 168deg,var(--c) 174deg,transparent 180deg,transparent 360deg);
+      filter:blur(22px);transform-origin:50% 0}
+.beam.a{--c:rgba(255,176,32,.55);left:-8vmax;transform:rotate(-16deg);animation:sweepA 19s ease-in-out infinite alternate}
+.beam.b{--c:rgba(47,212,255,.5);right:-8vmax;transform:rotate(16deg);animation:sweepB 23s ease-in-out infinite alternate}
+.beam.c{--c:rgba(255,61,138,.32);left:38vmax;top:-30%;transform:rotate(3deg);animation:sweepC 29s ease-in-out infinite alternate;opacity:.6}
+@keyframes sweepA{from{transform:rotate(-22deg)}to{transform:rotate(4deg)}}
+@keyframes sweepB{from{transform:rotate(24deg)}to{transform:rotate(-6deg)}}
+@keyframes sweepC{from{transform:rotate(-9deg)}to{transform:rotate(10deg)}}
+.haze{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(60% 50% at 30% 0%,rgba(255,176,32,.10),transparent 60%),
+  radial-gradient(60% 50% at 75% 0%,rgba(47,212,255,.10),transparent 60%),
+  radial-gradient(80% 60% at 50% 100%,rgba(255,61,138,.06),transparent 70%)}
+#dust{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.7}
+.floor{position:absolute;left:0;right:0;bottom:0;height:38%;z-index:2;pointer-events:none;background:linear-gradient(to top,var(--stage) 30%,transparent)}
+
+.kicker{font-family:var(--mono);font-size:clamp(11px,1.3vw,13px);letter-spacing:.24em;color:var(--ink3);margin:0 0 clamp(18px,3vh,30px);display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--ink3)}
+.h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-.02em;line-height:1.08;font-size:clamp(34px,7.4vw,104px);text-wrap:balance}
+.h1 .ln{display:block;opacity:0;transform:translateY(18px);filter:blur(10px);animation:cue .9s cubic-bezier(.2,.7,.2,1) forwards}
+.h1 .ln:nth-child(1){animation-delay:.15s;color:var(--ink2);font-size:.62em;font-weight:800;letter-spacing:.02em;margin-bottom:.15em}
+.h1 .ln:nth-child(2){animation-delay:.55s}
+.h1 .ln:nth-child(3){animation-delay:.95s}
+.h1 .ln:nth-child(4){animation-delay:1.35s}
+.h1 .ln:nth-child(5){animation-delay:1.85s;color:var(--amber)}
+.h1 .ln em{font-style:normal;position:relative;white-space:nowrap}
+.h1 .ln em::after{content:"";position:absolute;left:-.1em;right:-.1em;bottom:.02em;height:.14em;background:currentColor;opacity:.22;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:under .7s .6s ease forwards}
+@keyframes cue{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes under{to{transform:scaleX(1)}}
+.lede{margin:clamp(22px,3.4vh,36px) 0 0;max-width:36em;font-size:clamp(16px,2vw,20px);color:var(--ink2);opacity:0;animation:cue .8s 2.3s ease forwards}
+.lede b{color:var(--ink);font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(24px,4vh,40px);opacity:0;animation:cue .8s 2.6s ease forwards}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15.5px;border:1px solid var(--line2);color:var(--ink);background:rgba(255,255,255,.03);transition:.2s}
+.btn:hover{border-color:var(--ink2);background:rgba(255,255,255,.06)}
+.btn.fill{background:var(--amber);border-color:var(--amber);color:#111}
+.btn.fill:hover{background:#FFC24D}
+.btn .mono{font-weight:600}
+.scroll-hint{position:absolute;left:50%;bottom:calc(46px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink3);animation:bob 2.2s ease-in-out infinite;opacity:0;animation:cue .8s 3s ease forwards,bob 2.2s 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(-50%,6px)}}
+
+/* LED 전광판 */
+.led{position:absolute;left:0;right:0;bottom:0;z-index:4;background:#05060A;border-top:1px solid var(--line);height:44px;display:flex;align-items:center;overflow:hidden;
+     background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+.led .tag{flex:none;height:100%;display:flex;align-items:center;padding:0 14px;background:#0B0C12;border-right:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--cyan);z-index:2}
+.led .tag i{width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:8px;box-shadow:0 0 8px var(--cyan);animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.led .track{display:flex;white-space:nowrap;animation:ticker var(--dur,70s) linear infinite;font-family:var(--mono);font-size:13px;font-weight:500;color:#D9F7FF;text-shadow:0 0 6px rgba(47,212,255,.35)}
+.led .track span{padding:0 28px}
+.led .track span b{color:var(--cyan);font-weight:600;margin-right:8px}
+.led .track span s{text-decoration:none;color:var(--ink3);margin-left:8px;font-size:12px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.led:hover .track{animation-play-state:paused}
+
+/* ── 누구를 위한 ── */
+.who{padding:clamp(40px,7vh,72px) 0 0}
+.who .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.who .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--ink3);margin-right:8px}
+.chip{padding:8px 14px;border:1px solid var(--line2);border-radius:999px;font-size:14px;color:var(--ink2);background:var(--stage2)}
+.chip b{color:var(--ink);font-weight:500}
+
+/* ── 서비스 큐 목록 ── */
+.cues{padding:clamp(48px,8vh,96px) 0 0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;margin-bottom:clamp(28px,5vh,52px)}
+.sec-head .n{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ink3)}
+.sec-head h2{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(26px,4.4vw,48px);letter-spacing:-.02em;line-height:1.15;text-wrap:balance}
+.sec-head p{grid-column:2;margin:8px 0 0;color:var(--ink2);max-width:40em}
+.cue{--gel:var(--amber);display:grid;grid-template-columns:96px 1fr minmax(280px,420px);gap:clamp(16px,3vw,40px);padding:clamp(34px,5vh,56px) 0;border-top:1px solid var(--line);align-items:center}
+.cue:last-of-type{border-bottom:1px solid var(--line)}
+.cue-no{font-family:var(--mono);font-size:clamp(28px,4vw,44px);font-weight:600;color:var(--gel);line-height:1;letter-spacing:-.02em;text-shadow:0 0 18px color-mix(in srgb,var(--gel) 45%,transparent)}
+.cue-no small{display:block;font-size:10px;letter-spacing:.2em;color:var(--ink3);margin-top:8px;font-weight:500}
+.cue-body .k{font-size:13px;letter-spacing:.06em;color:var(--gel);font-weight:700;margin-bottom:10px}
+.cue-body h3{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(22px,3.2vw,36px);line-height:1.22;letter-spacing:-.02em;text-wrap:balance}
+.cue-body p{margin:14px 0 0;color:var(--ink2);max-width:36em}
+.cue-body p b{color:var(--ink);font-weight:700}
+.facts{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.facts li{font-family:var(--mono);font-size:12.5px;padding:6px 11px;border:1px solid var(--line2);border-radius:6px;color:var(--ink2);background:var(--stage2)}
+.facts li b{color:var(--gel);font-weight:600}
+.cta{display:inline-flex;align-items:center;gap:8px;margin-top:20px;text-decoration:none;font-weight:700;color:var(--ink);border-bottom:2px solid var(--gel);padding-bottom:3px;transition:.2s}
+.cta:hover{color:var(--gel)}
+.cta .ar{font-family:var(--mono)}
+/* 시각 자료 — 폰 틀 */
+.vis{position:relative}
+.phone{background:var(--haze);border:1px solid var(--line2);border-radius:26px;padding:14px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.03);max-width:360px;margin-left:auto}
+.phone .bar{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink3);padding:2px 8px 10px}
+.phone .scr{background:var(--stage);border-radius:16px;padding:14px;min-height:200px;border:1px solid var(--line)}
+.noti{background:#1E2130;border:1px solid var(--line2);border-radius:12px;padding:12px;margin-bottom:10px;font-size:13.5px;line-height:1.5}
+.noti .app{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;color:var(--ink3);margin-bottom:6px}
+.noti .app i{width:14px;height:14px;border-radius:4px;background:var(--gel);display:inline-block}
+.noti b{color:var(--ink)}
+.noti.hot{border-color:var(--gel);box-shadow:0 0 0 1px color-mix(in srgb,var(--gel) 40%,transparent)}
+.card{background:linear-gradient(160deg,#1C1E2C,#12131B);border:1px solid var(--line2);border-radius:14px;padding:16px}
+.card .nm{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.02em}
+.card .rl{color:var(--ink2);font-size:13px;margin-top:2px}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.card .tags span{font-size:11.5px;padding:3px 8px;border-radius:999px;background:var(--stage);border:1px solid var(--line2);color:var(--ink2)}
+.card .acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.card .acts span{text-align:center;font-size:11px;padding:8px 4px;border-radius:8px;background:var(--stage);color:var(--ink2);border:1px solid var(--line)}
+.sms{margin-top:10px;background:var(--gel);color:#111;border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:13px;line-height:1.5;font-weight:500}
+.sms small{display:block;font-family:var(--mono);font-size:10px;opacity:.7;margin-bottom:4px}
+.list{display:grid;gap:8px}
+.row-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:10px 12px;background:var(--stage2);border:1px solid var(--line);border-radius:10px;font-size:13px;line-height:1.45;text-decoration:none}
+.row-item:hover{border-color:var(--line2)}
+.row-item .t{color:var(--ink);font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row-item .m{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:3px}
+.row-item .d{font-family:var(--mono);font-size:11.5px;color:var(--gel);white-space:nowrap;text-align:right;line-height:1.4}
+.row-item .d small{display:block;color:var(--ink3);font-size:10px}
+.pipe{display:grid;gap:8px}
+.pipe .st{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:10px 12px;background:var(--stage2);border:1px solid var(--line);border-radius:10px;font-size:13.5px}
+.pipe .st i{font-family:var(--mono);font-size:11px;color:var(--gel);font-weight:600}
+.pipe .st.on{border-color:var(--gel);background:color-mix(in srgb,var(--gel) 8%,var(--stage2))}
+.pipe .st small{display:block;color:var(--ink3);font-size:11.5px}
+.post{background:var(--stage2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.post .ph{height:120px;background:linear-gradient(135deg,#2A2D3D,#151722);position:relative}
+.post .ph::after{content:"사진 한 장";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink3)}
+.post .tx{padding:12px 14px;font-size:13px;line-height:1.5}
+.post .tx b{display:block;font-size:14px;margin-bottom:4px}
+.post .sh{display:flex;gap:6px;padding:0 14px 12px;flex-wrap:wrap}
+.post .sh span{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--ink2)}
+.a4{background:#F7F5EE;color:#161616;border-radius:8px;padding:16px;aspect-ratio:1/1.3;max-width:280px;margin-left:auto;display:flex;flex-direction:column;gap:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.a4 .nm{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.02em}
+.a4 .rl{font-size:12px;color:#555}
+.a4 .ph{flex:1;background:linear-gradient(160deg,#D9D5C8,#B9B4A4);border-radius:6px;min-height:80px}
+.a4 .li{font-size:11px;line-height:1.55;color:#333}
+.a4 .qr{width:44px;height:44px;background:repeating-conic-gradient(#111 0 25%,#F7F5EE 0 50%) 0 0/8px 8px;align-self:flex-end}
+@media(max-width:900px){.cue{grid-template-columns:64px 1fr}.cue .vis{grid-column:2}.phone,.a4{margin-left:0}}
+@media(max-width:520px){.cue{grid-template-columns:1fr}.cue .vis{grid-column:1}.cue-no{font-size:26px}.cue-no small{display:inline;margin-left:8px}}
+
+/* ── 실시간 판 ── */
+.live{padding:clamp(56px,9vh,110px) 0 0}
+.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:clamp(22px,4vh,40px)}
+.panel{background:var(--stage2);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,2.4vw,26px);--gel:var(--cyan)}
+.panel.bid{--gel:var(--magenta)}
+.panel .ph{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.panel .ph h3{margin:0;font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:-.01em}
+.panel .ph .cnt{font-family:var(--mono);font-size:12px;color:var(--gel)}
+.panel .ph .src{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink3)}
+.panel .more{display:inline-flex;gap:8px;align-items:center;margin-top:14px;font-size:14px;font-weight:700;text-decoration:none;color:var(--gel)}
+.upd{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-top:12px}
+.skel{height:52px;border-radius:10px;background:linear-gradient(90deg,var(--stage2),var(--haze),var(--stage2));background-size:200% 100%;animation:sk 1.2s linear infinite;border:1px solid var(--line)}
+@keyframes sk{to{background-position:-200% 0}}
+@media(max-width:820px){.live-grid{grid-template-columns:1fr}}
+
+/* ── 마감 ── */
+.close-sec{padding:clamp(64px,10vh,120px) 0 clamp(40px,6vh,64px)}
+.close-box{position:relative;overflow:hidden;border:1px solid var(--line2);border-radius:24px;padding:clamp(28px,5vw,64px);background:radial-gradient(80% 100% at 20% 0%,rgba(255,176,32,.12),transparent 60%),radial-gradient(60% 80% at 90% 100%,rgba(47,212,255,.10),transparent 60%),var(--stage2)}
+.close-box h2{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,58px);letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+.close-box p{margin:16px 0 0;color:var(--ink2);max-width:36em;font-size:clamp(15px,1.8vw,18px)}
+.close-box .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.big-tel{font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,52px);letter-spacing:-.01em;margin-top:22px}
+.big-tel a{text-decoration:none}
+footer{border-top:1px solid var(--line);padding:32px 0 calc(40px + env(safe-area-inset-bottom));color:var(--ink3);font-size:13px}
+footer .f{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+footer .f b{color:var(--ink2);font-weight:500}
+footer .sis{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
+
+@media(prefers-reduced-motion:reduce){
+  .beam,.led .track,.led .tag i,.scroll-hint{animation:none!important}
+  .h1 .ln,.lede,.hero-cta{animation:none;opacity:1;transform:none;filter:none}
+  .h1 .ln em::after{transform:scaleX(1);animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#"><span class="dots"><i></i><i></i><i></i></span><b>EVENT KOREA</b></a>
+    <nav>
+      <a href="#make">홈페이지</a><a href="#job">일감 알림</a><a href="#card">전자명함</a><a href="#live">축제 · 입찰</a><a href="#go">신청</a>
+    </nav>
+    <a class="tel-btn" href="tel:15337295">📞 <span class="mono">1533-7295</span></a>
+  </div>
+</header>
+
+<!-- ═══ 히어로 ═══ -->
+<section class="hero" id="hero">
+  <div class="haze"></div>
+  <div class="beam a"></div><div class="beam b"></div><div class="beam c"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="floor"></div>
+  <div class="wrap">
+    <p class="kicker">EVENT KOREA · 이벤트인의 포털</p>
+    <h1 class="h1">
+      <span class="ln">오직,</span>
+      <span class="ln"><em>이벤트의</em></span>
+      <span class="ln"><em>이벤트에 의한</em>,</span>
+      <span class="ln"><em>이벤트인을 위한</em></span>
+      <span class="ln">홈페이지.</span>
+    </h1>
+    <p class="lede">만들고, 알리고, 따내고, 명함까지. <b>이벤트 하는 사람이 매일 쓰는 도구</b>를 한 곳에 모았습니다. 이벤트 회사가, 이벤트 회사를 위해 만들었습니다.</p>
+    <div class="hero-cta">
+      <a class="btn fill" href="#go">무료 데모 신청</a>
+      <a class="btn" href="#live">지금 뜬 입찰 · 축제 보기 <span class="mono">↓</span></a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+  <div class="led" aria-label="이번 주 전국 축제">
+    <div class="tag"><i></i>LIVE · 이번 주 축제</div>
+    <div class="track" id="ticker"></div>
+  </div>
+</section>
+
+<!-- ═══ 누구를 위한 ═══ -->
+<section class="who">
+  <div class="wrap">
+    <div class="row">
+      <span class="lbl">FOR</span>
+      <span class="chip"><b>이벤트 기획사</b></span><span class="chip"><b>MC · 사회자</b></span><span class="chip"><b>가수 · 공연팀</b></span><span class="chip"><b>음향 · 조명 · 무대</b></span><span class="chip"><b>렌탈 · 설치</b></span><span class="chip"><b>영상 · 중계</b></span><span class="chip"><b>축제 · 행사 담당자</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 서비스 큐 ═══ -->
+<section class="cues" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="n">CUE SHEET</span>
+      <h2>이벤트인이 매일 쓰는 도구, 순서대로.</h2>
+      <p>전부 실제로 돌아가는 것들입니다. 큰길이벤트기획이 현장에서 쓰려고 만들었고, 그대로 드립니다.</p>
+    </div>
+
+    <article class="cue" id="make" style="--gel:var(--amber)">
+      <div class="cue-no">01<small>홈페이지</small></div>
+      <div class="cue-body">
+        <div class="k">이벤트인을 위한 홈페이지 제작</div>
+        <h3>이벤트 회사 13곳 중 12곳이<br>홈페이지가 없습니다.</h3>
+        <p>담당자는 전화 걸기 전에 검색부터 합니다. <b>나오는 한 곳이 문의를 다 가져갑니다.</b> 실력 순이 아니라 보이는 순입니다. 회사 이름으로 데모를 먼저 만들어 보내드립니다. 마음에 안 들면 그냥 지웁니다.</p>
+        <ul class="facts"><li><b>10만원</b>부터</li><li><b>데모 먼저</b> · 돈은 마음에 들 때</li><li>자료 받고 <b>일주일</b> 안 오픈</li><li>글자 · 사진 <b>직접 수정</b></li></ul>
+        <a class="cta" href="https://www.ai-make.co.kr/#demo" target="_blank" rel="noopener">무료 데모 신청 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="phone"><div class="bar"><span>9:41</span><span>●●●</span></div><div class="scr">
+          <div class="noti"><div class="app"><i></i>네이버 검색 · "○○이벤트"</div><b>지도 1건</b><br><span style="color:var(--ink3)">홈페이지 · 없음</span></div>
+          <div class="noti hot"><div class="app"><i></i>네이버 검색 · "△△이벤트"</div><b>홈페이지 · 행사 이야기 · 견적 문의</b><br><span style="color:var(--ink2)">담당자가 여기로 갑니다</span></div>
+        </div></div>
+      </div>
+    </article>
+
+    <article class="cue" id="job" style="--gel:var(--magenta)">
+      <div class="cue-no">02<small>일감</small></div>
+      <div class="cue-body">
+        <div class="k">이벤트 일감 알림톡</div>
+        <h3>카톡방에 구인 글이 뜨는 순간,<br>폰이 울립니다.</h3>
+        <p>행사 구인은 단톡방 수십 개에 흩어져 올라오고, <b>먼저 본 사람이 가져갑니다.</b> 큰길행사알림 앱이 카톡 알림을 읽어 「구인 · 섭외 · 급구」 글만 골라 울리고, 누르면 그 방이 바로 열립니다.</p>
+        <ul class="facts"><li>안드로이드 <b>무료</b></li><li>단톡방 <b>몇 개든</b></li><li>낱말 <b>직접 고름</b></li><li>회사 밖에서도</li></ul>
+        <a class="cta" href="https://xn--wk0bn7yi8h24iszc.com/app/" target="_blank" rel="noopener">알림 앱 받기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="phone"><div class="bar"><span>14:02</span><span>●●●</span></div><div class="scr">
+          <div class="noti hot"><div class="app"><i></i>큰길행사알림 · 방금</div><b>[전남 행사인 모임]</b> 9/12(토) 여수 체육대회 <b>MC 급구</b>, 음향 1팀 같이 — 연락 주세요</div>
+          <div class="noti"><div class="app"><i></i>큰길행사알림 · 23분 전</div><b>[광주전남 이벤트]</b> 10/3 순천 기공식 <b>사회자 섭외</b> 문의</div>
+          <div class="noti" style="opacity:.55"><div class="app"><i></i>큰길행사알림 · 1시간 전</div><b>[공연팀 구인]</b> 9/20 광양 축제 버스킹 2팀</div>
+        </div></div>
+      </div>
+    </article>
+
+    <article class="cue" id="card" style="--gel:var(--magenta)">
+      <div class="cue-no">03<small>명함</small></div>
+      <div class="cue-body">
+        <div class="k">이벤트인의 전자 명함 · 콜백 문자</div>
+        <h3>전화를 끊으면,<br>명함이 문자로 갑니다.</h3>
+        <p>종이 명함은 지갑에서 사라집니다. <b>링크 명함은 상대 폰에 남습니다.</b> 「연락처 저장」 한 번이면 주소록에 들어가고, QR로 현장에서 화면만 보여주면 됩니다. 통화가 끝나면 앱이 명함 링크를 알아서 문자로 보냅니다.</p>
+        <ul class="facts"><li>직군 태그 <b>16개</b></li><li>전화 · 문자 · 카톡 · 길찾기 <b>한 번에</b></li><li>vCard 저장</li><li>카톡 <b>미리보기</b></li></ul>
+        <a class="cta" href="https://xn--wk0bn7yi8h24iszc.com/card/" target="_blank" rel="noopener">내 명함 만들기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="phone"><div class="bar"><span>통화 종료 · 4:12</span><span>●●●</span></div><div class="scr">
+          <div class="card"><div class="nm">김효민</div><div class="rl">큰길이벤트기획 · 대표</div><div class="tags"><span>행사 기획</span><span>무대 · 음향</span><span>MC</span><span>영상</span></div><div class="acts"><span>전화</span><span>문자</span><span>저장</span><span>길찾기</span></div></div>
+          <div class="sms"><small>자동 발송 · 방금</small>방금 통화한 큰길이벤트기획 김효민입니다. 제 명함입니다 → event-korea.com/c/…</div>
+        </div></div>
+      </div>
+    </article>
+
+    <article class="cue" id="bid" style="--gel:var(--cyan)">
+      <div class="cue-no">04<small>입찰</small></div>
+      <div class="cue-body">
+        <div class="k">전국 축제 · 행사 입찰 정보</div>
+        <h3>나라장터에 오늘 뜬 행사 용역,<br>마감 임박순으로.</h3>
+        <p>축제 대행, 기념식, 박람회, 경연대회 — 지자체와 공공기관 행사는 <b>전부 입찰 공고로 나옵니다.</b> 매일 아침 나라장터를 긁어 행사 관련만 골라 놓습니다. 사업비와 마감 시각이 한 줄에 보입니다.</p>
+        <ul class="facts"><li>지금 <b><span id="bidCount">—</span>건</b> 공고</li><li>매일 <b>자동 갱신</b></li><li>마감 임박순 · 사업비순</li><li>무료</li></ul>
+        <a class="cta" href="https://brizymedia.github.io/haengsa-board/" target="_blank" rel="noopener">입찰 공고 전체 보기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis"><div class="list" id="bidMini"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
+    </article>
+
+    <article class="cue" id="fest" style="--gel:var(--cyan)">
+      <div class="cue-no">05<small>행사</small></div>
+      <div class="cue-body">
+        <div class="k">전국 행사 · 축제 정보</div>
+        <h3>이번 주 전국에서 열리는<br>축제와 행사, 한 화면에.</h3>
+        <p>한국관광공사 자료로 전국 축제·공연·행사를 날짜순으로 모읍니다. <b>어디서 뭐가 열리는지 알면 다음 일이 보입니다</b> — 부스, 공연 섭외, 장비 렌탈, 사회자. 담당자 전화번호까지 붙어 있습니다.</p>
+        <ul class="facts"><li>이번 주 <b><span id="festCount">—</span>건</b></li><li>지역 · 날짜 · 담당 전화</li><li>관광공사 공식 자료</li></ul>
+        <a class="cta" href="https://brizymedia.github.io/haengsa-board/#festival" target="_blank" rel="noopener">전국 축제 전체 보기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis"><div class="list" id="festMini"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
+    </article>
+
+    <article class="cue" id="paper" style="--gel:var(--amber)">
+      <div class="cue-no">06<small>서류</small></div>
+      <div class="cue-body">
+        <div class="k">기획서 · 견적서 · 전자계약</div>
+        <h3>문의가 견적서가 되고,<br>견적서가 계약서가 됩니다.</h3>
+        <p>문자로 견적 주고받다 놓치는 일이 없습니다. 이야기만 들으면 <b>기획서가 나오고</b>, 버튼 하나로 견적서 링크가 되고, 손님이 폰에서 서명하면 <b>PDF가 양쪽 메일로</b> 갑니다. 대장에 한 줄 남습니다.</p>
+        <ul class="facts"><li>기획서 <b>자동</b></li><li>견적서 → 계약서 <b>버튼 하나</b></li><li>폰에서 서명</li><li>PDF · 대장 자동</li></ul>
+        <a class="cta" href="https://www.ai-make.co.kr/plan.html?admin=1" target="_blank" rel="noopener">기획서 도구 열기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="pipe">
+          <div class="st"><i>01</i><span>손님 문의 <small>홈페이지 폼 → 메일</small></span></div>
+          <div class="st"><i>02</i><span>기획서 <small>업종 · 목적만 넣으면</small></span></div>
+          <div class="st on"><i>03</i><span>견적서 링크 <small>버튼 하나</small></span></div>
+          <div class="st"><i>04</i><span>계약서 · 서명 <small>손님 폰에서</small></span></div>
+          <div class="st"><i>05</i><span>PDF 양쪽 메일 <small>계약 대장 기록</small></span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cue" id="promo" style="--gel:var(--amber)">
+      <div class="cue-no">07<small>홍보</small></div>
+      <div class="cue-body">
+        <div class="k">사진 한 장 → 홍보글 · 카드뉴스 · 쇼츠</div>
+        <h3>행사 끝나고 사진 한 장 올리면,<br>홍보글이 됩니다.</h3>
+        <p>글쓰기 도구가 사진 크기, 검색용 정보, 블로그·밴드 공유 문구까지 만듭니다. <b>행사 열 번이면 홍보글 열 개가 검색에 쌓입니다.</b> 카드뉴스와 쇼츠, 홍보영상은 저희가 만들어 드립니다.</p>
+        <ul class="facts"><li>갤러리 글 <b>자동 발행</b></li><li>블로그 · 밴드 <b>공유</b></li><li>카드뉴스 · 쇼츠</li><li>홍보영상 제작</li></ul>
+        <a class="cta" href="https://www.ai-make.co.kr/gallery/" target="_blank" rel="noopener">홍보글 예시 보기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="post"><div class="ph"></div><div class="tx"><b>녹동바다불꽃축제 무대 · 음향 진행</b>3일 밤, 관객 1만 명 앞에 라인어레이 25K가 섰습니다…</div><div class="sh"><span>네이버 블로그</span><span>밴드</span><span>인스타 문구</span><span>검색 등록 ✓</span></div></div>
+      </div>
+    </article>
+
+    <article class="cue" id="profile" style="--gel:var(--amber)">
+      <div class="cue-no">08<small>프로필</small></div>
+      <div class="cue-body">
+        <div class="k">가수 · MC · 공연팀 프로필 페이지</div>
+        <h3>섭외 담당자는<br>영상 30초로 결정합니다.</h3>
+        <p>무대를 아직 못 본 담당자가 링크 하나로 섭외를 결정하게 만듭니다. <b>대표 영상 + 이력 + 섭외 폼</b>이 한 페이지에, 기획사에 바로 보낼 <b>A4 프로필 한 장</b>은 덤입니다.</p>
+        <ul class="facts"><li>원페이지 + <b>A4 한 장</b></li><li>섭외 폼 · 문자로 받기</li><li>QR</li></ul>
+        <a class="cta" href="https://www.ai-make.co.kr/gallery/posts/2026-08-singer-mc-homepage.html" target="_blank" rel="noopener">가수 · MC 홈페이지 이야기 <span class="ar">→</span></a>
+      </div>
+      <div class="vis">
+        <div class="a4"><div class="nm">박준화</div><div class="rl">트로트 가수 · 행사 · 축제 · 방송</div><div class="ph"></div><div class="li">대표곡 「…」 · 2025 ○○가요제 대상 · 전국 축제 무대 120회</div><div class="qr"></div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 실시간 판 ═══ -->
+<section class="live" id="live">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="n">LIVE BOARD</span>
+      <h2>지금 뜬 것.</h2>
+      <p>나라장터 입찰 공고와 전국 축제를 매일 아침 모아 놓습니다. 여기 보이는 건 실제 최신 자료입니다.</p>
+    </div>
+    <div class="live-grid">
+      <div class="panel bid">
+        <div class="ph"><h3>마감 임박 행사 입찰</h3><span class="cnt" id="bidCnt2"></span><span class="src">나라장터</span></div>
+        <div class="list" id="bidList"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        <a class="more" href="https://brizymedia.github.io/haengsa-board/#bid" target="_blank" rel="noopener">입찰 공고 전체 →</a>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3>이번 주 전국 축제</h3><span class="cnt" id="festCnt2"></span><span class="src">한국관광공사</span></div>
+        <div class="list" id="festList"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        <a class="more" href="https://brizymedia.github.io/haengsa-board/#festival" target="_blank" rel="noopener">축제 · 행사 전체 →</a>
+      </div>
+    </div>
+    <p class="upd" id="upd">자료를 불러오는 중…</p>
+  </div>
+</section>
+
+<!-- ═══ 마감 ═══ -->
+<section class="close-sec" id="go">
+  <div class="wrap">
+    <div class="close-box">
+      <h2>대표님 회사 이름을 검색하면,<br>지금 뭐가 나옵니까.</h2>
+      <p>회사 이름과 전화번호만 주시면 이번 주 안에 데모 링크가 문자로 갑니다. 보시고 결정하세요. 마음에 안 들면 비용 없이 그냥 지웁니다.</p>
+      <div class="acts">
+        <a class="btn fill" href="https://www.ai-make.co.kr/#demo" target="_blank" rel="noopener">무료 데모 신청</a>
+        <a class="btn" href="sms:15337295?body=%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%BD%94%EB%A6%AC%EC%95%84%20%EB%8D%B0%EB%AA%A8%20%EC%8B%A0%EC%B2%AD%20-%20%ED%9A%8C%EC%82%AC%EB%AA%85%3A%20">문자로 신청</a>
+      </div>
+      <div class="big-tel"><a href="tel:15337295">1533-7295</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f"><b>이벤트 코리아</b><span>주식회사 브리지미디어</span><span>대표 김효민</span><span class="mono">1533-7295</span><span>www.event-korea.com</span></div>
+    <div class="sis">
+      <a href="https://www.ai-make.co.kr/" target="_blank" rel="noopener">큰길브리지 — 홈페이지 · 영상 제작</a>
+      <a href="https://xn--wk0bn7yi8h24iszc.com/" target="_blank" rel="noopener">큰길이벤트기획 — 행사 진행</a>
+      <a href="https://brizymedia.github.io/haengsa-board/" target="_blank" rel="noopener">행사 고시 알림판</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ── 상단 바 ── */
+  var top=document.getElementById('top');
+  function onS(){ top.classList.toggle('on', window.scrollY>40); }
+  window.addEventListener('scroll',onS,{passive:true}); onS();
+
+  /* ── 먼지 (빔 속을 떠다니는 것) ── */
+  var cv=document.getElementById('dust'), rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(cv && cv.getContext && !rm){
+    var cx=cv.getContext('2d'), W,H,P=[],N=70;
+    function size(){ var r=cv.parentNode.getBoundingClientRect(); W=cv.width=Math.floor(r.width); H=cv.height=Math.floor(r.height); }
+    function mk(){ return {x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.4,vx:(Math.random()-.5)*.15,vy:-Math.random()*.18-.04,a:Math.random()*.5+.15,t:Math.random()*6.28}; }
+    size(); for(var i=0;i<N;i++)P.push(mk());
+    window.addEventListener('resize',function(){ size(); });
+    var vis=true; document.addEventListener('visibilitychange',function(){ vis=!document.hidden; });
+    (function loop(){
+      if(vis){ cx.clearRect(0,0,W,H);
+        for(var i=0;i<P.length;i++){ var p=P[i]; p.t+=.01; p.x+=p.vx+Math.sin(p.t)*.08; p.y+=p.vy;
+          if(p.y<-4||p.x<-4||p.x>W+4){ P[i]=mk(); P[i].y=H+4; continue; }
+          cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fillStyle='rgba(255,245,220,'+(p.a*(0.6+0.4*Math.sin(p.t*3)))+')'; cx.fill(); } }
+      requestAnimationFrame(loop); })();
+  }
+
+  /* ── 실시간 자료 ──
+     행사 고시 알림판이 매일 만드는 events.json 을 그대로 읽는다. 서버 없다.
+     못 읽으면 아래 「비상용」 몇 건을 보여준다. */
+  var SRC='https://brizymedia.github.io/haengsa-board/data/events.json';
+  var 비상={ bids:[
+      {title:'2026 이천 모두의 일자리박람회 행사 용역',org:'경기도 이천시',deadline:'2026-09-03 17:00',budget:'36363636',url:'https://www.g2b.go.kr/'},
+      {title:'제27회 전국 119소방동요 경연대회 행사 용역',org:'소방청',deadline:'2026-09-04 11:00',budget:'29090909',url:'https://www.g2b.go.kr/'},
+      {title:'2026년 방과후 사업 성과공유회 대행 용역',org:'한국과학창의재단',deadline:'2026-09-04 10:00',budget:'40909091',url:'https://www.g2b.go.kr/'}],
+    fests:[
+      {title:'무주반딧불축제',region:'전북',place:'무주군',start_date:'2026-09-04',end_date:'2026-09-12'},
+      {title:'서울라이트 DDP 가을',region:'서울',place:'DDP',start_date:'2026-09-03',end_date:'2026-09-13'},
+      {title:'공주 국가유산야행',region:'충남',place:'공주시',start_date:'2026-09-04',end_date:'2026-09-06'},
+      {title:'예산황새축제',region:'충남',place:'예산황새공원',start_date:'2026-09-05',end_date:'2026-09-06'},
+      {title:'무안 황토 갯벌축제',region:'전남',place:'무안군 해제면',start_date:'2026-08-29',end_date:'2026-09-06'},
+      {title:'왜관 홀리 페스티벌',region:'경북',place:'칠곡군 왜관수도원',start_date:'2026-09-04',end_date:'2026-09-06'}] };
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function 만원(n){ n=Number(n)||0; if(!n) return ''; if(n>=1e8) return (n/1e8).toFixed(1).replace(/\.0$/,'')+'억'; return Math.round(n/1e4).toLocaleString('ko-KR')+'만원'; }
+  function md(s){ var m=/(\d{4})-(\d{2})-(\d{2})/.exec(s||''); return m? (Number(m[2])+'.'+Number(m[3])) : ''; }
+  function hm(s){ var m=/(\d{2}):(\d{2})/.exec(s||''); return m? m[0] : ''; }
+  function today(){ var d=new Date(),p=function(n){return (n<10?'0':'')+n;}; return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+  function plus(days){ var d=new Date(); d.setDate(d.getDate()+days); var p=function(n){return (n<10?'0':'')+n;}; return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+  function region(x){ return x.region || (x.place||'').split(' ')[0] || ''; }
+  function days(a,b){ var x=new Date(a+'T00:00:00'), y=new Date(b+'T00:00:00'); return (isNaN(x)||isNaN(y)) ? 999 : Math.round((y-x)/864e5); }
+  /* 상설 공연·전시(몇 달짜리)는 날짜 대신 「상설」로. 이번 주 축제 목록에서 끝을 알 수 있게 */
+  function when(f){ var d=days(f.start_date,f.end_date); return d>60 ? '상설<small>~ '+md(f.end_date)+'</small>' : md(f.start_date)+'<small>~ '+md(f.end_date)+'</small>'; }
+  function bidRow(b){ var dl=b.deadline||''; return '<a class="row-item" href="'+esc(b.url||'#')+'" target="_blank" rel="noopener"><span><span class="t">'+esc(b.title)+'</span><span class="m">'+esc(b.org||'')+(b.budget?' · '+만원(b.budget):'')+'</span></span><span class="d">'+(md(dl)||'—')+'<small>'+(hm(dl)?hm(dl)+' 마감':'마감')+'</small></span></a>'; }
+  function festRow(f){ return '<a class="row-item" href="'+esc(f.url||'https://brizymedia.github.io/haengsa-board/#festival')+'" target="_blank" rel="noopener"><span><span class="t">'+esc(f.title)+'</span><span class="m">'+esc(region(f))+(f.place?' · '+esc(f.place):'')+'</span></span><span class="d">'+when(f)+'</span></a>'; }
+  function render(items, gen){
+    var t0=today(), t7=plus(7), tm1=plus(-1);
+    var now=(function(){ var d=new Date(),p=function(n){return (n<10?'0':'')+n;}; return t0+' '+p(d.getHours())+':'+p(d.getMinutes()); })();
+    var bids=items.filter(function(x){return x.kind==='bid';})
+      .filter(function(x){return !x.deadline || x.deadline>=now;})   // 이미 지난 마감은 뺀다
+      .sort(function(a,b){return (a.deadline||'9').localeCompare(b.deadline||'9');});
+    if(bids.length<3) bids=items.filter(function(x){return x.kind==='bid';}).sort(function(a,b){return (b.posted_at||'').localeCompare(a.posted_at||'');});
+    /* 이번 주 축제 순서: ① 이번 주에 시작하는 것 ② 짧게 열리는 진행 중인 것 ③ 몇 달짜리 상설 */
+    function rank(f){ var s=f.start_date||'', d=days(f.start_date,f.end_date); if(s>=tm1 && s<=t7) return 0; if(d<=30) return 1; return 2; }
+    var fests=items.filter(function(x){return x.kind==='festival';})
+      .filter(function(x){return (x.end_date||'9')>=t0 && (x.start_date||'')<=t7;})
+      .sort(function(a,b){ var ra=rank(a), rb=rank(b); if(ra!==rb) return ra-rb; return ra===1 ? (a.end_date||'').localeCompare(b.end_date||'') : (a.start_date||'').localeCompare(b.start_date||''); });
+    var allB=items.filter(function(x){return x.kind==='bid';}).length;
+    document.getElementById('bidCount').textContent=allB.toLocaleString('ko-KR');
+    document.getElementById('festCount').textContent=fests.length.toLocaleString('ko-KR');
+    document.getElementById('bidCnt2').textContent=allB+'건';
+    document.getElementById('festCnt2').textContent=fests.length+'건';
+    document.getElementById('bidMini').innerHTML=bids.slice(0,3).map(bidRow).join('');
+    document.getElementById('festMini').innerHTML=fests.slice(0,3).map(festRow).join('');
+    document.getElementById('bidList').innerHTML=bids.slice(0,6).map(bidRow).join('');
+    document.getElementById('festList').innerHTML=fests.slice(0,6).map(festRow).join('');
+    var tk=fests.slice(0,18).map(function(f){ return '<span><b>▶</b>'+esc(f.title)+' '+md(f.start_date)+'–'+md(f.end_date)+'<s>'+esc(region(f))+'</s></span>'; }).join('');
+    var tr=document.getElementById('ticker'); tr.innerHTML=tk+tk; tr.style.setProperty('--dur', Math.max(40, fests.slice(0,18).length*5)+'s');
+    document.getElementById('upd').textContent='자료 갱신 '+(gen?gen.replace('T',' ').slice(0,16):'—')+' · 출처 나라장터 · 한국관광공사 · 행사 고시 알림판이 매일 모읍니다';
+  }
+  function fallback(){
+    var items=비상.bids.map(function(b){b.kind='bid';return b;}).concat(비상.fests.map(function(f){f.kind='festival';return f;}));
+    render(items,'');
+    document.getElementById('upd').textContent='실시간 자료를 잠시 못 불러와 최근 것을 보여드립니다 · 출처 나라장터 · 한국관광공사';
+  }
+  var done=false;
+  fetch(SRC,{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(j){ done=true; render(j.items||[], j.generated_at||''); })
+    .catch(function(){ if(!done) fallback(); });
+  setTimeout(function(){ if(!done && document.querySelector('#bidList .skel')) fallback(); }, 6000);
+  window.__ek={render:render, fallback:fallback};
+})();
+</script>
+</body>
+</html>
