@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>행사 기획서 — 이벤트 코리아</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;900&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/*
+  행사 기획서 자동 작성.
+  행사 이야기를 칸에 채우면 기획서가 나온다 — 개요·방향·큐시트 초안·무대와 장비·인력·예산·일정·안전·준비물.
+  서버 없다. 내용은 주소(#p=) 안에 통째로 담긴다.
+  ?admin=1 → 우리 화면(왼쪽 칸 + 문서 + 견적서로 넘기기) / 그냥 열면 → 담당자 화면(문서만)
+  「견적서로 넘기기」는 큰길이벤트기획 자동 견적서(#q=)에 규모에 맞는 품목을 실어 보낸다.
+*/
+:root{--stage:#0A0B10;--stage2:#12131B;--line:#262937;--line2:#33364A;--ink:#F3F2EC;--ink2:#A9AAB6;--ink3:#6E7080;
+      --amber:#FFB020;--magenta:#FF3D8A;--cyan:#2FD4FF;
+      --paper:#FFFFFF;--paper2:#F6F5F0;--pline:#E3E1D8;--phair:#EEECE5;--pink:#161616;--pink2:#5A5A55;--pink3:#8E8E88;
+      --display:"Gothic A1","Noto Sans KR",sans-serif;--sans:"IBM Plex Sans KR","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stage);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:20;background:rgba(10,11,16,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1440px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:9px;text-decoration:none}
+.mark .dots{display:flex;gap:3px}.mark .dots i{width:7px;height:7px;border-radius:50%;display:block}
+.mark .dots i:nth-child(1){background:var(--amber)}.mark .dots i:nth-child(2){background:var(--magenta)}.mark .dots i:nth-child(3){background:var(--cyan)}
+.mark b{font-family:var(--display);font-weight:900;letter-spacing:.12em;font-size:13px}
+.mark span{color:var(--ink3);font-size:13px}
+.mode{font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:3px 9px;border-radius:99px;background:rgba(255,176,32,.14);color:var(--amber)}
+.mode.cust{background:rgba(47,212,255,.12);color:var(--cyan)}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:99px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--ink2)}
+.btn.amber{background:var(--amber);border-color:var(--amber);color:#111}
+.btn.cyan{background:var(--cyan);border-color:var(--cyan);color:#111}
+.layout{max-width:1440px;margin:0 auto;padding:18px;display:grid;grid-template-columns:minmax(320px,420px) 1fr;gap:18px;align-items:start}
+.layout.cust{grid-template-columns:1fr;max-width:960px}
+aside{background:var(--stage2);border:1px solid var(--line);border-radius:16px;padding:18px;position:sticky;top:62px;max-height:calc(100vh - 80px);overflow:auto}
+aside h3{margin:16px 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink3);font-weight:600}
+aside h3:first-child{margin-top:0}
+label{display:block;font-size:12.5px;color:var(--ink2);margin:10px 0 4px}
+input[type=text],input[type=date],input[type=time],input[type=number],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line2);border-radius:9px;font:inherit;font-size:14px;background:var(--stage);color:var(--ink)}
+input::placeholder,textarea::placeholder{color:var(--ink3)}
+select option{background:#15161E;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line2);border-radius:99px;font-size:13px;cursor:pointer;user-select:none;color:var(--ink2)}
+.chip input{margin:0;accent-color:var(--amber)}
+.chip.on{border-color:var(--amber);color:var(--amber);background:rgba(255,176,32,.08)}
+.seg{display:flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden}
+.seg label{flex:1;margin:0;text-align:center;padding:8px;font-size:13.5px;cursor:pointer;color:var(--ink2)}
+.seg label.on{background:var(--amber);color:#111;font-weight:700}
+.seg input{display:none}
+.hint{font-size:12px;color:var(--ink3);margin-top:6px}
+
+/* ── 문서 (종이) ── */
+.doc{background:var(--paper);color:var(--pink);border-radius:14px;padding:clamp(22px,4vw,52px);box-shadow:0 30px 60px -40px rgba(0,0,0,.8)}
+.cover{border-bottom:2px solid var(--pink);padding-bottom:22px;margin-bottom:28px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end}
+.cover .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--pink3)}
+.cover h1{font-family:var(--display);font-weight:900;font-size:clamp(24px,4vw,38px);line-height:1.2;letter-spacing:-.02em;margin:8px 0 10px;text-wrap:balance}
+.cover .m{display:flex;gap:16px;flex-wrap:wrap;color:var(--pink2);font-size:13px}
+.cover .who{text-align:right;font-size:12.5px;color:var(--pink2);line-height:1.6}
+.cover .who b{font-family:var(--display);font-weight:900;display:block;font-size:14px;color:var(--pink)}
+.sec{margin:30px 0 0}
+.sec .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--pink3);font-weight:600}
+.sec h2{font-family:var(--display);font-weight:900;font-size:clamp(18px,2.4vw,22px);margin:4px 0 10px;letter-spacing:-.01em}
+.sec p{margin:0 0 8px;color:var(--pink2)}
+.sec p b{color:var(--pink)}
+.lead{font-size:clamp(15px,1.9vw,17.5px);color:var(--pink);line-height:1.6;padding:14px 18px;background:var(--paper2);border-left:4px solid var(--amber);border-radius:0 8px 8px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--phair);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--pink3);font-weight:600;white-space:nowrap}
+td.t{font-family:var(--mono);font-size:12.5px;color:var(--pink2);white-space:nowrap}
+td.r{text-align:right;font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}
+.kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--pink3);padding-top:4px}
+.kv dd{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tags span{font-size:12.5px;padding:4px 10px;border:1px solid var(--pline);border-radius:99px;color:var(--pink2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--pline);border-radius:10px;padding:14px 16px}
+.box h4{margin:0 0 6px;font-size:13.5px;font-family:var(--mono);letter-spacing:.06em;color:var(--pink3);font-weight:600}
+.box ul{margin:0;padding-left:18px;color:var(--pink2);font-size:14px}
+.box li{margin:3px 0}
+.chk{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.chk li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--pink2)}
+.chk li::before{content:"";width:15px;height:15px;border:1.5px solid var(--pink3);border-radius:4px;flex:none;margin-top:5px}
+.bud{display:grid;grid-template-columns:1fr auto auto;gap:6px 14px;font-size:14px;align-items:center}
+.bud .bar{height:8px;background:var(--phair);border-radius:99px;overflow:hidden;grid-column:1/-1;margin-bottom:6px}
+.bud .bar i{display:block;height:100%;background:var(--amber)}
+.bud .pc{font-family:var(--mono);font-size:12px;color:var(--pink3)}
+.bud .won{font-family:var(--mono);font-size:13px;text-align:right}
+.total{margin-top:10px;padding-top:10px;border-top:1px solid var(--pline);display:flex;justify-content:space-between;align-items:baseline}
+.total b{font-family:var(--display);font-weight:900;font-size:20px}
+.total small{color:var(--pink3);font-size:12px}
+.foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--phair);font-size:12px;color:var(--pink3)}
+.cta{margin-top:26px;padding:20px;border-radius:12px;background:var(--pink);color:#fff;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.cta b{font-size:16px}.cta .sp{flex:1}
+.cta .btn{border-color:transparent;color:#fff}.cta .btn.amber{color:#111}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,10px);opacity:0;transition:.25s;background:#222;color:#fff;padding:10px 16px;border-radius:10px;z-index:99;pointer-events:none;font-size:14px}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{position:static;max-height:none}.grid2{grid-template-columns:1fr}.cover{grid-template-columns:1fr}.cover .who{text-align:left}}
+@media print{body{background:#fff}.top,aside,.cta,.toast{display:none!important}.layout{display:block;padding:0}.doc{box-shadow:none;border-radius:0;padding:0}.sec{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in">
+  <a class="mark" href="./"><span class="dots"><i></i><i></i><i></i></span><b>EVENT KOREA</b><span>· 행사 기획서</span></a>
+  <span class="mode" id="mode">작성 화면</span>
+  <span class="sp"></span>
+  <button class="btn" id="b-link" type="button">🔗 링크 복사</button>
+  <button class="btn" id="b-prompt" type="button" title="더 다듬고 싶을 때 Claude 에 붙여넣는 글">✎ 프롬프트 복사</button>
+  <button class="btn" id="b-print" type="button">🖨 인쇄 · PDF</button>
+  <button class="btn amber" id="b-quote" type="button">📄 이 기획서로 견적서 만들기</button>
+</div></div>
+
+<div class="layout" id="layout">
+  <aside id="form">
+    <h3>행사</h3>
+    <label>행사 유형</label><select id="f-type"></select>
+    <label>행사명</label><input type="text" id="f-title" placeholder="예: 2026 순천 시민의 날 기념식">
+    <div class="two"><div><label>일시</label><input type="date" id="f-date"></div><div><label>시작 시각</label><input type="time" id="f-time" value="14:00"></div></div>
+    <label>장소</label><input type="text" id="f-place" placeholder="예: 순천만국가정원 잔디광장">
+    <label>실내 · 실외</label>
+    <div class="seg" id="f-indoor"><label class="on"><input type="radio" name="io" value="out" checked>실외</label><label><input type="radio" name="io" value="in">실내</label></div>
+    <label>예상 인원</label><input type="number" id="f-people" placeholder="예: 500" min="10" step="10">
+    <h3>주최</h3>
+    <label>주최 · 주관</label><input type="text" id="f-org" placeholder="예: 순천시 문화예술과">
+    <div class="two"><div><label>담당자</label><input type="text" id="f-name" placeholder="예: 김주무관"></div><div><label>전화</label><input type="text" id="f-tel" placeholder="061-000-0000"></div></div>
+    <label>이메일 <span class="hint" style="display:inline">(선택)</span></label><input type="text" id="f-email" placeholder="name@example.com">
+    <h3>행사로 얻고 싶은 것</h3>
+    <div class="chips" id="f-goals"></div>
+    <h3>필요한 것</h3>
+    <div class="chips" id="f-needs"></div>
+    <p class="hint">유형을 고르면 보통 필요한 것이 미리 체크됩니다. 고치셔도 됩니다.</p>
+    <h3>예산</h3>
+    <select id="f-budget"></select>
+    <label>특이사항 · 들은 이야기</label><textarea id="f-note" placeholder="예: 시장님 참석 확정, 우천 시 실내 체육관으로 이동, 주차 200대"></textarea>
+    <p class="hint">칸을 채우는 대로 오른쪽 문서가 바뀝니다. 「링크 복사」로 보내면 담당자도 같은 문서를 봅니다.</p>
+  </aside>
+  <main class="doc" id="doc"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══ 유형별 뼈대 — 큐시트 초안은 [시작 분, 순서 이름, 길이 분] ══ */
+var 유형들={
+  festival:{이름:'지역 축제',방향:'{t}은(는) 주민과 방문객이 함께 즐기는 자리입니다. 낮에는 체험과 부스, 저녁에는 무대 공연으로 흐름을 나누고, 무대는 광장 어디서든 보이게 높이와 LED 크기를 잡습니다.',
+    큐:[[0,'개막 · 내빈 소개',20],[20,'축하공연 1부',40],[60,'체험 · 부스 자유 관람 (무대 BGM · 안내 방송)',90],[150,'시민 참여 무대 · 경품 추첨',40],[190,'초청가수 공연',50],[240,'폐막 · 불꽃 연출',15]],
+    필요:['무대','음향','조명','LED 전광판','MC · 사회자','가수 · 공연','텐트 · 부스','포토존 · 현수막','특수효과','발전차'],야외:true},
+  ceremony:{이름:'기념식 · 준공식 · 오픈식',방향:'{t}은(는) 의전이 핵심입니다. 내빈 동선과 식순, 테이프 커팅 순서를 분 단위로 잡고, 무대는 격식 있게 단정하게 세웁니다.',
+    큐:[[0,'접수 · 내빈 안내 · 착석',30],[30,'개식 · 국민의례',10],[40,'경과보고 · 기념사 · 축사',30],[70,'기념 퍼포먼스 · 테이프 커팅',15],[85,'기념 촬영',10],[95,'축하공연 · 다과',40],[135,'폐식',5]],
+    필요:['무대','음향','LED 전광판','MC · 사회자','영상 중계 · 기록','포토존 · 현수막']},
+  sports:{이름:'체육대회 · 명랑운동회',방향:'{t}은(는) 참가자가 주인공입니다. 진행 MC의 텐션과 운동장 전체를 덮는 음향이 성패를 가릅니다. 응원석 그늘과 급수 동선을 먼저 잡습니다.',
+    큐:[[0,'집결 · 개회식 · 준비체조',30],[30,'단체 종목 1부',90],[120,'점심 · 레크리에이션',60],[180,'단체 종목 2부 · 계주',90],[270,'시상 · 폐회',30]],
+    필요:['음향','MC · 사회자','텐트 · 부스','포토존 · 현수막','행사 스탭'],야외:true},
+  conference:{이름:'컨퍼런스 · 포럼 · 세미나',방향:'{t}은(는) 발표가 잘 보이고 잘 들리는 것이 전부입니다. 스크린 크기, 발표자 마이크, 기록 영상이 핵심 장비이고 등록 데스크 동선을 챙깁니다.',
+    큐:[[0,'등록 · 입장',30],[30,'개회 · 환영사',15],[45,'기조 발표',45],[90,'휴식',15],[105,'세션 발표 · 패널 토론',90],[195,'질의응답 · 폐회',30]],
+    필요:['음향','영상 중계 · 기록','LED 전광판','MC · 사회자'],실내:true},
+  award:{이름:'시상식 · 이취임식',방향:'{t}은(는) 주인공이 무대에 오르는 순간을 위한 행사입니다. 조명과 음악, 영상이 한 박자에 맞아야 하므로 큐시트를 초 단위로 잡습니다.',
+    큐:[[0,'접수 · 착석',30],[30,'개식 · 내빈 소개',15],[45,'경과 영상 · 기념사',20],[65,'시상 · 이취임 의식',45],[110,'축하공연',30],[140,'기념 촬영 · 폐식',20]],
+    필요:['무대','음향','조명','LED 전광판','MC · 사회자','영상 중계 · 기록','특수효과'],실내:true},
+  concert:{이름:'콘서트 · 공연',방향:'{t}은(는) 출연진의 요구 장비(라이더)를 먼저 받는 데서 시작합니다. 음향 규모와 무대 높이, 관객 안전 펜스가 출발점입니다.',
+    큐:[[0,'입장 · 오프닝 DJ',40],[40,'오프닝 공연',30],[70,'메인 아티스트 1부',50],[120,'브릿지 · 관객 이벤트',15],[135,'메인 아티스트 2부',50],[185,'앙코르 · 퇴장 안내',20]],
+    필요:['무대','음향','조명','LED 전광판','가수 · 공연','특수효과','발전차','행사 스탭']},
+  corporate:{이름:'기업 워크숍 · 송년회',방향:'{t}은(는) 직원이 즐거운 것이 목표입니다. 레크리에이션 MC, 경품, 부서별 무대가 뼈대이고, 영상 기록은 다음 해 홍보물이 됩니다.',
+    큐:[[0,'입장 · 식사',60],[60,'개회 · 대표 인사',15],[75,'시상 · 장기자랑',60],[135,'레크리에이션 · 경품 추첨',45],[180,'단체 촬영 · 폐회',15]],
+    필요:['음향','조명','LED 전광판','MC · 사회자','영상 중계 · 기록','포토존 · 현수막'],실내:true},
+  expo:{이름:'박람회 · 전시',방향:'{t}은(는) 부스 동선과 개막식, 무대 이벤트 시간표가 축입니다. 안내 방송용 음향과 전기 용량 계산이 먼저입니다.',
+    큐:[[0,'개막식',30],[30,'부스 관람 · 안내 방송',180],[210,'무대 이벤트 · 경품',60],[270,'폐막 안내 · 정리',15]],
+    필요:['텐트 · 부스','음향','LED 전광판','MC · 사회자','포토존 · 현수막','발전차']},
+  etc:{이름:'기타 행사',방향:'{t}의 목적 한 문장을 먼저 정합니다. 그 문장에 맞게 무대·음향·진행을 붙입니다.',
+    큐:[[0,'입장 · 준비',30],[30,'개식',15],[45,'본 프로그램',90],[135,'마무리 · 폐식',20]],필요:['음향','MC · 사회자']}
+};
+var 목적들=['홍보 · 이미지','지역 화합','기념 · 의전','매출 · 판매','직원 사기','참여 · 체험'];
+var 필요들=['무대','음향','조명','LED 전광판','MC · 사회자','가수 · 공연','영상 중계 · 기록','텐트 · 부스','포토존 · 현수막','특수효과','발전차','행사 스탭'];
+var 예산들=[['',''],['u5','500만원 이하'],['5_10','500~1,000만원'],['10_30','1,000~3,000만원'],['30p','3,000만원 이상'],['tbd','미정 (규모로 추정)']];
+
+/* ══ 상태 ══ */
+var P={type:'festival',title:'',date:'',time:'14:00',place:'',io:'out',people:'',org:'',name:'',tel:'',email:'',goals:[],needs:null,budget:'',note:''};
+var Q=new URLSearchParams(location.search), MODE=Q.get('admin')==='1'?'admin':'customer';
+function $(s){return document.querySelector(s);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function b64u(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function unb64(t){t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';return decodeURIComponent(escape(atob(t)));}
+function 날짜글(d){var p=function(n){return (n<10?'0':'')+n;};return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
+function 오늘(){return 날짜글(new Date());}
+function 날짜말(s){if(!s)return '';var d=new Date(s+'T00:00:00');if(isNaN(d))return s;var 요=['일','월','화','수','목','금','토'][d.getDay()];return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()+'. ('+요+')';}
+function 더하기(s,n){var d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return 날짜글(d);}
+function 짧게(s){var d=new Date(s+'T00:00:00');return isNaN(d)?'':(d.getMonth()+1)+'/'+d.getDate();}
+function 시각(base,min){var m=/^(\d{1,2}):(\d{2})$/.exec(base||'14:00');var h=m?+m[1]:14,mm=m?+m[2]:0;var t=h*60+mm+min;var p=function(n){return (n<10?'0':'')+n;};return p(Math.floor(t/60)%24)+':'+p(t%60);}
+function 만원(n){n=Math.round(n/10000);return n.toLocaleString('ko-KR')+'만원';}
+function toast(m){var t=$('#toast');t.textContent=m;t.className='toast on';clearTimeout(toast.t);toast.t=setTimeout(function(){t.className='toast';},2600);}
+function 규모(){var n=+P.people||0;return n<=0?'중형':n<=100?'소형':n<=300?'중형':n<=1000?'대형':'초대형';}
+function 필요목록(){return P.needs||유형들[P.type].필요.slice();}
+function 야외(){return P.io!=='in';}
+
+/* ══ 장비 뼈대 — 규모 × 필요한 것 → 품목 (큰길이벤트 견적서 품목 번호) ══ */
+function 장비(){
+  var T=규모(), N=필요목록(), out=[], has=function(k){return N.indexOf(k)>=0;};
+  var i=function(id,name,qty,why){out.push({id:id,name:name,qty:qty||1,why:why||''});};
+  if(has('무대')){ ({소형:function(){i('d1','조립식 무대 10평',1,'단상 · 소규모 공연');},중형:function(){i('d6','조립식 무대 20평',1,'출연 4~6인 무대');},대형:function(){i('d7','조립식 무대 30평',1,'밴드 · 댄스팀 동시 무대');},초대형:function(){i('d8','조립식 무대 40평 이상',1,'대형 공연 · 규모 협의');}})[T](); i('d2','백드롭 트러스',{소형:6,중형:9,대형:12,초대형:15}[T],'현수막 · LED 거치'); }
+  if(has('음향')){ i({소형:'a1',중형:'a2',대형:'a3',초대형:'a3'}[T],{소형:'음향 (소형)',중형:'음향 (중형)',대형:'음향 (대형)',초대형:'음향 (대형)'}[T],1,T==='초대형'?'라인어레이 · 딜레이 스피커 협의':'객석 끝까지'); i('a4','무선 마이크 추가',{소형:2,중형:4,대형:6,초대형:8}[T],'사회 · 축사 · 공연'); if(has('가수 · 공연')) i('a5','인이어 모니터',1,'라이브 공연용'); }
+  if(has('조명')){ i('b1','기본 조명',1,'무대 기본 면조명'); if(T!=='소형') i('b2','무빙라이트',{중형:4,대형:8,초대형:12}[T],'공연 연출'); if(T==='대형'||T==='초대형') i('b4','조명 트러스 시공',1,'구조물'); if(T==='초대형') i('b3','팔로우 스팟',2,'주인공 조명'); }
+  if(has('LED 전광판')){ if(!야외()&&T==='소형') i('c4','빔 프로젝터 · 스크린',1,'실내 소규모'); else i({소형:'c1',중형:'c1',대형:'c2',초대형:'c3'}[T],{소형:'LED 전광판 200인치',중형:'LED 전광판 200인치',대형:'LED 전광판 300인치',초대형:'LED 전광판 400인치'}[T],1,'식순 · 영상 · 자막'); if(T==='대형'||T==='초대형') i('c7','레이허 구조물',1,'LED 거치'); i('c6','영상 오퍼레이터',1,'식순 영상 · 자막 운용'); }
+  if(has('영상 중계 · 기록')){ i('c5','실시간 중계 · 송출',1,'카메라 · 스위처 · 기록'); }
+  if(has('MC · 사회자')) i('f1','MC · 사회자',1,'전문 진행자');
+  if(has('가수 · 공연')) i('f2','가수 섭외',T==='초대형'?2:1,'행사 성격에 맞는 라인업');
+  if(has('텐트 · 부스')){ var n=Math.max(2,Math.round((+P.people||300)/60)); if(P.type==='expo') n=Math.max(6,n); i('d3','자바라 텐트 3m×3m',Math.min(n,40),'부스 · 접수 · 대기'); if(T==='대형'||T==='초대형') i('d11','몽골텐트',2,'본부 · 내빈'); i('d9','의자',Math.min(+P.people||100,1000),'객석 · 부스'); }
+  if(has('포토존 · 현수막')){ i('d4','포토존 제작',1,'행사명 · 로고'); i('d5','현수막 · 배너',{소형:2,중형:4,대형:8,초대형:12}[T],'무대 · 입구 · 안내'); }
+  if(has('특수효과')){ if(야외()&&(P.type==='festival'||P.type==='concert')) i('e2','무대 불꽃',1,'오프닝 · 피날레'); i('e1','스모그 · 헤이저',1,'조명 연출'); }
+  if(has('발전차')||(야외()&&(T==='대형'||T==='초대형'))) i('g1','발전차',1,'전원 미확보 대비');
+  if(has('행사 스탭')||T!=='소형') i('f5','행사 스탭',{소형:2,중형:4,대형:6,초대형:10}[T],'현장 진행 · 안내');
+  i('g2','운반 · 설치 인건비',1,'상하차 · 설치 · 철수');
+  return out;
+}
+function 인력(){
+  var T=규모(), N=필요목록(), n=+P.people||300, r=[['총감독 · 진행 PD',1,'큐시트 · 전체 지휘']];
+  if(N.indexOf('무대')>=0) r.push(['무대감독',1,'출연자 동선 · 전환']);
+  if(N.indexOf('음향')>=0) r.push(['음향 오퍼레이터',1,'마이크 · 밸런스']);
+  if(N.indexOf('조명')>=0) r.push(['조명 오퍼레이터',1,'큐별 조명']);
+  if(N.indexOf('LED 전광판')>=0||N.indexOf('영상 중계 · 기록')>=0) r.push(['영상 오퍼레이터',N.indexOf('영상 중계 · 기록')>=0?2:1,'식순 영상 · 카메라']);
+  if(P.type==='ceremony'||P.type==='award') r.push(['의전 · 접수',2,'내빈 안내 · 명찰']);
+  r.push(['행사 스탭',{소형:2,중형:4,대형:6,초대형:10}[T],'안내 · 동선 · 정리']);
+  if(야외()) r.push(['안전요원',Math.max(1,Math.ceil(n/200)),'인원 200명당 1명 기준']);
+  return r;
+}
+function 예산(){
+  var T=규모(), 중간={u5:4000000,'5_10':7500000,'10_30':20000000,'30p':40000000}[P.budget];
+  var 추정=!중간; if(!중간) 중간={소형:3000000,중형:7000000,대형:18000000,초대형:40000000}[T];
+  var N=필요목록(), 몫=[];
+  var w=function(name,keys,pct){ if(keys.some(function(k){return N.indexOf(k)>=0;})) 몫.push([name,pct]); };
+  w('무대 · 구조물',['무대','텐트 · 부스','포토존 · 현수막'],30); w('음향 · 조명',['음향','조명'],25); w('LED · 영상',['LED 전광판','영상 중계 · 기록'],15); w('출연 · 인력',['MC · 사회자','가수 · 공연','행사 스탭'],20);
+  몫.push(['운영 · 운반 · 예비',[],10]);
+  var 합=몫.reduce(function(s,x){return s+x[1];},0);
+  return {총:중간,추정:추정,몫:몫.map(function(x){return [x[0],Math.round(x[1]/합*100),중간*x[1]/합];})};
+}
+
+/* ══ 폼 ══ */
+function 폼그리기(){
+  $('#f-type').innerHTML=Object.keys(유형들).map(function(k){return '<option value="'+k+'">'+esc(유형들[k].이름)+'</option>';}).join('');
+  $('#f-goals').innerHTML=목적들.map(function(g){return '<label class="chip"><input type="checkbox" value="'+esc(g)+'">'+esc(g)+'</label>';}).join('');
+  $('#f-needs').innerHTML=필요들.map(function(g){return '<label class="chip"><input type="checkbox" value="'+esc(g)+'">'+esc(g)+'</label>';}).join('');
+  $('#f-budget').innerHTML=예산들.map(function(b){return '<option value="'+b[0]+'">'+(b[1]||'예산대 고르기')+'</option>';}).join('');
+  $('#f-type').addEventListener('change',function(){P.type=this.value;P.needs=null;var 유=유형들[P.type];if(유.실내)P.io='in';else if(유.야외)P.io='out';폼채우기();그리기();});
+  ['title','place','org','name','tel','email','note','people'].forEach(function(k){$('#f-'+k).addEventListener('input',function(){P[k]=this.value;그리기();});});
+  $('#f-date').addEventListener('change',function(){P.date=this.value;그리기();});
+  $('#f-time').addEventListener('change',function(){P.time=this.value;그리기();});
+  document.querySelectorAll('#f-indoor input').forEach(function(r){r.addEventListener('change',function(){P.io=this.value;세그();그리기();});});
+  $('#f-budget').addEventListener('change',function(){P.budget=this.value;그리기();});
+  document.querySelectorAll('#f-goals input').forEach(function(c){c.addEventListener('change',function(){P.goals=[].map.call(document.querySelectorAll('#f-goals input:checked'),function(x){return x.value;});칩색();그리기();});});
+  document.querySelectorAll('#f-needs input').forEach(function(c){c.addEventListener('change',function(){P.needs=[].map.call(document.querySelectorAll('#f-needs input:checked'),function(x){return x.value;});칩색();그리기();});});
+}
+function 폼채우기(){
+  $('#f-type').value=P.type;
+  ['title','date','time','place','people','org','name','tel','email','note','budget'].forEach(function(k){$('#f-'+k).value=P[k]||'';});
+  document.querySelectorAll('#f-indoor input').forEach(function(r){r.checked=r.value===P.io;}); 세그();
+  var N=필요목록();
+  document.querySelectorAll('#f-goals input').forEach(function(c){c.checked=P.goals.indexOf(c.value)>=0;});
+  document.querySelectorAll('#f-needs input').forEach(function(c){c.checked=N.indexOf(c.value)>=0;});
+  칩색();
+}
+function 칩색(){document.querySelectorAll('.chip').forEach(function(l){l.classList.toggle('on',l.querySelector('input').checked);});}
+function 세그(){document.querySelectorAll('#f-indoor label').forEach(function(l){l.classList.toggle('on',l.querySelector('input').checked);});}
+
+/* ══ 문서 ══ */
+function 그리기(){
+  var 유=유형들[P.type], t=P.title||'(행사명)', T=규모(), N=필요목록(), h='';
+  h+='<div class="cover"><div><div class="k">EVENT PROPOSAL · 행사 기획서</div><h1>'+esc(t)+'</h1><div class="m"><span>'+esc(유.이름)+'</span>'+(P.date?'<span>'+날짜말(P.date)+(P.time?' '+esc(P.time):'')+'</span>':'')+(P.place?'<span>'+esc(P.place)+'</span>':'')+'<span>작성 '+오늘().replace(/-/g,'.')+'</span></div></div><div class="who"><b>이벤트 코리아 · 큰길이벤트기획</b>주식회사 브리지미디어<br>1533-7295 · www.event-korea.com</div></div>';
+
+  h+='<div class="sec"><div class="n">01 · 개요</div><h2>행사 개요</h2><dl class="kv"><dt>행사명</dt><dd>'+esc(t)+'</dd><dt>유형</dt><dd>'+esc(유.이름)+'</dd><dt>일시</dt><dd>'+(P.date?날짜말(P.date)+(P.time?' '+esc(P.time)+' 시작':''):'협의')+'</dd><dt>장소</dt><dd>'+esc(P.place||'협의')+' · '+(야외()?'실외':'실내')+'</dd><dt>예상 인원</dt><dd>'+(P.people?Number(P.people).toLocaleString('ko-KR')+'명':'협의')+' <span style="color:var(--pink3)">('+T+' 규모)</span></dd><dt>주최 · 주관</dt><dd>'+esc(P.org||'-')+(P.name?' · '+esc(P.name):'')+(P.tel?' · '+esc(P.tel):'')+'</dd>'+(P.goals.length?'<dt>목적</dt><dd>'+P.goals.map(esc).join(' · ')+'</dd>':'')+'</dl></div>';
+
+  var 방향=유.방향.replace(/\{t\}/g,t);
+  h+='<div class="sec"><div class="n">02 · 방향</div><h2>이렇게 갑니다</h2><p class="lead">'+esc(방향)+'</p>'+(P.goals.length?'<p>이번 행사로 얻고 싶은 것은 <b>'+P.goals.map(esc).join('</b>, <b>')+'</b>입니다. 프로그램과 무대 연출은 이 순서로 우선순위를 둡니다.</p>':'')+(P.note?'<p><b>들은 이야기 —</b> '+esc(P.note).replace(/\n/g,'<br>')+'</p>':'')+'</div>';
+
+  h+='<div class="sec"><div class="n">03 · 진행</div><h2>프로그램 진행표 (큐시트 초안)</h2><table><thead><tr><th>시각</th><th>순서</th><th>길이</th><th>비고</th></tr></thead><tbody>';
+  h+='<tr><td class="t">'+시각(P.time,-120)+'</td><td>장비 반입 · 설치 · 리허설</td><td class="t">120분</td><td style="color:var(--pink3)">무대 · 음향 · 조명 세팅, 출연자 사운드체크</td></tr>';
+  유.큐.forEach(function(c){h+='<tr><td class="t">'+시각(P.time,c[0])+'</td><td>'+esc(c[1])+'</td><td class="t">'+c[2]+'분</td><td></td></tr>';});
+  var 끝=유.큐[유.큐.length-1]; h+='<tr><td class="t">'+시각(P.time,끝[0]+끝[2])+'</td><td>철수 · 정리</td><td class="t">90분</td><td style="color:var(--pink3)">원상복구 · 쓰레기 · 전기 차단 확인</td></tr></tbody></table><p style="margin-top:8px;font-size:13px">실제 큐시트는 식순과 출연진이 확정되면 분 단위로 다시 짭니다. 이 표는 시간 배분을 잡기 위한 초안입니다.</p></div>';
+
+  var 장=장비();
+  h+='<div class="sec"><div class="n">04 · 무대 · 장비</div><h2>'+T+' 규모 · '+(야외()?'실외':'실내')+' 기준 구성</h2><table><thead><tr><th>품목</th><th>수량</th><th>쓰임</th></tr></thead><tbody>'+장.map(function(x){return '<tr><td>'+esc(x.name)+'</td><td class="t">'+x.qty+'</td><td style="color:var(--pink2)">'+esc(x.why)+'</td></tr>';}).join('')+'</tbody></table><div class="tags">'+N.map(function(n){return '<span>'+esc(n)+'</span>';}).join('')+'</div></div>';
+
+  h+='<div class="sec"><div class="n">05 · 인력</div><h2>운영 인력</h2><table><thead><tr><th>역할</th><th>인원</th><th>맡는 일</th></tr></thead><tbody>'+인력().map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="t">'+r[1]+'명</td><td style="color:var(--pink2)">'+esc(r[2])+'</td></tr>';}).join('')+'</tbody></table></div>';
+
+  var B=예산();
+  h+='<div class="sec"><div class="n">06 · 예산</div><h2>예산 개요 <span style="font-size:.7em;font-weight:500;color:var(--pink3)">'+(B.추정?'규모로 추정':'예산대 기준')+'</span></h2><div class="bud">'+B.몫.map(function(m){return '<span>'+esc(m[0])+'</span><span class="pc">'+m[1]+'%</span><span class="won">약 '+만원(m[2])+'</span><div class="bar"><i style="width:'+m[1]+'%"></i></div>';}).join('')+'</div><div class="total"><small>합계 (부가세 별도 · 견적서에서 확정)</small><b>약 '+만원(B.총)+' 안팎</b></div><p style="margin-top:8px;font-size:13px">항목별 실제 단가는 「견적서」에서 품목마다 확정합니다. 이 배분은 어디에 돈이 가는지 감을 잡기 위한 것입니다.</p></div>';
+
+  h+='<div class="sec"><div class="n">07 · 일정</div><h2>'+(P.date?짧게(P.date)+' 행사 기준 준비 일정':'행사일 기준 준비 일정')+'</h2><table><thead><tr><th>시점</th><th>할 일</th></tr></thead><tbody>';
+  [[-30,'기획 확정 · 장소 답사 · 전기 · 반입 동선 확인'],[-14,'출연진 · 장비 발주 · 허가 신청 (도로점용 · 소음 · 공원 사용)'],[-7,'큐시트 확정 · 현수막 · 영상 출력 · 리허설 계획'],[-1,'무대 · 장비 설치 · 리허설'],[0,'행사 운영 · 사진 · 영상 기록'],[1,'철수 · 정산 · 사진 전달 · 홍보글 발행']].forEach(function(s){h+='<tr><td class="t">'+(P.date?짧게(더하기(P.date,s[0]))+' ':'')+'D'+(s[0]<0?s[0]:s[0]>0?'+'+s[0]:'-day')+'</td><td>'+esc(s[1])+'</td></tr>';});
+  h+='</tbody></table></div>';
+
+  var 안=야외()?['우천 대안: 실내 대체 장소 또는 순연일을 계약서에 명시','강풍 시 트러스 · 현수막 · 텐트 고정, 풍속 기준 초과 시 철수 판단권','전기: 발전차 또는 현장 전원 용량 확인 (음향 · 조명 · LED 합산)','안전요원 배치 · 관객 펜스 · 응급 연락체계','소음 민원 대비 안내 · 종료 시각 준수']:['소방 · 피난 동선 확보, 무대 앞 통로 유지','현장 전원 용량과 분전반 위치 확인','장비 반입 시간 · 화물 엘리베이터 · 주차','응급 연락체계 · 구급함'];
+  h+='<div class="sec"><div class="n">08 · 안전</div><h2>안전 · 비상 대비</h2><div class="grid2"><div class="box"><h4>'+(야외()?'실외 행사':'실내 행사')+'</h4><ul>'+안.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div><div class="box"><h4>공통</h4><ul><li>행사배상책임보험 가입 여부 확인</li><li>출연자 · 스탭 비상연락망 1장</li><li>VIP 동선 · 주차 · 대기실</li><li>사진 · 영상 촬영 동의 안내</li></ul></div></div></div>';
+
+  h+='<div class="sec"><div class="n">09 · 준비</div><h2>주최측에서 주실 것</h2><ul class="chk"><li>식순 · 내빈 명단 · 축사 순서 (확정본)</li><li>로고 · 현수막 문구 · 영상에 넣을 자료</li><li>장소 사용 허가 · 전원 위치 · 반입 동선</li><li>출연 희망 라인업 또는 예산 범위</li>'+(N.indexOf('텐트 · 부스')>=0?'<li>부스 참여 업체 명단 · 배치 희망</li>':'')+'<li>담당자 · 현장 책임자 연락처</li></ul></div>';
+
+  if(MODE==='customer') h+='<div class="cta"><b>이 기획서로 진행할까요?</b><span class="sp"></span><a class="btn" href="tel:15337295">📞 1533-7295</a><a class="btn amber" href="https://xn--wk0bn7yi8h24iszc.com/#contact" target="_blank" rel="noopener">문의 남기기</a></div>';
+  h+='<div class="foot">이 기획서는 '+esc(P.org||'주최측')+'의 이야기를 듣고 정리한 초안입니다. 확정되면 큐시트와 견적서를 다시 냅니다. — 이벤트 코리아 · 큰길이벤트기획 (주식회사 브리지미디어) · 1533-7295</div>';
+  $('#doc').innerHTML=h;
+  if(MODE==='admin'){try{history.replaceState(null,'',location.pathname+'?admin=1#p='+b64u(JSON.stringify(P)));}catch(e){}}
+}
+
+/* ══ 단추 ══ */
+function 고객링크(){return location.origin+location.pathname+'#p='+b64u(JSON.stringify(P));}
+function 복사(text,msg){function 폴백(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast(msg);}catch(e){prompt('복사해서 쓰세요',text);}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){toast(msg);},폴백);else 폴백();}
+$('#b-link').addEventListener('click',function(){if(!P.title){toast('행사명부터 넣어주세요');return;}복사(고객링크(),'기획서 링크를 복사했어요');});
+$('#b-print').addEventListener('click',function(){window.print();});
+$('#b-prompt').addEventListener('click',function(){
+  var 유=유형들[P.type];
+  var t=['아래 행사 기획서 초안을 더 다듬어 줘. 주최측 담당자가 읽을 문서라 쉬운 말로, 단정하게.','','행사명: '+(P.title||'(미정)'),'유형: '+유.이름,'일시: '+(P.date||'미정')+' '+(P.time||''),'장소: '+(P.place||'미정')+' ('+(야외()?'실외':'실내')+')','예상 인원: '+(P.people||'미정'),'주최: '+(P.org||'미정'),'목적: '+(P.goals.join(', ')||'미정'),'필요한 것: '+필요목록().join(', '),'예산대: '+((예산들.filter(function(b){return b[0]===P.budget;})[0]||[])[1]||'미정'),'특이사항: '+(P.note||''),'','지금 초안:','- 방향: '+유.방향.replace(/\{t\}/g,P.title||'이 행사'),'- 큐시트: '+유.큐.map(function(c){return 시각(P.time,c[0])+' '+c[1]+'('+c[2]+'분)';}).join(' / '),'- 장비: '+장비().map(function(x){return x.name+'×'+x.qty;}).join(', '),'','다음을 포함해서 제안해 줘:','1) 행사 컨셉 한 문장과 슬로건 후보 3개','2) 큐시트를 분 단위로 다듬고 전환 시 주의점','3) 이 규모에서 빠지기 쉬운 준비물'].join('\n');
+  복사(t,'프롬프트를 복사했어요. Claude 에 붙여넣으세요');
+});
+$('#b-quote').addEventListener('click',function(){
+  if(!P.title){toast('행사명부터 넣어주세요');return;}
+  /* 큰길이벤트기획 견적서의 상태 모양: { i:[org,name,tel,email,title,date,place,people,memo], r:[ [품목번호, 수량] ... ] } */
+  var memo='행사 기획서 기준: '+고객링크()+(P.note?'\n'+P.note:'');
+  var S={i:[P.org,P.name,P.tel,P.email,P.title,P.date,P.place,P.people?String(P.people)+'명':'',memo],r:장비().map(function(x){return x.qty===1?x.id:[x.id,x.qty];})};
+  window.open('https://xn--wk0bn7yi8h24iszc.com/quote.html?admin=1#q='+b64u(JSON.stringify(S)),'_blank','noopener');
+});
+
+/* ══ 시작 ══ */
+(function(){
+  var h=location.hash.indexOf('#p=')===0?location.hash.slice(3):'';
+  if(h){try{var o=JSON.parse(unb64(h));if(o&&유형들[o.type]){Object.keys(P).forEach(function(k){if(o[k]!==undefined)P[k]=o[k];});}}catch(e){}}
+  if(MODE==='customer'){$('#form').style.display='none';$('#layout').classList.add('cust');$('#mode').textContent='기획서';$('#mode').classList.add('cust');['b-link','b-prompt','b-quote'].forEach(function(id){$('#'+id).style.display='none';});}
+  else{폼그리기();폼채우기();}
+  그리기();
+  window.__ep={P:P,장비:장비,예산:예산};
+})();
+</script>
+</body>
+</html>
