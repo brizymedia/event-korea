@@ -669,7 +669,7 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
       '<div class="ledger"><table><thead><tr><th>기록시각</th><th>계약번호</th><th>상태</th><th>행사</th><th>상호</th><th>담당자</th><th>계약금액</th><th>서명시각</th><th>PDF</th></tr></thead>'+
       '<tbody><tr><td>2026-10-04 14:32</td><td class="tag">KG-20261004-7A2</td><td><b>서명완료</b></td><td>가을 별빛 문화축제 (예시)</td><td>별빛군 문화관광과</td><td>김담당</td><td><b>22,840,000</b></td><td>2026-10-04 14:32</td><td class="tag">drive.google.com/…</td></tr></tbody></table></div>'}
   ];
-  var exEl=document.getElementById('ex'), exBody=document.getElementById('ex-body'), exOpen=document.getElementById('ex-open'), exCur=-1;
+  var exEl=document.getElementById('ex'), exBody=document.getElementById('ex-body'), exOpen=document.getElementById('ex-open'), exCur=-1, exHist=false;
   function exShow(i){
     i=Math.max(0,Math.min(EX.length-1,i)); exCur=i; var e=EX[i];
     document.getElementById('ex-no').textContent=e.no; document.getElementById('ex-k').textContent=e.k; document.getElementById('ex-title').textContent=e.t;
@@ -682,13 +682,20 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
     document.getElementById('ex-next').textContent=i===EX.length-1?'닫기':'다음 단계 ›';
     document.querySelectorAll('#pipe .st').forEach(function(st,j){ st.classList.toggle('on', j===i); });
     exEl.hidden=false; document.body.style.overflow='hidden';
+    /* 폰의 뒤로가기가 사이트를 떠나지 않고 이 창만 닫게 — 창을 열 때 기록을 한 칸 남긴다 */
+    if(!exHist){ try{ history.pushState({ex:1},''); exHist=true; }catch(e){} }
   }
-  function exClose(){ exEl.hidden=true; document.body.style.overflow=''; exBody.innerHTML=''; document.querySelectorAll('#pipe .st').forEach(function(st){ st.classList.remove('on'); }); }
+  function exClose(fromBack){
+    if(exEl.hidden) return;
+    exEl.hidden=true; document.body.style.overflow=''; exBody.innerHTML=''; document.querySelectorAll('#pipe .st').forEach(function(st){ st.classList.remove('on'); });
+    if(exHist){ exHist=false; if(!fromBack){ try{ history.back(); }catch(e){} } }   // × 로 닫으면 남겨둔 기록 한 칸을 거둔다
+  }
+  window.addEventListener('popstate', function(){ if(!exEl.hidden) exClose(true); });   // 뒤로가기 = 창 닫기
   document.querySelectorAll('#pipe .st[data-ex]').forEach(function(st){
     st.addEventListener('click',function(){ exShow(+st.getAttribute('data-ex')); });
     st.addEventListener('keydown',function(ev){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); exShow(+st.getAttribute('data-ex')); } });
   });
-  exEl.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',exClose); });
+  exEl.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click',function(){ exClose(false); }); });
   document.getElementById('ex-prev').addEventListener('click',function(){ exShow(exCur-1); });
   document.getElementById('ex-next').addEventListener('click',function(){ if(exCur>=EX.length-1) exClose(); else exShow(exCur+1); });
   document.addEventListener('keydown',function(ev){ if(exEl.hidden) return; if(ev.key==='Escape') exClose(); else if(ev.key==='ArrowRight') exShow(exCur+1); else if(ev.key==='ArrowLeft') exShow(exCur-1); });
