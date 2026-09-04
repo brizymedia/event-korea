@@ -204,7 +204,7 @@ img{max-width:100%;height:auto;display:block}
 .upd{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-top:12px}
 .skel{height:52px;border-radius:10px;background:linear-gradient(90deg,var(--stage2),var(--haze),var(--stage2));background-size:200% 100%;animation:sk 1.2s linear infinite;border:1px solid var(--line)}
 @keyframes sk{to{background-position:-200% 0}}
-@media(max-width:820px){.live-grid{grid-template-columns:1fr}}
+@media(max-width:820px){.live-grid{grid-template-columns:1fr}.sec-head{grid-template-columns:1fr;gap:10px;align-items:start}.sec-head p{grid-column:1}}
 
 /* ── 검색 체크 ── */
 .check{padding:clamp(56px,9vh,110px) 0 0}
@@ -218,6 +218,7 @@ img{max-width:100%;height:auto;display:block}
 .cklist input:checked + i::after{transform:rotate(45deg) scale(1)}
 .cklist input:focus-visible + i{outline:2px solid var(--cyan);outline-offset:2px}
 .cklist span b{display:block;font-size:clamp(15px,1.8vw,17px);font-weight:700;line-height:1.45}
+.cklist span b.hang{text-indent:-.5em}
 .cklist span small{display:block;color:var(--ink3);font-size:13px;margin-top:3px}
 .cklist input:checked ~ span b{color:var(--ink2)}
 .ckres{margin-top:18px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:15px;color:var(--ink2)}
@@ -550,7 +551,7 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
     <ol class="cklist" id="cklist">
       <li><label><input type="checkbox"><i></i><span><b>네이버에 회사 이름을 치면 홈페이지가 나온다</b><small>지도 한 장만 나오면 X</small></span></label></li>
       <li><label><input type="checkbox"><i></i><span><b>구글에 쳐도 나온다</b><small>기관 담당자 절반은 구글로 찾습니다</small></span></label></li>
-      <li><label><input type="checkbox"><i></i><span><b>「수원 이벤트 회사」처럼 지역 + 업종으로 쳐도 나온다</b><small>회사 이름을 모르는 손님이 오는 길입니다</small></span></label></li>
+      <li><label><input type="checkbox"><i></i><span><b class="hang">「수원 이벤트 회사」처럼 지역 + 업종으로 쳐도 나온다</b><small>회사 이름을 모르는 손님이 오는 길입니다</small></span></label></li>
       <li><label><input type="checkbox"><i></i><span><b>폰에서 열면 글자가 안 잘리고, 전화번호가 눌러진다</b><small>담당자는 폰으로 봅니다</small></span></label></li>
       <li><label><input type="checkbox"><i></i><span><b>최근 한 달 안에 올린 글이나 사진이 있다</b><small>멈춘 사이트는 검색이 뒤로 밀어냅니다</small></span></label></li>
     </ol>
