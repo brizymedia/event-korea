@@ -232,6 +232,7 @@ img{max-width:100%;height:auto;display:block}
 .pipe .st em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--gel);opacity:.8;white-space:nowrap}
 .pipe-hint{font-size:10.5px;letter-spacing:.12em;color:var(--ink3);text-align:center;padding-top:6px}
 .ex{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:14px}
+.ex[hidden]{display:none!important}   /* hidden 속성이 위 display:flex 에 지지 않게. 이게 없으면 닫아도 안 사라진다 */
 .ex-back{position:absolute;inset:0;background:rgba(5,6,10,.8);backdrop-filter:blur(4px)}
 .ex-card{position:relative;width:min(960px,100%);max-height:94vh;display:flex;flex-direction:column;background:var(--stage2);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
 .ex-head{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line)}
