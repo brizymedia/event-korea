@@ -271,7 +271,7 @@ function 세그(){document.querySelectorAll('#f-indoor label').forEach(function(
 /* ══ 문서 ══ */
 function 그리기(){
   var 유=유형들[P.type], t=P.title||'(행사명)', T=규모(), N=필요목록(), h='';
-  h+='<div class="cover"><div><div class="k">EVENT PROPOSAL · 행사 기획서</div><h1>'+esc(t)+'</h1><div class="m"><span>'+esc(유.이름)+'</span>'+(P.date?'<span>'+날짜말(P.date)+(P.time?' '+esc(P.time):'')+'</span>':'')+(P.place?'<span>'+esc(P.place)+'</span>':'')+'<span>작성 '+오늘().replace(/-/g,'.')+'</span></div></div><div class="who"><b>이벤트 코리아 · 큰길이벤트기획</b>주식회사 브리지미디어<br>1533-7295 · www.event-korea.com</div></div>';
+  h+='<div class="cover"><div><div class="k">EVENT PROPOSAL · 행사 기획서</div><h1>'+esc(t)+'</h1><div class="m"><span>'+esc(유.이름)+'</span>'+(P.date?'<span>'+날짜말(P.date)+(P.time?' '+esc(P.time):'')+'</span>':'')+(P.place?'<span>'+esc(P.place)+'</span>':'')+'<span>작성 '+오늘().replace(/-/g,'.')+'</span></div></div><div class="who"><b>이벤트 코리아 · 큰길이벤트기획</b>주식회사 브리지미디어<br>1533-7295 · www.event-korea.co.kr</div></div>';
 
   h+='<div class="sec"><div class="n">01 · 개요</div><h2>행사 개요</h2><dl class="kv"><dt>행사명</dt><dd>'+esc(t)+'</dd><dt>유형</dt><dd>'+esc(유.이름)+'</dd><dt>일시</dt><dd>'+(P.date?날짜말(P.date)+(P.time?' '+esc(P.time)+' 시작':''):'협의')+'</dd><dt>장소</dt><dd>'+esc(P.place||'협의')+' · '+(야외()?'실외':'실내')+'</dd><dt>예상 인원</dt><dd>'+(P.people?Number(P.people).toLocaleString('ko-KR')+'명':'협의')+' <span style="color:var(--pink3)">('+T+' 규모)</span></dd><dt>주최 · 주관</dt><dd>'+esc(P.org||'-')+(P.name?' · '+esc(P.name):'')+(P.tel?' · '+esc(P.tel):'')+'</dd>'+(P.goals.length?'<dt>목적</dt><dd>'+P.goals.map(esc).join(' · ')+'</dd>':'')+'</dl></div>';
 

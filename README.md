@@ -1,4 +1,4 @@
-# 이벤트 코리아 — www.event-korea.com
+# 이벤트 코리아 — www.event-korea.co.kr
 
 이벤트인을 위한 포털. 단일 `index.html`, 서버 없음. GitHub Pages 로 뜬다.
 
@@ -6,7 +6,7 @@
 `https://brizymedia.github.io/haengsa-board/data/events.json` 을 브라우저가 직접 읽는다.
 그 파일이 죽으면 페이지 안의 「비상용」 몇 건을 보여준다.
 
-## 도메인 연결 (가비아 DNS 관리에서 한 번)
+## 도메인 연결 (호스팅케이알(다우) DNS 관리에서 한 번)
 
 | 종류 | 호스트 | 값 |
 |---|---|---|
