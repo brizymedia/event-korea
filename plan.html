@@ -117,6 +117,7 @@ td.r{text-align:right;font-family:var(--mono);font-size:12.5px;white-space:nowra
   <button class="btn" id="b-link" type="button">🔗 링크 복사</button>
   <button class="btn" id="b-prompt" type="button" title="더 다듬고 싶을 때 Claude 에 붙여넣는 글">✎ 프롬프트 복사</button>
   <button class="btn" id="b-print" type="button">🖨 인쇄 · PDF</button>
+  <button class="btn" id="b-stage" type="button" title="기획서의 유형·인원·필요한 것이 3D 무대로 세워집니다">🎪 이 기획서로 3D 무대 보기</button>
   <button class="btn amber" id="b-quote" type="button">📄 이 기획서로 견적서 만들기</button>
 </div></div>
 
@@ -313,6 +314,16 @@ function 복사(text,msg){function 폴백(){var ta=document.createElement('texta
   if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){toast(msg);},폴백);else 폴백();}
 $('#b-link').addEventListener('click',function(){if(!P.title){toast('행사명부터 넣어주세요');return;}복사(고객링크(),'기획서 링크를 복사했어요');});
 $('#b-print').addEventListener('click',function(){window.print();});
+/* 3D 무대 시안(큰길이벤트.com/stage3d) — 같은 유형 키를 쓴다. 필요한 것에 따라 켜고 끌 것을 넘긴다 */
+$('#b-stage').addEventListener('click',function(){
+  var N=필요목록(), has=function(k){return N.indexOf(k)>=0;};
+  var S={type:P.type,title:P.title||'',people:+P.people||300,io:야외()?'out':'in',night:true,
+    backdrop:has('무대'),led:has('LED 전광판')?undefined:'',truss:has('조명'),moving:has('조명')?undefined:0,sound:has('음향')?undefined:'',
+    fog:has('특수효과'),spark:has('특수효과'),tents:has('텐트 · 부스')?undefined:0,photo:has('포토존 · 현수막'),gen:has('발전차')};
+  if(!has('무대')) S.stage='none';
+  Object.keys(S).forEach(function(k){if(S[k]===undefined)delete S[k];});
+  window.open('https://xn--wk0bn7yi8h24iszc.com/stage3d/#s='+b64u(JSON.stringify(S)),'_blank','noopener');
+});
 $('#b-prompt').addEventListener('click',function(){
   var 유=유형들[P.type];
   var t=['아래 행사 기획서 초안을 더 다듬어 줘. 주최측 담당자가 읽을 문서라 쉬운 말로, 단정하게.','','행사명: '+(P.title||'(미정)'),'유형: '+유.이름,'일시: '+(P.date||'미정')+' '+(P.time||''),'장소: '+(P.place||'미정')+' ('+(야외()?'실외':'실내')+')','예상 인원: '+(P.people||'미정'),'주최: '+(P.org||'미정'),'목적: '+(P.goals.join(', ')||'미정'),'필요한 것: '+필요목록().join(', '),'예산대: '+((예산들.filter(function(b){return b[0]===P.budget;})[0]||[])[1]||'미정'),'특이사항: '+(P.note||''),'','지금 초안:','- 방향: '+유.방향.replace(/\{t\}/g,P.title||'이 행사'),'- 큐시트: '+유.큐.map(function(c){return 시각(P.time,c[0])+' '+c[1]+'('+c[2]+'분)';}).join(' / '),'- 장비: '+장비().map(function(x){return x.name+'×'+x.qty;}).join(', '),'','다음을 포함해서 제안해 줘:','1) 행사 컨셉 한 문장과 슬로건 후보 3개','2) 큐시트를 분 단위로 다듬고 전환 시 주의점','3) 이 규모에서 빠지기 쉬운 준비물'].join('\n');
