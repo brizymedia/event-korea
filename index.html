@@ -271,12 +271,12 @@ img{max-width:100%;height:auto;display:block}
 .close-box .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .big-tel{font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,52px);letter-spacing:-.01em;margin-top:22px}
 .big-tel a{text-decoration:none}
-/* ═══ 만든 것들 — 살아 있는 이벤트인 사이트들 (24칸 격자, 한 줄 4장 + 가운데 3장) ═══ */
+/* ═══ 만든 것들 — 살아 있는 이벤트인 사이트들 (24칸 격자, 첫 줄 4장 + 아래 두 줄 가운데 3장씩 = 10장) ═══ */
 .works{padding:clamp(56px,9vh,110px) 0 0}
 .wgrid{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:14px}
 .work{--gel:var(--amber);grid-column:span 6;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0F1017;transition:transform .25s,border-color .25s}
 .work:hover{transform:translateY(-4px);border-color:var(--gel)}
-.work:nth-child(5){grid-column:4/10}.work:nth-child(6){grid-column:10/16}.work:nth-child(7){grid-column:16/22}
+.work:nth-child(5),.work:nth-child(8){grid-column:4/10}.work:nth-child(6),.work:nth-child(9){grid-column:10/16}.work:nth-child(7),.work:nth-child(10){grid-column:16/22}
 .work .shot{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#14151d}
 .work .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s}
 .work:hover .shot img{transform:scale(1.03)}
@@ -295,9 +295,9 @@ img{max-width:100%;height:auto;display:block}
 .maker p{margin:8px 0 0;color:var(--ink2);max-width:36em}
 .maker .go{justify-self:end;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--amber);color:#111;font-weight:800;white-space:nowrap}
 .maker .go small{font-family:var(--mono);font-weight:600;font-size:12px;opacity:.7}
-@media(max-width:900px){.wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.work,.work:nth-child(5),.work:nth-child(6),.work:nth-child(7){grid-column:auto}.work:nth-child(7){grid-column:1/-1}.work:nth-child(7) .shot{aspect-ratio:16/7}}
+@media(max-width:900px){.wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.work,.work:nth-child(n){grid-column:auto}}
 @media(max-width:720px){.maker{grid-template-columns:1fr}.maker .go{justify-self:start;white-space:normal;flex-wrap:wrap}}
-@media(max-width:520px){.wgrid{grid-template-columns:1fr}.work:nth-child(7){grid-column:auto}.work:nth-child(7) .shot{aspect-ratio:16/10}}
+@media(max-width:520px){.wgrid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.work,.work .shot img,.maker{transition:none}}
 footer{border-top:1px solid var(--line);padding:32px 0 calc(40px + env(safe-area-inset-bottom));color:var(--ink3);font-size:13px}
 footer .f{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
@@ -615,6 +615,18 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
       <a class="work" href="https://brizymedia.github.io/immagic/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
         <div class="shot"><img src="img/works/immagic.webp" alt="아이엠매직 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
         <div class="wb"><span class="wk">공연팀</span><b>아이엠매직 I.M.MAGIC</b><p>2005년부터 4,000회 넘는 무대. 마술·버블·벌룬·샌드아트·레이저쇼, 춘천에서 전국으로 찾아가는 공연팀.</p><span class="wu"><i>brizymedia.github.io/immagic</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://brizymedia.github.io/pro-event/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
+        <div class="shot"><img src="img/works/proevent.webp" alt="프로이벤트 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">종합 이벤트 대행</span><b>프로이벤트 PRO EVENT</b><p>2006년부터 프로젝트 729회. 최대 2만 명 규모 행사까지 기획·연출·운영을 한 팀이 끝까지 맡는 이벤트 회사.</p><span class="wu"><i>brizymedia.github.io/pro-event</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://brizymedia.github.io/hd-event/" target="_blank" rel="noopener" style="--gel:var(--amber)">
+        <div class="shot"><img src="img/works/hdevent.webp" alt="HD기획 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">행사기획 · 대행</span><b>HD기획</b><p>서울·광명·남양주 기업행사·체육대회·지자체 행사. 기획서 한 장에서 무대 철수까지 한 팀이 책임집니다.</p><span class="wu"><i>brizymedia.github.io/hd-event</i><span>열어보기 ↗</span></span></div>
+      </a>
+      <a class="work" href="https://brizymedia.github.io/es-company/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
+        <div class="shot"><img src="img/works/escompany.webp" alt="이에스컴퍼니 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
+        <div class="wb"><span class="wk">행사용품 렌탈</span><b>이에스컴퍼니 ES COMPANY</b><p>청주에서 충북·충남·세종·대전까지. 천막·테이블·의자부터 무대·음향·조명까지 싣고 가서 설치·철거까지.</p><span class="wu"><i>brizymedia.github.io/es-company</i><span>열어보기 ↗</span></span></div>
       </a>
       <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/jisuyang/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
         <div class="shot"><img src="img/works/jisuyang.webp" alt="가수 지수양 홍보 페이지 첫 화면" loading="lazy" width="880" height="550"></div>
