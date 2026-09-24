@@ -70,7 +70,7 @@ function plan() {
     useT[p.topic] = (useT[p.topic] || 0) + 1;
     if (p.city) { useC[p.city] = (useC[p.city] || 0) + 1; pair.add(p.topic + '|' + p.city); }
   }
-  const n = +(process.argv.find(a => a.startsWith('--n='))?.slice(4) || P.perDay || 2);
+  const n = +(process.argv.find(a => a.startsWith('--n='))?.slice(4) || (P.perDay ?? 2));
   const picks = [], usedT = new Set(), usedC = new Set();
   // 같은 주제 · 도시가 반복되지 않도록 가장 덜 쓴 것부터
   const topics = [...P.topics].sort((a, b) => (useT[a.id] || 0) - (useT[b.id] || 0));
