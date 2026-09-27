@@ -177,5 +177,10 @@
    "name": "질병관리청 — 인플루엔자 질병 정보",
    "url": "https://www.kdca.go.kr/kdca/3495/subview.do"
   }
- ]
+ ],
+ "cover": {
+  "src": "photos/school/006.jpg",
+  "alt": "강당 무대 음향·조명 세팅",
+  "caption": "큰길이벤트기획 현장 — 학교 강당 행사 — 강당 무대 음향·조명 세팅"
+ }
 }

@@ -170,5 +170,10 @@
    "name": "제품안전정보센터 — 인증정보 검색",
    "url": "https://www.safetykorea.kr/release/certDetail"
   }
- ]
+ ],
+ "cover": {
+  "src": "photos/school/028.jpg",
+  "alt": "학교 운동장 야외 무대와 현수막, 천막, 관객",
+  "caption": "큰길이벤트기획 현장 — 순천이수초등학교 어울 한마당(순천) — 학교 운동장 야외 무대와 현수막, 천막, 관객"
+ }
 }

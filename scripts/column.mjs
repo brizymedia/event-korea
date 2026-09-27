@@ -20,6 +20,12 @@ const cfg = JSON.parse(readFileSync(resolve(CDIR, 'config.json'), 'utf8'));
 const BASE = cfg.column.base;                       // 예: "/column/"
 const OUT = resolve(ROOT, BASE.replace(/^\/|\/$/g, ''));
 const DOMAIN = cfg.site.domain.replace(/\/$/, '');
+// 사이트가 쓸 수 있는 사진 목록 — _column/photos.json { base, 사진: [{ src, 보이는것, 쓰임, 캡션 }] }
+const LIB = existsSync(resolve(CDIR, 'photos.json')) ? JSON.parse(readFileSync(resolve(CDIR, 'photos.json'), 'utf8')) : { base: '', 사진: [] };
+const LIBSET = new Set((LIB.사진 || []).map(x => x.src));
+const imgURL = src => /^https?:/.test(src) || src.startsWith('/') ? src : (LIB.base || '/') + src;
+const imgAbs = src => { const u = imgURL(src); return /^https?:/.test(u) ? encodeURI(decodeURI(u)) : DOMAIN + encodeURI(u); };
+const imgOK = src => !!src && (src.startsWith('/') ? existsSync(resolve(ROOT, decodeURI(src).slice(1))) : LIBSET.has(src));
 const todayKST = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 
 // ───────────────────────── 공통 ─────────────────────────
@@ -54,6 +60,7 @@ function blockText(b) {
   if (b.table) return [b.table.head, ...b.table.rows].map(r => r.join(' ')).join('\n');
   if (b.quote) return b.quote.text;
   if (b.img) return b.img.caption || '';
+  if (b.stats) return b.stats.map(x => x.num + ' ' + x.label).join('\n');
   return '';
 }
 const bodyText = p => plain([p.lead, ...(p.points || []),
@@ -119,10 +126,14 @@ function checkOne(p, file, others) {
   need(Array.isArray(p.sources) && p.sources.length >= srcMin && p.sources.every(s => s.name && /^https:\/\//.test(s.url)), `sources ${srcMin}개 이상, 주소는 https://`);
   for (const s of p.sections || []) {
     need(s.h2 && Array.isArray(s.blocks) && s.blocks.length, `소제목/블록 비어 있음: ${s.h2}`);
-    for (const b of s.blocks || []) if (b.img) need(b.img.src?.startsWith('/') && existsSync(resolve(ROOT, b.img.src.slice(1))) && b.img.alt?.length >= 8, `사진 파일이 없거나 alt 8자 미만: ${b.img?.src}`);
-    for (const b of s.blocks || []) need(['p', 'ul', 'ol', 'table', 'tip', 'warn', 'quote', 'img'].some(k => k in b), `모르는 블록: ${JSON.stringify(b).slice(0, 60)}`);
+    for (const b of s.blocks || []) if (b.img) need(imgOK(b.img.src) && b.img.alt?.length >= 8, `사진이 _column/photos.json 목록 · 사이트 파일에 없거나 alt 8자 미만: ${b.img?.src}`);
+    for (const b of s.blocks || []) if (b.stats) need(Array.isArray(b.stats) && b.stats.length >= 2 && b.stats.length <= 4 && b.stats.every(x => x.num && x.label), 'stats 는 2~4개 { num, label }');
+    for (const b of s.blocks || []) need(['p', 'ul', 'ol', 'table', 'tip', 'warn', 'quote', 'img', 'stats'].some(k => k in b), `모르는 블록: ${JSON.stringify(b).slice(0, 60)}`);
   }
+  if (p.cover) need(imgOK(p.cover.src) && p.cover.alt?.length >= 8 && p.cover.caption, `cover 사진이 목록에 없거나 alt(8자+) · caption 이 없다: ${p.cover.src}`);
   if (E.length) return { E, W };
+  const imgs = (p.cover ? 1 : 0) + p.sections.flatMap(s => s.blocks).filter(b => b.img).length;
+  if (!imgs) W.push('사진이 없다 — 자동 표지만 나간다. 맞는 사진이 _column/photos.json 에 있으면 cover 로 넣는다');
 
   const body = bodyText(p);
   const all = body + '\n' + p.title + '\n' + p.description;
@@ -252,11 +263,36 @@ blockquote cite{display:block;font-size:.8rem;margin-top:4px;font-style:normal}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px}
 .chips button{font:inherit;font-size:.85rem;padding:7px 14px;border-radius:999px;border:1px solid var(--ln);background:transparent;color:var(--ink2);cursor:pointer}
 .chips button[aria-pressed=true]{background:var(--ac);color:var(--acink);border-color:var(--ac);font-weight:700}
+/* 사진 · 표지 */
+.cover{margin:4px 0 26px}
+.cover img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:1px solid var(--ln);display:block;background:var(--sf)}
+.cover figcaption{text-align:left}
+.gcover{margin:4px 0 26px;border-radius:14px;overflow:hidden;border:1px solid var(--ln)}
+.gcover svg{display:block;width:100%;height:auto}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+.tag{font-size:.78rem;padding:4px 11px;border-radius:999px;background:var(--sf);border:1px solid var(--ln);color:var(--ink2)}
+.tag.k{color:var(--ac);border-color:var(--ac);font-weight:700}
+article h2{display:flex;gap:10px;align-items:baseline}
+article h2 .n{flex-shrink:0;display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;border-radius:8px;background:var(--ac);color:var(--acink);font-size:.82em;font-weight:800}
+article ol:not(.plain){list-style:none;padding-left:0;counter-reset:st}
+article ol:not(.plain)>li{counter-increment:st;position:relative;padding:10px 12px 10px 48px;margin:8px 0;background:var(--sf);border:1px solid var(--ln);border-radius:10px}
+article ol:not(.plain)>li::before{content:counter(st);position:absolute;left:12px;top:10px;width:26px;height:26px;border-radius:50%;background:var(--ac);color:var(--acink);font-weight:800;font-size:.85rem;display:grid;place-items:center}
+article ul>li::marker{color:var(--ac)}
+tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--sf) 60%,transparent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:8px 0 20px}
+.stat{background:var(--sf);border:1px solid var(--ln);border-top:3px solid var(--ac);border-radius:12px;padding:14px 14px 12px}
+.stat b{display:block;font-size:1.45rem;line-height:1.2;color:var(--ac);letter-spacing:-.02em}
+.stat span{display:block;font-size:.84rem;color:var(--ink2);margin-top:4px;line-height:1.5}
+.cards a{padding:0;overflow:hidden}
+.cards .th{display:block;aspect-ratio:16/9;background:var(--sf);border-bottom:1px solid var(--ln);overflow:hidden}
+.cards .th img,.cards .th svg{width:100%;height:100%;object-fit:cover;display:block}
+.cards .tx{display:block;padding:14px 16px 16px}
+@media(min-width:720px){#list.cards{grid-template-columns:1fr 1fr}.rel .cards{grid-template-columns:1fr 1fr}}
 footer{border-top:1px solid var(--ln);margin-top:56px;padding:26px 0 40px;font-size:.82rem;color:var(--ink2)}
 footer a{color:var(--ink2)}
 `;
 
-function head({ title, desc, path, type = 'website', extra = '', kw = '', image = cfg.site.ogImage }) {
+function head({ title, desc, path, type = 'website', extra = '', kw = '', image = DOMAIN + encodeURI(cfg.site.ogImage) }) {
   return `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -272,7 +308,7 @@ ${kw ? `<meta name="keywords" content="${esc(kw)}">\n` : ''}<meta name="robots" 
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${abs(path)}">
-<meta property="og:image" content="${DOMAIN}${encodeURI(image)}">
+<meta property="og:image" content="${image}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="${T.bg}">
 ${cfg.site.favicon ? `<link rel="icon" href="${cfg.site.favicon}">\n` : ''}<link rel="alternate" type="application/rss+xml" title="${esc(cfg.column.title)}" href="${BASE}rss.xml">
@@ -289,6 +325,25 @@ const foot = () => `<footer><div class="wrap">${cfg.site.footer}<br><a href="/">
 `;
 const ld = o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>\n`;
 
+// 맞는 사진이 없는 글의 자동 표지 — 분류 · 핵심 키워드 · 사이트 이름을 담은 그림 (외부 그림 · AI 이미지 없이)
+function wrapKo(t, n) {
+  const words = String(t).split(/\s+/); const lines = []; let cur = '';
+  for (const w of words) { if ((cur + ' ' + w).trim().length > n && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }
+  if (cur) lines.push(cur);
+  return lines.slice(0, 3);
+}
+function genCover(p, id) {
+  const cat = cfg.categories[p.category]?.name || '';
+  const lines = wrapKo(p.keyword.main, 10);
+  const fs = lines.length > 2 ? 64 : 76;
+  const y0 = 330 - (lines.length - 1) * fs * 0.62;
+  const icon = p.category === 'life'
+    ? '<path d="M0-58 48-40v34c0 34-22 58-48 70-26-12-48-36-48-70v-34z" fill="none" stroke="currentColor" stroke-width="9" stroke-linejoin="round"/><path d="M-20 0l14 14 26-30" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>'
+    : '<rect x="-52" y="-10" width="22" height="52" rx="5" fill="currentColor"/><rect x="-11" y="-38" width="22" height="80" rx="5" fill="currentColor"/><rect x="30" y="-60" width="22" height="102" rx="5" fill="currentColor"/>';
+  return `<svg viewBox="0 0 1200 630" role="img" aria-label="${esc(p.title)}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${T.coverFrom || T.accent}"/><stop offset="1" stop-color="${T.coverTo || T.bg}"/></linearGradient></defs><rect width="1200" height="630" fill="url(#g${id})"/><circle cx="1040" cy="120" r="220" fill="#fff" opacity=".08"/><circle cx="1110" cy="560" r="160" fill="#fff" opacity=".06"/><g transform="translate(1000 330)" color="#fff" opacity=".9">${icon}</g><rect x="80" y="92" rx="22" width="${cat.length * 30 + 60}" height="46" fill="#fff" opacity=".95"/><text x="110" y="124" font-size="26" font-weight="800" fill="${T.coverFrom || T.accent}" font-family="Pretendard Variable,Pretendard,sans-serif">${esc(cat)}</text>${lines.map((l, i) => `<text x="80" y="${y0 + i * fs * 1.24}" font-size="${fs}" font-weight="800" fill="#fff" font-family="Pretendard Variable,Pretendard,sans-serif" letter-spacing="-2">${esc(l)}</text>`).join('')}<text x="80" y="560" font-size="28" font-weight="700" fill="#fff" opacity=".85" font-family="Pretendard Variable,Pretendard,sans-serif">${esc(cfg.site.name)}${p.city ? ' · ' + esc(p.city) : ''}</text></svg>`;
+}
+const readMin = p => Math.max(2, Math.round([...bodyText(p).replace(/\s/g, '')].length / 500));
+
 function renderBlock(b) {
   if (b.p) return `<p>${inline(b.p)}</p>`;
   if (b.ul) return `<ul>${b.ul.map(x => `<li>${inline(x)}</li>`).join('')}</ul>`;
@@ -296,13 +351,16 @@ function renderBlock(b) {
   if (b.tip) return `<div class="tip">${inline(b.tip)}</div>`;
   if (b.warn) return `<div class="warn">${inline(b.warn)}</div>`;
   if (b.quote) return `<blockquote>${inline(b.quote.text)}${b.quote.from ? `<cite>— ${inline(b.quote.from)}</cite>` : ''}</blockquote>`;
-  if (b.img) return `<figure><img src="${b.img.src}" alt="${esc(b.img.alt)}" loading="lazy" decoding="async"${b.img.w ? ` width="${b.img.w}" height="${b.img.h}"` : ''}>${b.img.caption ? `<figcaption>${inline(b.img.caption)}</figcaption>` : ''}</figure>`;
+  if (b.stats) return `<div class="stats">${b.stats.map(x => `<div class="stat"><b>${esc(x.num)}</b><span>${inline(x.label)}</span></div>`).join('')}</div>`;
+  if (b.img) return `<figure><img src="${esc(imgURL(b.img.src))}" alt="${esc(b.img.alt)}" loading="lazy" decoding="async"${b.img.w ? ` width="${b.img.w}" height="${b.img.h}"` : ''}>${b.img.caption ? `<figcaption>${inline(b.img.caption)}</figcaption>` : ''}</figure>`;
   if (b.table) return `<div class="tbl"><table><thead><tr>${b.table.head.map(h => `<th>${inline(h)}</th>`).join('')}</tr></thead><tbody>${b.table.rows.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   return '';
 }
 
+let cardN = 0;
 function card(p) {
-  return `<li data-c="${p.category}"><a href="${url(p.slug)}"><span class="badge">${esc(cfg.categories[p.category].name)}</span>${p.city ? `<span class="city">${esc(p.city)}</span>` : ''}<span class="d">${p.date}</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p></a></li>`;
+  const th = p.cover ? `<img src="${esc(imgURL(p.cover.src))}" alt="${esc(p.cover.alt)}" loading="lazy" decoding="async">` : genCover(p, 'c' + (cardN++));
+  return `<li data-c="${p.category}"><a href="${url(p.slug)}"><span class="th">${th}</span><span class="tx"><span class="badge">${esc(cfg.categories[p.category].name)}</span>${p.city ? `<span class="city">${esc(p.city)}</span>` : ''}<span class="d">${p.date}</span><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p></span></a></li>`;
 }
 
 function renderPost(p, all) {
@@ -311,13 +369,14 @@ function renderPost(p, all) {
   const cta = p.cta || cfg.cta[p.category];
   const rel = [...all.filter(x => x !== p && x.category === p.category), ...all.filter(x => x !== p && x.category !== p.category)].slice(0, 4);
   const firstImg = p.sections.flatMap(s => s.blocks).find(b => b.img)?.img.src;
-  const image = p.cover || firstImg || cfg.site.ogImage;
+  const imgSrc = p.cover?.src || firstImg;
+  const image = imgSrc ? imgAbs(imgSrc) : DOMAIN + encodeURI(cfg.site.ogImage);
   const person = { '@type': 'Organization', name: cfg.site.publisher || cfg.site.name, url: DOMAIN + '/' };
   const extra = ld({
     '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.description,
     datePublished: p.date + 'T07:00:00+09:00', dateModified: (p.updated || p.date) + 'T07:00:00+09:00',
     author: person, publisher: { ...person, logo: { '@type': 'ImageObject', url: DOMAIN + cfg.site.ogImage } },
-    image: DOMAIN + encodeURI(image), mainEntityOfPage: abs(path), inLanguage: 'ko-KR', articleSection: cat.name,
+    image, mainEntityOfPage: abs(path), inLanguage: 'ko-KR', articleSection: cat.name,
     keywords: [p.keyword.main, ...(p.keyword.sub || [])].join(', '),
     ...(p.city ? { contentLocation: { '@type': 'Place', name: p.city } } : {}),
   }) + ld({
@@ -335,11 +394,13 @@ function renderPost(p, all) {
 <article>
 <span class="badge">${esc(cat.name)}</span>${p.city ? `<span class="city">${esc(p.city)}</span>` : ''}
 <h1>${esc(p.title)}</h1>
-<div class="meta"><time datetime="${p.date}">${p.date}</time>${p.updated ? ` · 고침 ${p.updated}` : ''} · ${esc(cfg.site.name)}</div>
+<div class="meta"><time datetime="${p.date}">${p.date}</time>${p.updated ? ` · 고침 ${p.updated}` : ''} · ${esc(cfg.site.name)} · 읽는 시간 약 ${readMin(p)}분</div>
+<div class="tags"><span class="tag k">${esc(p.keyword.main)}</span>${(p.keyword.sub || []).slice(0, 3).map(k => `<span class="tag">${esc(k)}</span>`).join('')}</div>
 <p class="lead">${inline(p.lead)}</p>
+${p.cover ? `<figure class="cover"><img src="${esc(imgURL(p.cover.src))}" alt="${esc(p.cover.alt)}" decoding="async" fetchpriority="high"><figcaption>${inline(p.cover.caption)}</figcaption></figure>` : `<div class="gcover">${genCover(p, 'h')}</div>`}
 <div class="points"><b>핵심만 먼저</b><ul>${p.points.map(x => `<li>${inline(x)}</li>`).join('')}</ul></div>
-<nav class="toc" aria-label="목차"><b>목차</b><ol>${p.sections.map((s, i) => `<li><a href="#s${i + 1}">${esc(s.h2.replace(/^\d+\.\s*/, ''))}</a></li>`).join('')}<li><a href="#faq">자주 묻는 질문</a></li></ol></nav>
-${p.sections.map((s, i) => `<h2 id="s${i + 1}">${esc(s.h2)}</h2>\n${s.blocks.map(renderBlock).join('\n')}`).join('\n')}
+<nav class="toc" aria-label="목차"><b>목차</b><ol class="plain">${p.sections.map((s, i) => `<li><a href="#s${i + 1}">${esc(s.h2.replace(/^\d+\.\s*/, ''))}</a></li>`).join('')}<li><a href="#faq">자주 묻는 질문</a></li></ol></nav>
+${p.sections.map((s, i) => `<h2 id="s${i + 1}"><span class="n">${i + 1}</span><span>${esc(s.h2.replace(/^\d+\.\s*/, ''))}</span></h2>\n${s.blocks.map(renderBlock).join('\n')}`).join('\n')}
 <h2 id="faq">자주 묻는 질문</h2>
 <div class="faq">${p.faq.map(f => `<details><summary>${inline(f.q)}</summary><p>${inline(f.a)}</p></details>`).join('')}</div>
 <div class="src"><h2>참고한 자료</h2><ul>${p.sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener nofollow">${esc(s.name)}</a></li>`).join('')}</ul></div>
