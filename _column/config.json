@@ -202,6 +202,54 @@
     "keyword": "{city} 축제 무대 운영",
     "city": false,
     "angle": "실제 업계 이슈를 운영 관점으로 분석. 사람 평가 금지, 보도된 사실만"
+   },
+   {
+    "id": "drone-show",
+    "name": "드론쇼 · 불꽃 연출 행사 준비와 허가 확인",
+    "keyword": "{city} 드론쇼",
+    "angle": "항공안전법 등 공식 출처로 확인된 범위만, 비용 쓰지 않음"
+   },
+   {
+    "id": "led-screen",
+    "name": "LED 전광판 · 영상 운영 체크리스트",
+    "keyword": "{city} LED 전광판 대여",
+    "angle": "해상도 · 거리 · 전원 · 송출 일반 요령"
+   },
+   {
+    "id": "sound-rental",
+    "name": "행사 음향 장비 대여 전 확인할 것",
+    "keyword": "{city} 음향장비 대여",
+    "angle": "규모별 구성 · 무선 주파수 · 전원"
+   },
+   {
+    "id": "festival-trend",
+    "name": "지역축제 트렌드와 기획 포인트",
+    "keyword": "{city} 지역축제",
+    "angle": "문화체육관광부 문화관광축제 등 공식 자료"
+   },
+   {
+    "id": "hybrid-event",
+    "name": "하이브리드 · 온라인 송출 행사 운영",
+    "keyword": "{city} 행사 온라인 중계",
+    "angle": "송출 장비 · 인터넷 회선 · 저작권 음원"
+   },
+   {
+    "id": "mc-script",
+    "name": "행사 MC 대본 · 큐시트 작성법",
+    "keyword": "{city} 행사 큐시트",
+    "angle": "의전 순서 · 시간 배분 표"
+   },
+   {
+    "id": "booth-rental",
+    "name": "체험부스 · 천막 운영 준비",
+    "keyword": "{city} 체험부스",
+    "angle": "안전 · 전원 · 동선"
+   },
+   {
+    "id": "govt-event",
+    "name": "관공서 기념식 · 의전 행사 준비",
+    "keyword": "{city} 기념식 행사",
+    "angle": "국민의례 등 공식 의전 기준(행정안전부)"
    }
   ]
  }
