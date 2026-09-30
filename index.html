@@ -271,23 +271,25 @@ img{max-width:100%;height:auto;display:block}
 .close-box .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .big-tel{font-family:var(--display);font-weight:900;font-size:clamp(28px,5vw,52px);letter-spacing:-.01em;margin-top:22px}
 .big-tel a{text-decoration:none}
-/* ═══ 만든 것들 — 살아 있는 이벤트인 사이트들 (24칸 격자, 첫 줄 4장 + 아래 두 줄 가운데 3장씩 = 10장) ═══ */
+/* ═══ 만든 것들 — 살아 있는 이벤트인 사이트들, 휴대폰 화면 두 줄이 서로 반대로 흐른다 (지금 15곳) ═══ */
 .works{padding:clamp(56px,9vh,110px) 0 0}
-.wgrid{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:14px}
-.work{--gel:var(--amber);grid-column:span 6;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0F1017;transition:transform .25s,border-color .25s}
-.work:hover{transform:translateY(-4px);border-color:var(--gel)}
-.work:nth-child(5),.work:nth-child(8){grid-column:4/10}.work:nth-child(6),.work:nth-child(9){grid-column:10/16}.work:nth-child(7),.work:nth-child(10){grid-column:16/22}
-.work .shot{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#14151d}
-.work .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s}
-.work:hover .shot img{transform:scale(1.03)}
-.work .shot::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gel);box-shadow:0 0 14px var(--gel)}
-.work .wb{padding:16px 18px 18px;display:grid;gap:6px;align-content:start;flex:1}
-.work .wk{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--gel)}
-.work b{font-family:var(--display);font-weight:900;font-size:17px;letter-spacing:-.01em;line-height:1.25;text-wrap:balance}
-.work p{margin:0;color:var(--ink2);font-size:14px;line-height:1.55}
-.work .wu{margin-top:auto;padding-top:8px;font-family:var(--mono);font-size:12px;color:var(--ink3);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.work .wu i{font-style:normal;color:var(--ink2);overflow-wrap:anywhere}
-.work .wu span{color:var(--gel);white-space:nowrap}
+.pmarq-wrap{overflow:hidden;margin-top:6px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.pmarq{display:flex;gap:20px;width:max-content;padding:16px 0}
+.pmarq.a{animation:pmarqL 58s linear infinite}
+.pmarq.b{animation:pmarqR 50s linear infinite}
+.pmarq-wrap:hover .pmarq{animation-play-state:paused}
+@keyframes pmarqL{to{transform:translateX(-50%)}}
+@keyframes pmarqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.pcard{--gel:var(--amber);flex:none;width:150px;text-decoration:none;color:var(--ink)}
+.pcard .phone{position:relative;width:150px;aspect-ratio:390/844;border-radius:26px;padding:7px;background:linear-gradient(150deg,#232637,#0A0B10);box-shadow:0 22px 46px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05);transition:transform .25s,box-shadow .25s}
+.pcard:hover .phone{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.pcard .phone::before{content:'';position:absolute;top:16px;left:50%;transform:translateX(-50%);width:40px;height:11px;border-radius:8px;background:#05060a;z-index:2}
+.pcard .scr{position:relative;width:100%;height:100%;border-radius:19px;overflow:hidden;background:#14151d}
+.pcard .scr img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pcard .scr::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--gel);box-shadow:0 0 10px var(--gel)}
+.pcard .cap{margin-top:12px}
+.pcard b{display:block;font-family:var(--display);font-weight:900;font-size:14px;letter-spacing:-.01em;line-height:1.3;text-wrap:balance}
+.pcard span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--gel);margin-top:3px}
 .maker{margin-top:clamp(28px,5vh,48px);display:grid;grid-template-columns:1fr auto;gap:18px 28px;align-items:center;padding:clamp(22px,4vw,36px) clamp(22px,4vw,40px);border:1px solid var(--line2);border-radius:22px;background:radial-gradient(70% 120% at 0% 50%,rgba(255,176,32,.14),transparent 60%),#0F1017;text-decoration:none;color:var(--ink);transition:border-color .25s,transform .25s}
 .maker:hover{border-color:var(--amber);transform:translateY(-2px)}
 .maker .mk{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ink3)}
@@ -295,10 +297,9 @@ img{max-width:100%;height:auto;display:block}
 .maker p{margin:8px 0 0;color:var(--ink2);max-width:36em}
 .maker .go{justify-self:end;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--amber);color:#111;font-weight:800;white-space:nowrap}
 .maker .go small{font-family:var(--mono);font-weight:600;font-size:12px;opacity:.7}
-@media(max-width:900px){.wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.work,.work:nth-child(n){grid-column:auto}}
 @media(max-width:720px){.maker{grid-template-columns:1fr}.maker .go{justify-self:start;white-space:normal;flex-wrap:wrap}}
-@media(max-width:520px){.wgrid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.work,.work .shot img,.maker{transition:none}}
+@media(max-width:640px){.pcard,.pcard .phone{width:122px}}
+@media(prefers-reduced-motion:reduce){.pmarq.a,.pmarq.b,.pcard .phone,.maker{animation:none;transition:none}.pmarq-wrap{overflow-x:auto}.pmarq{width:max-content}}
 footer{border-top:1px solid var(--line);padding:32px 0 calc(40px + env(safe-area-inset-bottom));color:var(--ink3);font-size:13px}
 footer .f{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
 footer .f b{color:var(--ink2);font-weight:500}
@@ -597,50 +598,12 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
     <div class="sec-head">
       <span class="n">ENCORE · WORKS</span>
       <h2>말로만 하지 않습니다.<br>이벤트인의 홈페이지, 여기서 홍보해 드립니다.</h2>
-      <p>전부 지금 살아 있는 사이트입니다. 폰으로 열어서 검색이 되는지, 전화가 눌러지는지, 대표님 회사 것과 비교해 보세요.</p>
+      <p>전부 지금 살아 있는 사이트의 휴대폰 첫 화면 그대로입니다. 밀어서 넘겨 보고, 마음에 드는 곳은 눌러서 직접 열어 보세요. 지금 15곳.</p>
     </div>
-    <div class="wgrid">
-      <a class="work" href="https://brizymedia.github.io/goodfriend-event/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
-        <div class="shot"><img src="img/works/goodfriend.webp" alt="굿프랜드유아체육연구소 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">유아체육 · 이벤트</span><b>굿프랜드유아체육연구소 &amp; 이벤트</b><p>여수·순천·광양 유치원으로 찾아가는 물놀이·에어바운스·운동회. 원장님이 폰으로 바로 문의하는 원페이지.</p><span class="wu"><i>brizymedia.github.io/goodfriend-event</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/" target="_blank" rel="noopener" style="--gel:var(--amber)">
-        <div class="shot"><img src="img/works/keungil.webp" alt="큰길이벤트기획 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">행사기획 · 장비</span><b>큰길이벤트기획</b><p>광양·순천 본사, 광주·전남·경남 당일 세팅. 자동 견적·전자계약·사진 갤러리까지 한 사이트에서.</p><span class="wu"><i>큰길이벤트.com</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://www.xn--el3bx2ohi64bba144lgmbdzd.com/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
-        <div class="shot"><img src="img/works/ym.webp" alt="YM토탈이벤트 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">토탈 행사대행</span><b>YM토탈이벤트</b><p>음향·조명·LED전광판·특수효과·무대를 한 번에. 축제·기념식·체육대회·법회까지 책임지는 토탈 행사대행.</p><span class="wu"><i>와이엠토탈이벤트.com</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://brizymedia.github.io/immagic/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
-        <div class="shot"><img src="img/works/immagic.webp" alt="아이엠매직 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">공연팀</span><b>아이엠매직 I.M.MAGIC</b><p>2005년부터 4,000회 넘는 무대. 마술·버블·벌룬·샌드아트·레이저쇼, 춘천에서 전국으로 찾아가는 공연팀.</p><span class="wu"><i>brizymedia.github.io/immagic</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://brizymedia.github.io/pro-event/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
-        <div class="shot"><img src="img/works/proevent.webp" alt="프로이벤트 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">종합 이벤트 대행</span><b>프로이벤트 PRO EVENT</b><p>2006년부터 프로젝트 729회. 최대 2만 명 규모 행사까지 기획·연출·운영을 한 팀이 끝까지 맡는 이벤트 회사.</p><span class="wu"><i>brizymedia.github.io/pro-event</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://brizymedia.github.io/hd-event/" target="_blank" rel="noopener" style="--gel:var(--amber)">
-        <div class="shot"><img src="img/works/hdevent.webp" alt="HD기획 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">행사기획 · 대행</span><b>HD기획</b><p>서울·광명·남양주 기업행사·체육대회·지자체 행사. 기획서 한 장에서 무대 철수까지 한 팀이 책임집니다.</p><span class="wu"><i>brizymedia.github.io/hd-event</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://brizymedia.github.io/es-company/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
-        <div class="shot"><img src="img/works/escompany.webp" alt="이에스컴퍼니 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">행사용품 렌탈</span><b>이에스컴퍼니 ES COMPANY</b><p>청주에서 충북·충남·세종·대전까지. 천막·테이블·의자부터 무대·음향·조명까지 싣고 가서 설치·철거까지.</p><span class="wu"><i>brizymedia.github.io/es-company</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/jisuyang/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
-        <div class="shot"><img src="img/works/jisuyang.webp" alt="가수 지수양 홍보 페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">가수 프로필</span><b>트로트 가수 지수양</b><p>무대 영상·활동 경력·정규 1집을 한 장에. 기획사에 보낼 A4 프로필과 섭외 신청 폼까지 붙은 홍보 페이지.</p><span class="wu"><i>큰길이벤트.com/jisuyang</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://xn--wk0bn7yi8h24iszc.com/mari/" target="_blank" rel="noopener" style="--gel:var(--magenta)">
-        <div class="shot"><img src="img/works/mari.webp" alt="가수 마리 홍보 페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">가수 프로필</span><b>가수 마리</b><p>정규 1집 「사랑의 라켄롤」 · 무대 영상 · 음반 · 행사 섭외 안내를 한 장에. 카톡으로 보내는 섭외용 페이지.</p><span class="wu"><i>큰길이벤트.com/mari</i><span>열어보기 ↗</span></span></div>
-      </a>
-      <a class="work" href="https://brizymedia.github.io/parkjunhwa-music/" target="_blank" rel="noopener" style="--gel:var(--cyan)">
-        <div class="shot"><img src="img/works/parkjunhwa.webp" alt="박준화실용음악학원 홈페이지 첫 화면" loading="lazy" width="880" height="550"></div>
-        <div class="wb"><span class="wk">학원 · 레슨</span><b>박준화실용음악학원</b><p>2000년부터 여수 도원로. 보컬 · 기타 · 베이스 · 드럼 · 피아노 · 작곡 · 미디 1:1 레슨 안내와 상담 신청.</p><span class="wu"><i>brizymedia.github.io/parkjunhwa-music</i><span>열어보기 ↗</span></span></div>
-      </a>
-    </div>
+  </div>
+  <div class="pmarq-wrap"><div class="pmarq a" id="pmarqA"></div></div>
+  <div class="pmarq-wrap"><div class="pmarq b" id="pmarqB"></div></div>
+  <div class="wrap">
     <a class="maker" href="https://www.ai-make.co.kr/" target="_blank" rel="noopener">
       <div>
         <span class="mk">MADE BY</span>
@@ -830,6 +793,38 @@ footer .sis a{text-decoration:none;border-bottom:1px solid var(--line2)}
     ckmsg.textContent=m; ckres.className="ckres"+(n<=1?" bad":n<=3?" mid":""); }
   cks.forEach(function(c){ c.addEventListener("change",ck); }); ck();
   window.__ek={render:render, fallback:fallback};
+
+  /* ── 만든 것들 — 휴대폰 화면 두 줄 (지금 15곳, 늘어나면 이 배열에 한 줄만 추가) ── */
+  var WORKS=[
+    ['goodfriend','굿프랜드유아체육연구소 & 이벤트','유아체육 · 이벤트','cyan','https://brizymedia.github.io/goodfriend-event/'],
+    ['keungil','큰길이벤트기획','행사기획 · 장비','amber','https://xn--wk0bn7yi8h24iszc.com/'],
+    ['ym','YM토탈이벤트','토탈 행사대행','magenta','https://www.xn--el3bx2ohi64bba144lgmbdzd.com/'],
+    ['immagic','아이엠매직 I.M.MAGIC','공연팀','cyan','https://brizymedia.github.io/immagic/'],
+    ['pro-event','프로이벤트 PRO EVENT','종합 이벤트 대행','cyan','https://brizymedia.github.io/pro-event/'],
+    ['hd-event','HD기획','행사기획 · 대행','amber','https://brizymedia.github.io/hd-event/'],
+    ['es-company','이에스컴퍼니 ES COMPANY','행사용품 렌탈','cyan','https://brizymedia.github.io/es-company/'],
+    ['jisuyang','트로트 가수 지수양','가수 프로필','magenta','https://xn--wk0bn7yi8h24iszc.com/jisuyang/'],
+    ['mari','가수 마리','가수 프로필','magenta','https://xn--wk0bn7yi8h24iszc.com/mari/'],
+    ['parkjunhwa','박준화실용음악학원','학원 · 레슨','cyan','https://brizymedia.github.io/parkjunhwa-music/'],
+    ['j6media','제이식스미디어 J6 MEDIA','음향 · 영상 렌탈','amber','https://brizymedia.github.io/j6media/'],
+    ['baro-event','바로기획','행사대행','magenta','https://brizymedia.github.io/baro-event/'],
+    ['healing-ent','힐링엔터테인먼트','기업행사 · 전문 MC','amber','https://brizymedia.github.io/healing-ent/'],
+    ['yegrina','한국체대 예그리나','유아체육 · 운동회','cyan','https://brizymedia.github.io/yegrina/'],
+    ['haengsaon','행사ON','행사대행 · 렌탈','magenta','https://brizymedia.github.io/haengsaon/']
+  ];
+  (function(){
+    var escW=function(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); };
+    function fig(w){
+      return '<a class="pcard" href="'+w[4]+'" target="_blank" rel="noopener" style="--gel:var(--'+w[3]+')">'+
+        '<div class="phone"><div class="scr"><img src="img/phone/'+w[0]+'.webp" alt="'+escW(w[1])+' 홈페이지 휴대폰 화면" loading="eager" decoding="async" width="360" height="780"></div></div>'+
+        '<div class="cap"><b>'+escW(w[1])+'</b><span>'+escW(w[2])+'</span></div></a>';
+    }
+    var half=Math.ceil(WORKS.length/2), laneA=WORKS.slice(0,half), laneB=WORKS.slice(half);
+    var noAnim=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var a=document.getElementById('pmarqA'), b=document.getElementById('pmarqB');
+    if(a) a.innerHTML=laneA.map(fig).join('')+(noAnim?'':laneA.map(fig).join(''));
+    if(b) b.innerHTML=laneB.map(fig).join('')+(noAnim?'':laneB.map(fig).join(''));
+  })();
 })();
 </script>
 </body>
