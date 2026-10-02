@@ -84,6 +84,8 @@ function plan() {
   for (const t of topics) {
     if (picks.length >= n) break;
     if (usedT.has(t.id)) continue;
+    // 도시 없이 쓰는 주제는 한 번 쓰면 다시 고르지 않는다(같은 키워드 글끼리 검색에서 다툰다)
+    if (t.city === false && useT[t.id]) continue;
     let city = null;
     if (picks.length < (P.cityPosts ?? n) && t.city !== false) {
       city = [...P.cities].sort((a, b) => (useC[a] || 0) - (useC[b] || 0))
@@ -92,6 +94,9 @@ function plan() {
     usedT.add(t.id); if (city) usedC.add(city);
     picks.push({ topic: t.id, 주제: t.name, city, 키워드: (city ? t.keyword.replace('{city}', city) : t.keyword.replace('{city} ', '').replace('{city}', '')), 방향: t.angle || '' });
   }
+  const fresh = P.topics.filter(t => !useT[t.id]).length;
+  if (picks.length < n) console.log(`!! 쓸 수 있는 주제가 모자란다 — _column/config.json plan.topics 를 보충한다`);
+  if (fresh < n * 3) console.log(`!! 아직 안 쓴 주제 ${fresh}개 — 곧 바닥난다. plan.topics 에 새 주제를 보충한다`);
   console.log(`# ${cfg.site.name} — ${todayKST()} 업계 글 ${n}개`);
   picks.forEach((p, i) => console.log(`${i + 1}. topic=${p.topic} · 도시=${p.city || '(없음)'} · 핵심 키워드="${p.키워드}"\n   주제: ${p.주제}${p.방향 ? `\n   방향: ${p.방향}` : ''}`));
   const life = posts.filter(p => p.category === 'life').slice(-10).map(p => `- ${p.date} ${p.title}`);
