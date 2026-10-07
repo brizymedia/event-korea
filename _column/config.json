@@ -322,6 +322,66 @@
     "name": "행사 끝난 뒤 정산 · 결과보고서 쓰는 법",
     "keyword": "{city} 행사 결과보고서",
     "angle": "보고서 항목, 사진 · 만족도 조사"
+   },
+   {
+    "id": "year-end-party",
+    "name": "연말 송년회 · 종무식 행사 준비",
+    "keyword": "{city} 송년회 행사",
+    "angle": "장소 · 음향 · 진행 순서 일반 요령, 음주 안전"
+   },
+   {
+    "id": "countdown",
+    "name": "해넘이 · 해맞이 · 카운트다운 행사 운영",
+    "keyword": "{city} 해맞이 행사",
+    "angle": "한랭 대비(질병관리청) · 인파 관리(행안부)"
+   },
+   {
+    "id": "winter-festival",
+    "name": "겨울 축제 · 빛 축제 운영 준비",
+    "keyword": "{city} 겨울 축제",
+    "angle": "전기 · 한파 · 결빙 안전, 공식 출처"
+   },
+   {
+    "id": "indoor-capacity",
+    "name": "실내 행사장 수용 인원 · 피난 동선",
+    "keyword": "{city} 실내 행사장",
+    "angle": "소방 · 공연법 기준 공식만"
+   },
+   {
+    "id": "signage",
+    "name": "행사 안내판 · 현수막 설치 기준",
+    "keyword": "{city} 행사 현수막",
+    "angle": "옥외광고물법 · 지자체 게시대 공식"
+   },
+   {
+    "id": "photo-video",
+    "name": "행사 사진 · 영상 촬영 동의와 활용",
+    "keyword": "{city} 행사 촬영",
+    "angle": "초상권 · 개인정보보호법 공식"
+   },
+   {
+    "id": "accessibility-event",
+    "name": "장애인 · 고령자 배려 행사 동선",
+    "keyword": "{city} 무장애 행사",
+    "angle": "보건복지부 · 행안부 공식 지침"
+   },
+   {
+    "id": "food-booth",
+    "name": "행사 먹거리 부스 위생 · 식품 안전",
+    "keyword": "{city} 푸드트럭 행사",
+    "angle": "식약처 · 지자체 영업신고 공식"
+   },
+   {
+    "id": "mc-hiring",
+    "name": "행사 사회자 · 진행자 섭외 체크",
+    "keyword": "{city} 행사 사회자",
+    "angle": "계약 · 큐시트 일반 요령, 금액 없음"
+   },
+   {
+    "id": "noise",
+    "name": "야외 행사 소음 기준 · 민원 대응",
+    "keyword": "{city} 행사 소음",
+    "angle": "소음진동관리법 · 지자체 공식"
    }
   ]
  }
