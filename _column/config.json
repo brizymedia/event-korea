@@ -389,6 +389,78 @@
     "keyword": "문화예술 지원사업 공모",
     "city": false,
     "angle": "한국문화예술위원회(아르코) · 지역 문화재단 · 지자체 누리집의 공식 공고에서 지금 접수 중인 공모만. 접수 기간 · 신청 경로 · 신청 순서를 표로, 금액은 공고 원문 링크로. 이벤트 회사가 직접 신청 주체인지 제작 파트너인지는 사업별 공고문의 지원 대상으로만 판단하고 확인 안 된 자격은 쓰지 않는다. 같은 공모를 앞서 쓴 글과 겹치지 않게 다른 사업 · 다른 기관으로"
+   },
+   {
+    "id": "sports-day",
+    "name": "기업 · 학교 체육대회 운영",
+    "keyword": "{city} 체육대회 행사",
+    "angle": "종목 구성 · 온열/한랭 · 응급 동선, 공식 안전 지침"
+   },
+   {
+    "id": "opening-ceremony",
+    "name": "개관식 · 준공식 · 착공식 준비",
+    "keyword": "{city} 준공식 행사",
+    "angle": "의전 순서 일반 요령, 국민의례 행안부 공식"
+   },
+   {
+    "id": "launch-event",
+    "name": "신제품 발표회 · 런칭 행사",
+    "keyword": "{city} 런칭 행사",
+    "angle": "표시광고법 · 일반 운영 요령"
+   },
+   {
+    "id": "conference-run",
+    "name": "세미나 · 컨퍼런스 운영 체크",
+    "keyword": "{city} 세미나 행사",
+    "angle": "등록 · 동선 · 음향 일반 요령, 개인정보 수집 공식"
+   },
+   {
+    "id": "wedding-party",
+    "name": "소규모 하우스웨딩 · 파티 행사",
+    "keyword": "{city} 스몰웨딩 행사",
+    "angle": "장소 · 음향 일반 요령, 소비자분쟁해결기준(공식)"
+   },
+   {
+    "id": "school-festival",
+    "name": "학교 축제 · 학예회 무대 운영",
+    "keyword": "{city} 학교 축제",
+    "angle": "교육청 · 학교안전공제회 공식"
+   },
+   {
+    "id": "market-event",
+    "name": "플리마켓 · 장터 행사 운영",
+    "keyword": "{city} 플리마켓",
+    "angle": "도로 · 공원 사용, 식품 판매 영업신고 공식"
+   },
+   {
+    "id": "traditional-event",
+    "name": "전통 행사 · 대보름 · 민속놀이",
+    "keyword": "{city} 정월대보름 행사",
+    "angle": "달집태우기 화재 안전(소방청) 공식"
+   },
+   {
+    "id": "dance-performance",
+    "name": "공연 · 댄스팀 섭외와 무대 조건",
+    "keyword": "{city} 공연 섭외",
+    "angle": "계약 · 무대 일반 요령, 공연법 공식"
+   },
+   {
+    "id": "event-sound-level",
+    "name": "행사 음향 볼륨 · 스피커 배치",
+    "keyword": "{city} 행사 음향",
+    "angle": "소음진동관리법 공식 + 일반 요령"
+   },
+   {
+    "id": "event-budget-items",
+    "name": "행사 견적서 항목 읽는 법",
+    "keyword": "{city} 행사 견적",
+    "angle": "항목 설명만, 금액 쓰지 않음"
+   },
+   {
+    "id": "rain-plan-b",
+    "name": "우천 시 실내 전환 · 플랜 B",
+    "keyword": "{city} 우천 행사",
+    "angle": "기상청 특보 공식 + 일반 요령"
    }
   ]
  }
