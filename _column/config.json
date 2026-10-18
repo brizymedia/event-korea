@@ -461,6 +461,96 @@
     "name": "우천 시 실내 전환 · 플랜 B",
     "keyword": "{city} 우천 행사",
     "angle": "기상청 특보 공식 + 일반 요령"
+   },
+   {
+    "id": "vip-protocol",
+    "name": "행사 내빈 의전 · 좌석 배치",
+    "keyword": "{city} 행사 의전",
+    "angle": "정부의전편람 공식 + 일반 요령"
+   },
+   {
+    "id": "registration-desk",
+    "name": "행사 접수 데스크 · 명찰 운영",
+    "keyword": "{city} 행사 접수",
+    "angle": "개인정보 최소수집 공식 + 일반 요령"
+   },
+   {
+    "id": "led-content",
+    "name": "LED 화면 영상 · 송출 준비",
+    "keyword": "{city} 행사 LED 영상",
+    "angle": "저작권(음원·영상) 공식 + 일반 요령"
+   },
+   {
+    "id": "lighting-design",
+    "name": "무대 조명 기본 — 색 · 방향 · 전원",
+    "keyword": "{city} 무대 조명",
+    "angle": "전기안전 공식 + 일반 요령"
+   },
+   {
+    "id": "event-staff-labor",
+    "name": "행사 단기 스탭 근로계약 · 4대보험",
+    "keyword": "{city} 행사 스탭 고용",
+    "angle": "고용노동부 공식"
+   },
+   {
+    "id": "event-crowd",
+    "name": "인파 밀집 관리 · 동선 분리",
+    "keyword": "{city} 행사 인파 관리",
+    "angle": "행안부 인파 안전 공식"
+   },
+   {
+    "id": "event-medical",
+    "name": "행사장 구급 · 응급 대응 체계",
+    "keyword": "{city} 행사 응급",
+    "angle": "응급의료법 · 소방청 공식"
+   },
+   {
+    "id": "event-parking",
+    "name": "행사장 주차 · 셔틀 운영",
+    "keyword": "{city} 행사 주차",
+    "angle": "도로교통법 · 지자체 공식 + 일반 요령"
+   },
+   {
+    "id": "event-photo-booth",
+    "name": "포토존 · 포토부스 설치",
+    "keyword": "{city} 포토존 설치",
+    "angle": "구조물 안전 일반 요령"
+   },
+   {
+    "id": "youth-event",
+    "name": "청소년 행사 · 보호자 동의",
+    "keyword": "{city} 청소년 행사",
+    "angle": "청소년보호법 · 개인정보 공식"
+   },
+   {
+    "id": "pet-event",
+    "name": "반려동물 동반 행사 운영",
+    "keyword": "{city} 반려동물 행사",
+    "angle": "동물보호법 공식"
+   },
+   {
+    "id": "hybrid-booth",
+    "name": "전시회 부스 참가 준비",
+    "keyword": "{city} 전시회 부스",
+    "angle": "전시장 규정 공식 + 일반 요령"
+   },
+   {
+    "id": "online-event",
+    "name": "온라인 행사 · 웨비나 운영",
+    "keyword": "{city} 웨비나",
+    "angle": "플랫폼 공식 도움말"
+   },
+   {
+    "id": "event-sponsorship",
+    "name": "행사 협찬 · 후원 표시",
+    "keyword": "{city} 행사 협찬",
+    "angle": "표시광고법 · 청탁금지법 공식"
+   },
+   {
+    "id": "event-evaluation",
+    "name": "행사 만족도 조사 설계",
+    "keyword": "{city} 행사 설문",
+    "angle": "개인정보 · 통계 일반 요령"
    }
   ]
  }
