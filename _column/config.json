@@ -551,6 +551,78 @@
     "name": "행사 만족도 조사 설계",
     "keyword": "{city} 행사 설문",
     "angle": "개인정보 · 통계 일반 요령"
+   },
+   {
+    "id": "event-transport-bus",
+    "name": "단체 행사 버스 대절",
+    "keyword": "{city} 행사 버스 대절",
+    "angle": "여객자동차법 전세버스 · 교통안전공단 공식"
+   },
+   {
+    "id": "event-catering-hygiene",
+    "name": "행사 도시락 · 케이터링 위생",
+    "keyword": "{city} 행사 도시락",
+    "angle": "식약처 집단급식 · 식중독 예방 공식"
+   },
+   {
+    "id": "event-waste",
+    "name": "행사장 쓰레기 · 다회용기",
+    "keyword": "{city} 행사 다회용기",
+    "angle": "환경부 공식 · 일회용품 규제"
+   },
+   {
+    "id": "event-generator",
+    "name": "행사 발전차 · 임시 전기",
+    "keyword": "{city} 행사 발전차",
+    "angle": "전기안전공사 · 사용전검사 공식"
+   },
+   {
+    "id": "event-tent-fire",
+    "name": "천막 방염 · 소방 점검",
+    "keyword": "{city} 행사 천막 방염",
+    "angle": "소방청 방염 제도 공식"
+   },
+   {
+    "id": "event-drone-photo",
+    "name": "행사 드론 촬영 허가",
+    "keyword": "{city} 드론 촬영 허가",
+    "angle": "국토부 드론원스톱 · 비행 승인 공식"
+   },
+   {
+    "id": "event-music-copyright",
+    "name": "행사 배경음악 저작권",
+    "keyword": "{city} 행사 음악 저작권",
+    "angle": "한국음악저작권협회 · 문체부 공식"
+   },
+   {
+    "id": "event-foreign-guest",
+    "name": "외국인 참가자 안내",
+    "keyword": "{city} 외국인 행사 안내",
+    "angle": "관광공사 · 다국어 안내 공식"
+   },
+   {
+    "id": "event-winter-cold",
+    "name": "겨울 야외 행사 한파 대비",
+    "keyword": "{city} 겨울 야외 행사",
+    "angle": "행안부 한파 행동요령 공식"
+   },
+   {
+    "id": "event-press-kit",
+    "name": "행사 보도자료 · 미디어 안내",
+    "keyword": "{city} 행사 보도자료",
+    "angle": "공공기관 보도자료 작성 일반 요령"
+   },
+   {
+    "id": "event-livestream-rights",
+    "name": "행사 생중계 초상권 고지",
+    "keyword": "{city} 행사 생중계",
+    "angle": "개인정보위 영상정보 공식"
+   },
+   {
+    "id": "event-gift-law",
+    "name": "행사 기념품 · 청탁금지법",
+    "keyword": "{city} 행사 기념품",
+    "angle": "국민권익위 청탁금지법 공식"
    }
   ]
  }
