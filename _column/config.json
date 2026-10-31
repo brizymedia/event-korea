@@ -623,6 +623,78 @@
     "name": "행사 기념품 · 청탁금지법",
     "keyword": "{city} 행사 기념품",
     "angle": "국민권익위 청탁금지법 공식"
+   },
+   {
+    "id": "event-qr-signage",
+    "name": "행사 QR 안내판 · 모바일 리플렛",
+    "keyword": "{city} 행사 QR 안내",
+    "angle": "개인정보위 · KISA QR 피싱 주의 공식"
+   },
+   {
+    "id": "event-lost-child",
+    "name": "미아 · 분실물 안내소 운영",
+    "keyword": "{city} 행사 미아 보호",
+    "angle": "경찰청 실종아동 · 행안부 매뉴얼 공식"
+   },
+   {
+    "id": "event-heat-shelter",
+    "name": "여름 행사 그늘막 · 폭염 대비",
+    "keyword": "{city} 여름 야외 행사",
+    "angle": "행안부 폭염 행동요령 공식"
+   },
+   {
+    "id": "event-toilet",
+    "name": "행사장 이동식 화장실 배치",
+    "keyword": "{city} 행사 이동화장실",
+    "angle": "지역축제 안전관리 매뉴얼 공식"
+   },
+   {
+    "id": "event-ceremony-script",
+    "name": "기념식 사회 대본 순서",
+    "keyword": "{city} 기념식 사회",
+    "angle": "정부의전편람 공식"
+   },
+   {
+    "id": "event-awards",
+    "name": "시상식 진행 순서 · 상장 준비",
+    "keyword": "{city} 시상식 진행",
+    "angle": "정부의전편람 · 일반 요령"
+   },
+   {
+    "id": "event-volunteer-insurance",
+    "name": "자원봉사자 보험 · 교육",
+    "keyword": "{city} 행사 자원봉사자",
+    "angle": "행안부 1365 · 자원봉사센터 공식"
+   },
+   {
+    "id": "event-children-safety",
+    "name": "어린이 참여 행사 안전",
+    "keyword": "{city} 어린이 행사 안전",
+    "angle": "어린이안전법 · 행안부 공식"
+   },
+   {
+    "id": "event-stage-wind",
+    "name": "야외 무대 강풍 기준",
+    "keyword": "{city} 야외 무대 강풍",
+    "angle": "지역축제 안전관리 매뉴얼 공식"
+   },
+   {
+    "id": "event-ticket-refund",
+    "name": "유료 행사 환불 규정",
+    "keyword": "{city} 행사 환불 규정",
+    "angle": "공정위 소비자분쟁해결기준 공식"
+   },
+   {
+    "id": "event-public-bid",
+    "name": "공공 행사 입찰 서류",
+    "keyword": "{city} 행사 입찰 서류",
+    "angle": "나라장터 · 조달청 공식"
+   },
+   {
+    "id": "event-carbon-free",
+    "name": "탄소중립 행사 운영",
+    "keyword": "{city} 친환경 행사",
+    "angle": "기후에너지환경부 공식"
    }
   ]
  }
