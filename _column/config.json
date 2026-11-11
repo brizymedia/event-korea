@@ -637,12 +637,6 @@
     "angle": "경찰청 실종아동 · 행안부 매뉴얼 공식"
    },
    {
-    "id": "event-heat-shelter",
-    "name": "여름 행사 그늘막 · 폭염 대비",
-    "keyword": "{city} 여름 야외 행사",
-    "angle": "행안부 폭염 행동요령 공식"
-   },
-   {
     "id": "event-toilet",
     "name": "행사장 이동식 화장실 배치",
     "keyword": "{city} 행사 이동화장실",
@@ -695,6 +689,84 @@
     "name": "탄소중립 행사 운영",
     "keyword": "{city} 친환경 행사",
     "angle": "기후에너지환경부 공식"
+   },
+   {
+    "id": "event-new-year-ceremony",
+    "name": "신년 행사 · 시무식 운영",
+    "keyword": "{city} 시무식 행사",
+    "angle": "정부의전편람 · 일반 요령"
+   },
+   {
+    "id": "event-christmas-market",
+    "name": "크리스마스 마켓 · 겨울 장터",
+    "keyword": "{city} 크리스마스 마켓",
+    "angle": "지역축제 안전관리 매뉴얼 공식"
+   },
+   {
+    "id": "event-indoor-heating",
+    "name": "실내 행사장 난방 · 환기",
+    "keyword": "{city} 행사장 난방",
+    "angle": "행안부 · 질병청 공식"
+   },
+   {
+    "id": "event-snow-plan",
+    "name": "눈 · 결빙 대비 행사 운영",
+    "keyword": "{city} 겨울 행사 결빙",
+    "angle": "행안부 대설 행동요령 공식"
+   },
+   {
+    "id": "event-rehearsal",
+    "name": "행사 리허설 진행표",
+    "keyword": "{city} 행사 리허설",
+    "angle": "일반 요령 · 매뉴얼"
+   },
+   {
+    "id": "event-cue-staff",
+    "name": "현장 무전 · 큐 사인 운영",
+    "keyword": "{city} 행사 무전",
+    "angle": "일반 요령"
+   },
+   {
+    "id": "event-vip-parking",
+    "name": "내빈 차량 · 의전 동선",
+    "keyword": "{city} 내빈 의전 차량",
+    "angle": "정부의전편람 공식"
+   },
+   {
+    "id": "event-sign-language",
+    "name": "수어 통역 · 문자 통역",
+    "keyword": "{city} 행사 수어 통역",
+    "angle": "장애인차별금지법 · 복지부 공식"
+   },
+   {
+    "id": "event-ar-photo",
+    "name": "포토부스 · 즉석 인화",
+    "keyword": "{city} 행사 포토부스",
+    "angle": "개인정보위 공식"
+   },
+   {
+    "id": "event-ticket-checkin",
+    "name": "입장권 · QR 체크인",
+    "keyword": "{city} 행사 입장 체크인",
+    "angle": "개인정보위 · 일반 요령"
+   },
+   {
+    "id": "event-report-photo",
+    "name": "결과보고서 사진 정리",
+    "keyword": "{city} 행사 결과보고",
+    "angle": "일반 요령"
+   },
+   {
+    "id": "event-contract-cancel",
+    "name": "행사 취소 · 연기 계약 조항",
+    "keyword": "{city} 행사 취소 계약",
+    "angle": "공정위 표준약관 공식"
+   },
+   {
+    "id": "event-heat-shelter",
+    "name": "여름 행사 그늘막 · 폭염 대비",
+    "keyword": "{city} 여름 야외 행사",
+    "angle": "행안부 폭염 행동요령 공식"
    }
   ]
  }
