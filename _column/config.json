@@ -767,6 +767,18 @@
     "name": "여름 행사 그늘막 · 폭염 대비",
     "keyword": "{city} 여름 야외 행사",
     "angle": "행안부 폭염 행동요령 공식"
+   },
+   {
+    "id": "event-livestream",
+    "name": "행사 유튜브 생중계 준비",
+    "keyword": "{city} 행사 생중계",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-lucky-draw",
+    "name": "경품 추첨 운영 · 당첨자 정보",
+    "keyword": "{city} 행사 경품 추첨",
+    "angle": "개인정보위 경품행사 가이드라인 공식"
    }
   ]
  }
