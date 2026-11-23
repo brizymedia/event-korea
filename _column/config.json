@@ -791,6 +791,18 @@
     "name": "행사 사진 공유 링크 권한",
     "keyword": "{city} 행사 사진 공유",
     "angle": "Google 드라이브 고객센터 공식"
+   },
+   {
+    "id": "event-video-chapters",
+    "name": "행사 다시보기 영상 챕터",
+    "keyword": "{city} 행사 영상 챕터",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-captions",
+    "name": "행사 영상 자막 달기",
+    "keyword": "{city} 행사 영상 자막",
+    "angle": "YouTube 고객센터 공식"
    }
   ]
  }
