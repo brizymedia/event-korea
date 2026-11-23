@@ -779,6 +779,18 @@
     "name": "경품 추첨 운영 · 당첨자 정보",
     "keyword": "{city} 행사 경품 추첨",
     "angle": "개인정보위 경품행사 가이드라인 공식"
+   },
+   {
+    "id": "event-video-content-id",
+    "name": "행사 영상 배경음악 · 유튜브 저작권",
+    "keyword": "{city} 행사 영상 저작권",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-photo-share-link",
+    "name": "행사 사진 공유 링크 권한",
+    "keyword": "{city} 행사 사진 공유",
+    "angle": "Google 드라이브 고객센터 공식"
    }
   ]
  }
