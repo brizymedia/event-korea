@@ -803,6 +803,18 @@
     "name": "행사 영상 자막 달기",
     "keyword": "{city} 행사 영상 자막",
     "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-thumbnail",
+    "name": "행사 영상 썸네일",
+    "keyword": "{city} 행사 영상 썸네일",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-playlist",
+    "name": "행사 영상 재생목록 정리",
+    "keyword": "{city} 행사 영상 재생목록",
+    "angle": "YouTube 고객센터 공식"
    }
   ]
  }
