@@ -815,6 +815,18 @@
     "name": "행사 영상 재생목록 정리",
     "keyword": "{city} 행사 영상 재생목록",
     "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-premiere",
+    "name": "행사 영상 최초 공개(프리미어)",
+    "keyword": "{city} 행사 영상 최초 공개",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-endscreen",
+    "name": "행사 영상 최종 화면",
+    "keyword": "{city} 행사 영상 최종 화면",
+    "angle": "YouTube 고객센터 공식"
    }
   ]
  }
