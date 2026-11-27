@@ -839,6 +839,18 @@
     "name": "행사 영상 댓글 관리",
     "keyword": "{city} 행사 영상 댓글",
     "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-video-shorts",
+    "name": "행사 쇼츠 만들기",
+    "keyword": "{city} 행사 쇼츠",
+    "angle": "YouTube 고객센터 공식"
+   },
+   {
+    "id": "event-channel-permission",
+    "name": "의뢰처 유튜브 채널 권한 받기",
+    "keyword": "{city} 유튜브 채널 권한",
+    "angle": "YouTube 고객센터 공식"
    }
   ]
  }
